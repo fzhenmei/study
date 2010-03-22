@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight.Dao", "Silverlight.Dao\Silverlight.Dao.csproj", "{FBB0091A-1A85-47CA-8EE3-B1CAA082BFBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightBasic", "SilverlightBasic\SilverlightBasic.csproj", "{F102EC36-3116-4451-BBDD-211B16953DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightBasic.Web", "SilverlightBasic.Web\SilverlightBasic.Web.csproj", "{B30284A4-DBA6-479D-B79E-346673607430}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBB0091A-1A85-47CA-8EE3-B1CAA082BFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB0091A-1A85-47CA-8EE3-B1CAA082BFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB0091A-1A85-47CA-8EE3-B1CAA082BFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB0091A-1A85-47CA-8EE3-B1CAA082BFBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F102EC36-3116-4451-BBDD-211B16953DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F102EC36-3116-4451-BBDD-211B16953DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F102EC36-3116-4451-BBDD-211B16953DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F102EC36-3116-4451-BBDD-211B16953DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B30284A4-DBA6-479D-B79E-346673607430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B30284A4-DBA6-479D-B79E-346673607430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B30284A4-DBA6-479D-B79E-346673607430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B30284A4-DBA6-479D-B79E-346673607430}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
