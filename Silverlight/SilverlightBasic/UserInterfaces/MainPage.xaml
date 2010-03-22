@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
     <Canvas x:Name="Canvas1">
-        <Button x:Name="Button1" Canvas.Top="10" Canvas.Left="20" Width="150" Height="20" Content="Button at (20, 10)"></Button>
+        <Button x:Name="Button1" Canvas.Top="10" Canvas.Left="20" Width="150" Height="20" Content="Button at (20, 10)" Click="Button1_Click"></Button>
         <TextBlock x:Name="Block1" Canvas.Top="10" Canvas.Left="180" Text="Outer Canvas" FontSize="20"></TextBlock>
         <Canvas x:Name="Canvas2" Background="Gray" Width="200" Height="100" Canvas.Top="50" Canvas.Left="10">
             <TextBlock x:Name="Block2" Canvas.Top="20" Canvas.Left="40" Text="This is Layout sample about Canvas"></TextBlock>
