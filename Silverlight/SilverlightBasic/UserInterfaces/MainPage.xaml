@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="UserInterfaces.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
+    <Canvas x:Name="Canvas1">
+        <Button Canvas.Top="10" Canvas.Left="20">Button at (20, 10)</Button>
+        <TextBlock Canvas.Top="180" Canvas.Left="20" Text="Outer Canvas"></TextBlock>
+        <Canvas Background="Gray">
+            <TextBlock Canvas.Top="20" Canvas.Left="40" Text="This is Layout sample about Canvas"></TextBlock>
+        </Canvas>
+    </Canvas>
+</UserControl>

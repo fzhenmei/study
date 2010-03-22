@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightBasic.Web", "Sil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBubble", "EventBubble\EventBubble.csproj", "{C93ADAC4-F8BD-49C4-8CCF-73397DD469B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterfaces", "UserInterfaces\UserInterfaces.csproj", "{2FDCD4AC-11EC-4C31-A356-D7F0CFC8A45F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{C93ADAC4-F8BD-49C4-8CCF-73397DD469B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C93ADAC4-F8BD-49C4-8CCF-73397DD469B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C93ADAC4-F8BD-49C4-8CCF-73397DD469B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDCD4AC-11EC-4C31-A356-D7F0CFC8A45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDCD4AC-11EC-4C31-A356-D7F0CFC8A45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDCD4AC-11EC-4C31-A356-D7F0CFC8A45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDCD4AC-11EC-4C31-A356-D7F0CFC8A45F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

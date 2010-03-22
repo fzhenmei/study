@@ -11,7 +11,7 @@
     <RootNamespace>SilverlightApplication1.Web</RootNamespace>
     <AssemblyName>SilverlightApplication1.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <SilverlightApplicationList>{F102EC36-3116-4451-BBDD-211B16953DB3}|..\SilverlightApplication1\SilverlightApplication1.csproj|ClientBin|False,{C93ADAC4-F8BD-49C4-8CCF-73397DD469B6}|..\EventBubble\EventBubble.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{F102EC36-3116-4451-BBDD-211B16953DB3}|..\SilverlightApplication1\SilverlightApplication1.csproj|ClientBin|False,{C93ADAC4-F8BD-49C4-8CCF-73397DD469B6}|..\EventBubble\EventBubble.csproj|ClientBin|False,{2FDCD4AC-11EC-4C31-A356-D7F0CFC8A45F}|..\UserInterfaces\UserInterfaces.csproj|ClientBin|False</SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,13 +54,17 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientBin\EventBubble.xap" />
     <Content Include="ClientBin\SilverlightApplication1.xap" />
+    <Content Include="ClientBin\UserInterfaces.xap" />
     <Content Include="Default.aspx" />
     <Content Include="EventBubbleTestPage.aspx" />
     <Content Include="EventBubbleTestPage.html" />
     <Content Include="Silverlight.js" />
     <Content Include="SilverlightApplication1TestPage.aspx" />
     <Content Include="SilverlightApplication1TestPage.html" />
+    <Content Include="UserInterfacesTestPage.aspx" />
+    <Content Include="UserInterfacesTestPage.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
