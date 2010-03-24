@@ -5,8 +5,8 @@
              >
     <Application.Resources>
         <nav:UriMapper x:Key="uriMapper">
-            <nav:UriMapping Uri="/CanvasDemo.xaml" MappedUri="/CanvasDemo.xaml"/>
-            <nav:UriMapping Uri="StackPanel" MappedUri="/StackPanelDemo.xaml"/>
+            <nav:UriMapping Uri="Canvas" MappedUri="CanvasDemo.xaml"/>
+            <nav:UriMapping Uri="StackPanel" MappedUri="StackPanelDemo.xaml"/>
             <nav:UriMapping Uri="Simple Grid" MappedUri="/GridDemo.xaml"/>
             <nav:UriMapping Uri="Star Sized Grid" MappedUri="/StarSizingDemo.xaml"/>
             <nav:UriMapping Uri="GridSplitter" MappedUri="/GridSplitterDemo.xaml"/>

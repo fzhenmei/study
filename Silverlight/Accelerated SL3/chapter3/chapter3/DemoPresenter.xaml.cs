@@ -52,17 +52,17 @@ namespace chapter3
         }
         internal void addDemo(string title, string uri)
         {
-          
-            UriMapper mapper =
-            (UriMapper)MainFrame.Resources["uriMapper"];
+            var mapper = (UriMapper)MainFrame.Resources["uriMapper"];
             if (mapper == null)
             {
                 mapper = new UriMapper();
                 MainFrame.Resources.Add("uriMapper", mapper);
             }
-            UriMapping mapping = new UriMapping();
-            mapping.Uri = new Uri(title, UriKind.Relative);
-            mapping.MappedUri = new Uri(uri, UriKind.Relative);
+            var mapping = new UriMapping
+                              {
+                                  Uri = new Uri(title, UriKind.Relative),
+                                  MappedUri = new Uri(uri, UriKind.Relative)
+                              };
             mapper.UriMappings.Add(mapping);
 
             demos.Add(title, uri);
@@ -73,11 +73,11 @@ namespace chapter3
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
-        private void demoList_SelectionChanged(object sender,SelectionChangedEventArgs e)
-        {
-            MainFrame.Navigate(new Uri((string)demoList.SelectedItem,UriKind.Relative));
-          //  MainFrame.Navigate(new Uri(demos[(string)demoList.SelectedItem],UriKind.Relative));
-        }
 
+        private void demoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //MainFrame.Navigate(new Uri((string)demoList.SelectedItem,UriKind.Relative));
+            MainFrame.Navigate(new Uri(demos[(string)demoList.SelectedItem], UriKind.Relative));
+        }
     }
 }

@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="chapter3.MainPage"
+﻿<UserControl
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation" x:Class="chapter3.MainPage" 
     Width="400" Height="300">
     <Grid x:Name="LayoutRoot" Background="White">
-
+    	<navigation:Frame x:Name="frameMain" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" UriMapper="{StaticResource uriMapper}"/>
     </Grid>
 </UserControl>
