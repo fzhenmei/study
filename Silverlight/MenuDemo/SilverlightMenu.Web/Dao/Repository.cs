@@ -8,7 +8,7 @@ namespace SilverlightMenu.Web.Dao
 
         protected Repository()
         {
-            Database = new DatabaseDataContext(ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
+            Database = new DatabaseDataContext(ConfigurationManager.ConnectionStrings["DemoConnectionString"].ConnectionString);
         }
     }
 }

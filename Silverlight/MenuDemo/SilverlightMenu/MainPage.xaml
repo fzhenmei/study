@@ -6,7 +6,7 @@
     d:DesignWidth="640" d:DesignHeight="480">
   <Grid x:Name="LayoutRoot">
     
-  	<layoutToolkit:Accordion x:Name="LeftMenu" Height="100" Width="100"/>
+  	<layoutToolkit:Accordion x:Name="LeftMenu" Width="100"/>
     
   </Grid>
 </UserControl>

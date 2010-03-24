@@ -30,11 +30,21 @@ namespace SilverlightMenu
 
         void srv_GetAllMenuNodesCompleted(object sender, GetAllMenuNodesCompletedEventArgs e)
         {
-            var resule = e.Result;
+            var data = e.Result;
             Dispatcher.BeginInvoke(() =>
                                        {
-                                           LeftMenu.DataContext = e.Result;
-                                           //LeftMenu.
+                                           var topNodes = data.Where(n => n.ParentId == 0);
+                                           foreach (var node in topNodes)
+                                           {
+                                               var item = new AccordionItem { Header = node.NodeName };
+                                               var currentNode = node;
+                                               var child = data.Where(d => d.ParentId == currentNode.Id).FirstOrDefault();
+                                               if (child != null)
+                                               {
+                                                   item.Content = child.NodeName;
+                                               }
+                                               LeftMenu.Items.Add(item);
+                                           }
                                        });
         }
     }
