@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="chapter5.ElementBinding"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="300">
+    <StackPanel x:Name="LayoutRoot" Background="White">
+        <TextBlock x:Name="myValue" Height="32" Width="auto" FontSize="14" Text="{Binding Value, Mode=OneWay, ElementName=mySlider}"></TextBlock>
+        <Slider x:Name="mySlider" Maximum="100" Minimum="1" Value="5"></Slider>
+    </StackPanel>
+</UserControl>

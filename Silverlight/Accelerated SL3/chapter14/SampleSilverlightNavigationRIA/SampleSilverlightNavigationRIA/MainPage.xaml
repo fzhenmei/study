@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="SampleSilverlightNavigationRIA.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationBackgroundColorBrush}">
+
+        <Grid Style="{StaticResource NavigationContainerStyle}">
+
+            <Border Style="{StaticResource NavigationBorderStyle}">
+            
+                <StackPanel Style="{StaticResource NavigationPanelStyle}">
+
+                    <Button Click="NavButton_Click" Tag="Default" Content="home" 
+                            Style="{StaticResource PageLinkStyle}"/>
+                    <Button Click="NavButton_Click" Tag="/Views/AboutPage.xaml" Content="about" 
+                            Style="{StaticResource PageLinkStyle}"/>
+                        <Button x:Name="InstallOOBButton" Click="InstallOOBButton_Click" Content="Install OOB" 
+                                Style="{StaticResource PageLinkStyle}"/>
+                </StackPanel>
+            
+            </Border>
+            
+            <Border Style="{StaticResource BrandingBorderStyle}">
+            
+                <StackPanel Style="{StaticResource BrandingPanelStyle}">
+
+                        <TextBlock Text="Connectivity Status: " Style="{StaticResource BrandingTextNormalStyle}"/>
+                        <TextBlock x:Name="NWStatus"  Text=" " Style="{StaticResource BrandingTextNormalStyle}"/>
+                    
+                        <TextBlock Text=" :: " Style="{StaticResource BrandingTextNormalStyle}"/>                   
+                    
+                        <TextBlock Text="Application Mode: " Style="{StaticResource BrandingTextNormalStyle}"/>
+                        <TextBlock x:Name="AppMode"  Text=" " Style="{StaticResource BrandingTextNormalStyle}"/>
+
+                </StackPanel>
+
+                
+            </Border>
+            
+        </Grid>
+
+        <Border Style="{StaticResource FrameContainerStyle}">
+
+            <Border Style="{StaticResource FrameInnerBorderStyle}">
+
+                <navigation:Frame x:Name="Frame" Source="/Views/HomePage.xaml"
+                                  HorizontalContentAlignment="Stretch"
+                                  VerticalContentAlignment="Stretch"
+                                  Padding="15,10,15,10"
+                                  Background="White"
+                                  JournalOwnership="Automatic"/>
+
+            </Border>
+
+        </Border>
+
+    </Grid>
+</UserControl>

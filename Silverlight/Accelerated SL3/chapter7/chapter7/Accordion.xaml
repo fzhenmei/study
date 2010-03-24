@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="chapter7.Accordion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:layoutToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+    Width="400" Height="300">
+    <Grid x:Name="LayoutRoot" Background="White">
+        <layoutToolkit:Accordion x:Name="Accordion1"
+                               HorizontalAlignment="Stretch"
+                               Margin="2,2,2,2"
+                               FontFamily="Georgia"
+                               FontSize="18">
+            <layoutToolkit:AccordionItem Content="H.264 Support"
+                                      Header="Media" />
+            <layoutToolkit:AccordionItem Header="Graphics" >
+                <layoutToolkit:AccordionItem.Content>
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock Text="3D Perspective" ></TextBlock>
+                        <TextBlock Text="Shadders" ></TextBlock>
+                    </StackPanel>
+                </layoutToolkit:AccordionItem.Content>
+            </layoutToolkit:AccordionItem>
+            <layoutToolkit:AccordionItem Content="Animation easing"
+                                      Header="Animation" />
+            <layoutToolkit:AccordionItem Content="Blend 3"
+                                      Header="Design tool" />
+        </layoutToolkit:Accordion>
+
+    </Grid>
+</UserControl>

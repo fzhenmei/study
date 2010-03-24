@@ -1,0 +1,13 @@
+﻿<UserControl 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="Chapter1.MainPage" 
+    Width="900" Height="100" mc:Ignorable="d">
+    <Canvas Height="Auto" Width="Auto" Background="White">
+        <TextBlock Height="49" Width="814" Canvas.Left="22" Canvas.Top="18" Text="Hello World – It’s Time to Light up the Web with Silverlight 3!" TextWrapping="Wrap" d:LayoutOverrides="Height" FontSize="30" FontFamily="Arial">
+			<TextBlock.Effect>
+				<DropShadowEffect/>
+			</TextBlock.Effect>
+        </TextBlock>
+    </Canvas>
+</UserControl>

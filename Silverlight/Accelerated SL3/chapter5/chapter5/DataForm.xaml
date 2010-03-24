@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="chapter5.DataForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:chapter5" 
+    xmlns:DF="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.DataForm"
+    Width="600" Height="300">
+    <UserControl.Resources>
+        <local:Consultant x:Key="C1" FirstName="Ashish" LastName="Ghoda" 
+                       Email="aghoda@TechnologyOpinion.com" Website="TechnologyOpinion.com" >
+        </local:Consultant>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Background="White">
+        <DF:DataForm  ItemsSource="{Binding Consultants}" 
+                       Header="TechnologyOpinion.com - Strive for the Strategic Excellence"
+                       Background="Cyan"   
+                       FieldLabelPosition="Auto"></DF:DataForm></Grid>
+</UserControl>

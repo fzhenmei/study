@@ -1,0 +1,33 @@
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:nav="clr-namespace:System.Windows.Navigation;assembly=System.Windows.Controls.Navigation"
+             x:Class="chapter3.App"
+             >
+    <Application.Resources>
+        <nav:UriMapper x:Key="uriMapper">
+            <nav:UriMapping Uri="/CanvasDemo.xaml" MappedUri="/CanvasDemo.xaml"/>
+            <nav:UriMapping Uri="StackPanel" MappedUri="/StackPanelDemo.xaml"/>
+            <nav:UriMapping Uri="Simple Grid" MappedUri="/GridDemo.xaml"/>
+            <nav:UriMapping Uri="Star Sized Grid" MappedUri="/StarSizingDemo.xaml"/>
+            <nav:UriMapping Uri="GridSplitter" MappedUri="/GridSplitterDemo.xaml"/>
+            <nav:UriMapping Uri="Buttons" MappedUri="/ButtonsDemo.xaml"/>
+            <nav:UriMapping Uri="TextBlock" MappedUri="/TextBlockDemo.xaml"/>
+            <nav:UriMapping Uri="TextBox" MappedUri="/TextBoxDemo.xaml"/>
+            <nav:UriMapping Uri="ListBox" MappedUri="/ListBoxDemo.xaml"/>
+            <nav:UriMapping Uri="Slider" MappedUri="/SliderDemo.xaml"/>
+            <nav:UriMapping Uri="AutoCompleteBox" MappedUri="/AutoCompleteBoxDemo.xaml"/>
+            <nav:UriMapping Uri="DocPanel" MappedUri="/DocPanelDemo.xaml"/>
+            <nav:UriMapping Uri="PasswordBox" MappedUri="/PasswordBoxDemo.xaml"/>
+            <nav:UriMapping Uri="ProgressBar" MappedUri="/ProgressBarDemo.xaml"/>
+            <nav:UriMapping Uri="ScrollBar" MappedUri="/ScrollBarDemo.xaml"/>
+            <nav:UriMapping Uri="ScrollViewer" MappedUri="/ScrollViewerDemo.xaml"/>
+            <nav:UriMapping Uri="TreeView" MappedUri="/TreeViewDemo.xaml"/>
+            <nav:UriMapping Uri="PopUp" MappedUri="/PopUpDemo.xaml"/>
+            <nav:UriMapping Uri="TabControl" MappedUri="/TabControlDemo.xaml"/>
+            <nav:UriMapping Uri="ToolTipService" MappedUri="/ToolTipServiceDemo.xaml"/>
+            <nav:UriMapping Uri="HeaderedItemsControl" MappedUri="/HeaderedItemsControlDemo.xaml"/>
+            <nav:UriMapping Uri="HeaderedContentControl" MappedUri="/HeaderedContentControlDemo.xaml"/>
+            <nav:UriMapping Uri="CalendarDatePicker" MappedUri="/CalendarDatePickerDemo.xaml"/>
+        </nav:UriMapper>
+    </Application.Resources>
+</Application>

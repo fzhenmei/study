@@ -21,8 +21,7 @@ namespace UserInterfaces
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            StackPanel page = new StackPanel();
-            
+            var page = new StackPanel();
         }
     }
 }

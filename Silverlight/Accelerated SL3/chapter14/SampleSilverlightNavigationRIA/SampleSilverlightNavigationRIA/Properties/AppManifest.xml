@@ -1,0 +1,16 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+    <Deployment.Parts>
+    </Deployment.Parts>
+
+    
+    <Deployment.ApplicationIdentity>
+        <ApplicationIdentity 
+            ShortName="OOB - SampleSLNavigationRIA" 
+            Title="Sample Silverlight Navigation RIA - Out of Browser Mode">
+            <ApplicationIdentity.Blurb>Demonstrating Silverlight Navigation Framework and Out of Browser Capabilities</ApplicationIdentity.Blurb>
+        </ApplicationIdentity>
+    </Deployment.ApplicationIdentity>
+    
+</Deployment>

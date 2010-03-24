@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="chapter3.ButtonsDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="600" Height="400">
+    <Grid  x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Canvas>
+            <TextBlock Canvas.Left="100" Text="Button"></TextBlock>
+            <Button x:Name="button" Canvas.Left="74" Canvas.Top="20" Width="100" Content="Press me!" Click="Button_Click" />
+        </Canvas>
+        <Canvas Grid.Column="1">
+            <TextBlock Canvas.Left="100" Text="HyperlinkButton"></TextBlock>
+            <HyperlinkButton x:Name="hyperlinkButton" Canvas.Left="45" Canvas.Top="20" Width="200" Content="Click to visit Silverlight website" NavigateUri="http://www.silverlight.net" TargetName="_blank"/>
+    </Canvas>
+        <Canvas Grid.Row="1">
+            <TextBlock Canvas.Left="100">ReapeatBtton</TextBlock>
+            <TextBlock Canvas.Top="60" Canvas.Left="30">Current Value:</TextBlock>
+            <TextBlock x:Name="repeatButtonValue" Canvas.Top="60" Canvas.Left="120"></TextBlock>
+        <RepeatButton Canvas.Left="73" Canvas.Top="20" Width="110" Content="Press and hold" Click="RepeatButton_Click"/>
+        </Canvas>
+        
+        <Canvas Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Toggle Buttons" Canvas.Left="100"></TextBlock>
+            <CheckBox x:Name="checkBox" Canvas.Left="25" Canvas.Top="20" IsChecked="True" Content="Checked"/>
+            <CheckBox x:Name="checkBox2" Canvas.Left="25" Canvas.Top="40" IsChecked="False" Content="Unchecked"/>
+            <CheckBox x:Name="checkBox3" Canvas.Left="25" Canvas.Top="60" IsChecked="" IsThreeState="True" Content="Indeterminate"/>
+            <Canvas Canvas.Left="110">
+                <RadioButton x:Name="radioButton1" GroupName="group1" Canvas.Left="40" Canvas.Top="20" Content="Red"/>
+                <RadioButton x:Name="radioButton2" GroupName="group1" Canvas.Left="40" Canvas.Top="40" Content="Green"/>
+                <RadioButton x:Name="radioButton3" GroupName="group1" Canvas.Left="40" Canvas.Top="60" Content="Blue"/>
+                <RadioButton x:Name="radioButton4" GroupName="group1" Canvas.Left="40" Canvas.Top="80" Content="Cyan"/>
+            </Canvas>
+            </Canvas>
+        </Grid>
+</UserControl>

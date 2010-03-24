@@ -1,0 +1,185 @@
+﻿<Application   
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+  xmlns:navigationCore="clr-namespace:System.Windows.Navigation;assembly=System.Windows.Controls.Navigation"
+  x:Class="SampleSilverlightNavigationRIA.App"
+>
+
+  <Application.Resources>
+    
+  <!-- ******MAIN PAGE STYLES****** -->
+  <!-- **************************** -->
+    <!-- Primary Color Brushes -->
+    <SolidColorBrush x:Key="ApplicationBackgroundColorBrush" Color="#FF181818"/>
+    <SolidColorBrush x:Key="HighLightColor" Color="#FFC60000"/>
+
+        <navigationCore:UriMapper x:Key="uriMapper">
+            <navigationCore:UriMapping Uri="Default" MappedUri="/Views/HomePage.xaml" />
+        </navigationCore:UriMapper>
+
+        <!-- Navigation Container Style -->
+    <Style x:Key="NavigationContainerStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="75,30,75,0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="MinWidth" Value="400"/>
+        <Setter Property="MinHeight" Value="300"/>
+    </Style>
+
+    <!-- Navigation Border Style -->
+    <Style x:Key="NavigationBorderStyle" TargetType="Border"/>
+
+    <!-- Navigation Panel Style -->
+    <Style x:Key="NavigationPanelStyle" TargetType="StackPanel">
+      <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <!-- Page Link Style -->
+    <Style x:Key="PageLinkStyle" TargetType="Button">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Margin" Value="10,0,10,0"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+      <Setter Property="VerticalContentAlignment" Value="Top"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Foreground" Value="#FFA7A7A7"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid Cursor="{TemplateBinding Cursor}" Background="{TemplateBinding Background}">
+              <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                  <VisualState x:Name="Normal"/>
+                  <VisualState x:Name="MouseOver">
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.7"/>
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Pressed">
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Disabled">
+                    <Storyboard>
+                      <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="Visibility">
+                        <DiscreteObjectKeyFrame KeyTime="0">
+                          <DiscreteObjectKeyFrame.Value>
+                            <Visibility>Visible</Visibility>
+                          </DiscreteObjectKeyFrame.Value>
+                        </DiscreteObjectKeyFrame>
+                      </ObjectAnimationUsingKeyFrames>
+                      <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)">
+                        <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                          <DiscreteObjectKeyFrame.Value>
+                            <HorizontalAlignment>Center</HorizontalAlignment>
+                          </DiscreteObjectKeyFrame.Value>
+                        </DiscreteObjectKeyFrame>
+                      </ObjectAnimationUsingKeyFrames>
+                      <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="stackPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                      </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                  </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                  <VisualState x:Name="Focused"/>
+                  <VisualState x:Name="Unfocused"/>
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+              <TextBlock HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" x:Name="DisabledOverlay" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed" Canvas.ZIndex="1" Foreground="#FFAAAAAA" Text="{TemplateBinding Content}"/>
+              <StackPanel Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="stackPanel">
+                <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                <Rectangle Height="3" Width="Auto" Fill="{StaticResource HighLightColor}" Stroke="{x:Null}" Visibility="Visible" x:Name="rectangle1" Opacity="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0"/>
+                <Rectangle Height="3" Width="Auto" Fill="{StaticResource HighLightColor}" Stroke="{x:Null}" Visibility="Visible" x:Name="rectangle2" Opacity="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-2,0,0"/>
+              </StackPanel>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Branding Border Style -->
+    <Style x:Key="BrandingBorderStyle" TargetType="Border"/>
+
+    <!-- Branding Panel Style -->
+    <Style x:Key="BrandingPanelStyle" TargetType="StackPanel">
+      <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+    <!-- Branding Text Highlight Style -->
+    <Style x:Key="BrandingTextHighlightStyle" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Foreground" Value="{StaticResource HighLightColor}"/>
+    </Style>
+
+    <!-- Branding Text Normal Style -->
+    <Style x:Key="BrandingTextNormalStyle" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Foreground" Value="#FFA7A7A7"/>
+    </Style>
+
+    <!-- Frame Container Style -->
+    <Style x:Key="FrameContainerStyle" TargetType="Border">
+      <Setter Property="Background" Value="#FF505050"/>
+      <Setter Property="BorderBrush" Value="#FF737373"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="12,14,12,14"/>
+      <Setter Property="Margin" Value="75,65,75,35"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!-- Frame Inner Border Style -->
+    <Style x:Key="FrameInnerBorderStyle" TargetType="Border">
+      <Setter Property="Background">
+        <Setter.Value>
+          <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFF0F0F0"/>
+            <GradientStop Color="#FFFFFFFF" Offset="1"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="BorderBrush" Value="#FFC1C1C1"/>
+      <Setter Property="BorderThickness" Value="12,14,12,14"/>
+    </Style>
+
+    <!-- ******CONTENT PAGE STYLES****** -->
+  <!-- ******************************* -->
+
+    <!-- Header Text Style -->
+    <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+      <Setter Property="Margin" Value="0,4,0,4"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#FF191919"/>
+    </Style>
+
+    <!-- Content Text Style -->
+    <Style x:Key="ContentTextStyle" TargetType="TextBlock">
+      <Setter Property="Margin" Value="0,2,0,2"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="Foreground" Value="#FF191919"/>
+    </Style>
+
+    <!-- HyperlinkButton Style -->
+    <Style x:Key="HyperlinkButtonStyle" TargetType="HyperlinkButton">
+      <Setter Property="TargetName" Value="_new"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Content Text Panel Style -->
+    <Style x:Key="ContentTextPanelStyle" TargetType="StackPanel">
+      <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
+  </Application.Resources>
+</Application>

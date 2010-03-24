@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAMLTour", "XAMLTour\XAMLTour.csproj", "{E4D23C37-939A-4A4F-BF70-0142DB500409}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAMLTour.Web", "XAMLTour.Web\XAMLTour.Web.csproj", "{7CB6317D-34AE-4F6C-9063-F514A06FF7DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4D23C37-939A-4A4F-BF70-0142DB500409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D23C37-939A-4A4F-BF70-0142DB500409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D23C37-939A-4A4F-BF70-0142DB500409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D23C37-939A-4A4F-BF70-0142DB500409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB6317D-34AE-4F6C-9063-F514A06FF7DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB6317D-34AE-4F6C-9063-F514A06FF7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB6317D-34AE-4F6C-9063-F514A06FF7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB6317D-34AE-4F6C-9063-F514A06FF7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

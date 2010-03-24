@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter14.Web", "chapter14.Web\chapter14.Web.csproj", "{C7C31ADF-E337-4C2B-8425-E8FDC3EAB5D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenderApp", "SenderApp\SenderApp.csproj", "{0A9E66CF-1EE1-48AB-8E83-C56F1442397C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiverApp", "ReceiverApp\ReceiverApp.csproj", "{14D1FA02-A7A5-4AE7-AB1E-56D68BB87459}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7C31ADF-E337-4C2B-8425-E8FDC3EAB5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C31ADF-E337-4C2B-8425-E8FDC3EAB5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C31ADF-E337-4C2B-8425-E8FDC3EAB5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C31ADF-E337-4C2B-8425-E8FDC3EAB5D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9E66CF-1EE1-48AB-8E83-C56F1442397C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9E66CF-1EE1-48AB-8E83-C56F1442397C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9E66CF-1EE1-48AB-8E83-C56F1442397C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9E66CF-1EE1-48AB-8E83-C56F1442397C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D1FA02-A7A5-4AE7-AB1E-56D68BB87459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D1FA02-A7A5-4AE7-AB1E-56D68BB87459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D1FA02-A7A5-4AE7-AB1E-56D68BB87459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D1FA02-A7A5-4AE7-AB1E-56D68BB87459}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

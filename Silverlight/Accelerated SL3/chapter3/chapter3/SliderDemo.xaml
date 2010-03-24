@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="chapter3.SliderDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="300">
+    <Canvas x:Name="LayoutRoot" Background="White">
+        <TextBlock Text="Horizontal Slider" Canvas.Left="20" Canvas.Top="40"/>
+        <Slider Orientation="Horizontal" Canvas.Left="20" Canvas.Top="70" Width="200" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10"
+Value="50"/>
+        <TextBlock Text="Vertical Slider" Canvas.Left="20" Canvas.Top="100"/>
+        <Slider Orientation="Vertical" Canvas.Left="130" Canvas.Top="100" Width="25" Height="100"/>
+    </Canvas>
+</UserControl>

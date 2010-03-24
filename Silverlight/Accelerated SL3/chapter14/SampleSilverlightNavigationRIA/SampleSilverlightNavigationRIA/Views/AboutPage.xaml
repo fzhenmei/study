@@ -1,0 +1,15 @@
+﻿<navigation:Page x:Class="SampleSilverlightNavigationRIA.AboutPage" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           Title="AboutPage Page">
+    <Grid x:Name="LayoutRoot" Background="White">
+        
+        <StackPanel>
+
+            <TextBlock Text="About" Style="{StaticResource HeaderTextStyle}"/>
+            <TextBlock Text="About page content " Style="{StaticResource ContentTextStyle}"/>
+
+        </StackPanel>
+    </Grid>
+</navigation:Page>

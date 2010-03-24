@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <customBinding>
+                <binding name="CustomBinding_GetBookInfo">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+            </customBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:53811/GetBookInfo.svc" binding="customBinding"
+                bindingConfiguration="CustomBinding_GetBookInfo" contract="GetBookInfo"
+                name="CustomBinding_GetBookInfo" />
+        </client>
+    </system.serviceModel>
+</configuration>

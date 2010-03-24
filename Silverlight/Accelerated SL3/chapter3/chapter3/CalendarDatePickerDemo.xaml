@@ -1,0 +1,21 @@
+﻿<UserControl xmlns:swcx="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"  x:Class="chapter3.CalendarDatePickerDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="300">
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="1">
+            <Canvas>
+                <swcx:DatePicker x:Name="datePicker" Canvas.Top="30" Canvas.Left="65"/>
+            </Canvas>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="1"> 
+            <Canvas>
+                <swcx:Calendar x:Name="calendar" Canvas.Top="30" Canvas.Left="15" SelectionMode="SingleRange"/>
+            </Canvas>
+        </Border>
+    </Grid>
+</UserControl>

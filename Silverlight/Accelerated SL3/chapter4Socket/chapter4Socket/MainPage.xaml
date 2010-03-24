@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="chapter4Socket.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" >
+    <StackPanel x:Name="LayoutRoot" Background="White">
+        <ScrollViewer  x:Name="Scroller" Height="200">
+            <TextBlock x:Name="Messages" TextWrapping="Wrap" ></TextBlock>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Enter your name: "></TextBlock>
+            <TextBox x:Name="txtName" MaxLength="20" Width="200"></TextBox>
+            <Button x:Name="btnConnect" Width="100" Content="Connect" Click="btnConnect_Click"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+        <TextBox x:Name="txtMessage" MaxLength="200" Height="100" Width="300"></TextBox>
+        <Button x:Name="btnSend" Width="100" Click="btnSend_Click" Content="Send"></Button>
+    </StackPanel>
+        </StackPanel>
+</UserControl>

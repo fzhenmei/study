@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="chapter8.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="300">
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="external.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+                <Style x:Name="Title" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Calibri" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+                <Style x:Name="MainTitle" TargetType="TextBlock" BasedOn="{StaticResource Title}">
+                    <Setter Property="Foreground" Value="Blue" />
+                </Style>
+                <Style x:Name="SubTitle" TargetType="TextBlock" BasedOn="{StaticResource Title}">
+                    <Setter Property="FontSize" Value="12" />
+                </Style>
+                <Style x:Name="DynamicTitle" TargetType="TextBlock" BasedOn="{StaticResource Title}">
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Foreground" Value="Green"/>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <StackPanel>
+            <TextBlock Text="Title" Style="{StaticResource Title}" Margin="5"/>
+            <TextBlock Text="Main Title" Style="{StaticResource MainTitle}" Margin="5"/>
+            <TextBlock Text="Sub Title" Style="{StaticResource LargeTitle}" Margin="5"/>
+            <Button x:Name="button1" Click="button1_Click"
+Content="Toggle Style" Width="150"/>
+            <TextBlock x:Name="textBlock1" Text="Main Title"
+Style="{StaticResource MainTitle}" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

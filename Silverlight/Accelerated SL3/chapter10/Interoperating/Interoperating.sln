@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interoperating", "Interoperating\Interoperating.csproj", "{424122F2-FD43-4D01-BC38-744F093ECC07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interoperating.Web", "Interoperating.Web\Interoperating.Web.csproj", "{8BB00010-7019-4636-AEBC-943E94FEDC24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{424122F2-FD43-4D01-BC38-744F093ECC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{424122F2-FD43-4D01-BC38-744F093ECC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{424122F2-FD43-4D01-BC38-744F093ECC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{424122F2-FD43-4D01-BC38-744F093ECC07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB00010-7019-4636-AEBC-943E94FEDC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB00010-7019-4636-AEBC-943E94FEDC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB00010-7019-4636-AEBC-943E94FEDC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB00010-7019-4636-AEBC-943E94FEDC24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

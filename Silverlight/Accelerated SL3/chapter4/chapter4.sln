@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter4", "chapter4\chapter4.csproj", "{2FF4BC82-42F6-461D-B5B5-0C363A501E30}"
+	ProjectSection(ProjectDependencies) = postProject
+		{12045B82-D189-45BC-8807-99FF95B1E83F} = {12045B82-D189-45BC-8807-99FF95B1E83F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter4.Web", "chapter4.Web\chapter4.Web.csproj", "{12045B82-D189-45BC-8807-99FF95B1E83F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FF4BC82-42F6-461D-B5B5-0C363A501E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF4BC82-42F6-461D-B5B5-0C363A501E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF4BC82-42F6-461D-B5B5-0C363A501E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF4BC82-42F6-461D-B5B5-0C363A501E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12045B82-D189-45BC-8807-99FF95B1E83F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12045B82-D189-45BC-8807-99FF95B1E83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12045B82-D189-45BC-8807-99FF95B1E83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12045B82-D189-45BC-8807-99FF95B1E83F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
