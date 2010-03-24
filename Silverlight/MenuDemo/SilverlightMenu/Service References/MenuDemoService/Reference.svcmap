@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5b1943ab-d147-45ac-af95-7db54bbf168a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4852/MenuDemo.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MenuDemo.wsdl" MetadataType="Wsdl" ID="a54dcf91-2cc7-4980-914e-6263c2d890bb" SourceId="1" SourceUrl="http://localhost:4852/MenuDemo.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="MenuDemo.disco" MetadataType="Disco" ID="028c7b87-e6ad-4573-9f8d-f2295d7d0ca5" SourceId="1" SourceUrl="http://localhost:4852/MenuDemo.svc?disco" />
+    <MetadataFile FileName="MenuDemo.xsd" MetadataType="Schema" ID="83a69eed-5df2-4b2a-8558-f3e93f8fc4f0" SourceId="1" SourceUrl="http://localhost:4852/MenuDemo.svc?xsd=xsd0" />
+    <MetadataFile FileName="MenuDemo1.xsd" MetadataType="Schema" ID="59d3e18b-8217-48be-bdd0-13ec665f5df5" SourceId="1" SourceUrl="http://localhost:4852/MenuDemo.svc?xsd=xsd1" />
+    <MetadataFile FileName="MenuDemo2.xsd" MetadataType="Schema" ID="8ac1a264-c1b7-454e-b532-c766d93b303b" SourceId="1" SourceUrl="http://localhost:4852/MenuDemo.svc?xsd=xsd2" />
+    <MetadataFile FileName="MenuDemo1.wsdl" MetadataType="Wsdl" ID="bd670fa8-f221-4c96-aae5-72d4c41e49bd" SourceId="1" SourceUrl="http://localhost:4852/MenuDemo.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

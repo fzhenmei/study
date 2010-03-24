@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <customBinding>
+                <binding name="CustomBinding_MenuDemo">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+            </customBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:4852/MenuDemo.svc" binding="customBinding"
+                bindingConfiguration="CustomBinding_MenuDemo" contract="MenuDemoService.MenuDemo"
+                name="CustomBinding_MenuDemo" />
+        </client>
+    </system.serviceModel>
+</configuration>

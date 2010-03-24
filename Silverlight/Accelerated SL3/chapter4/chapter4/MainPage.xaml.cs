@@ -32,8 +32,8 @@ namespace chapter4
             }
             else
             {
-                GetBookInfo GetBook1 = (GetBookInfo)GetBook;
-                GetBook1.BeginGetAllTitle(new AsyncCallback(GetAllTitle_AsyncCallBack), GetBook1);
+                GetBookInfo GetBook1 = GetBook;
+                GetBook1.BeginGetAllTitle(GetAllTitle_AsyncCallBack, GetBook1);
             }
         }
         void GetAllTitle_AsyncCallBack(IAsyncResult ar)

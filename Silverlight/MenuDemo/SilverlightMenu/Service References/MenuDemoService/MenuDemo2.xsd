@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web.Dao" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web.Dao" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfNodes">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Nodes" nillable="true" type="tns:Nodes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNodes" nillable="true" type="tns:ArrayOfNodes" />
+  <xs:complexType name="Nodes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="NodeName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Nodes" nillable="true" type="tns:Nodes" />
+</xs:schema>
