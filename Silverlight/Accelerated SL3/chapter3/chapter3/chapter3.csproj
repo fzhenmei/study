@@ -85,6 +85,9 @@
     <Compile Include="GridSplitterDemo.xaml.cs">
       <DependentUpon>GridSplitterDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeaderedItemsControlDemo.xaml.cs">
+      <DependentUpon>HeaderedItemsControlDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListBoxDemo.xaml.cs">
       <DependentUpon>ListBoxDemo.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,10 @@
     <Page Include="GridSplitterDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="HeaderedItemsControlDemo.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ListBoxDemo.xaml">
       <SubType>Designer</SubType>
