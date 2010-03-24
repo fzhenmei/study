@@ -38,10 +38,15 @@ namespace SilverlightMenu
                                            {
                                                var item = new AccordionItem { Header = node.NodeName };
                                                var currentNode = node;
-                                               var child = data.Where(d => d.ParentId == currentNode.Id).FirstOrDefault();
-                                               if (child != null)
+                                               var children = data.Where(d => d.ParentId == currentNode.Id).ToList();
+                                               if (children.Count() > 0)
                                                {
-                                                   item.Content = child.NodeName;
+                                                   var wrapper = new StackPanel();
+                                                   foreach (var child in children)
+                                                   {
+                                                       wrapper.Children.Add(new HyperlinkButton() { Content = child.NodeName });
+                                                   }
+                                                   item.Content = wrapper;
                                                }
                                                LeftMenu.Items.Add(item);
                                            }
