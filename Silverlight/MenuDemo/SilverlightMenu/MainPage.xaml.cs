@@ -48,6 +48,11 @@ namespace SilverlightMenu
                                                    }
                                                    item.Content = wrapper;
                                                }
+                                               else
+                                               {
+                                                   item.Content = "没有菜单项";
+                                               }
+
                                                LeftMenu.Items.Add(item);
                                            }
                                        });
