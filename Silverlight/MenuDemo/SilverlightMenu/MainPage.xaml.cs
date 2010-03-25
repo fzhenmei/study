@@ -37,11 +37,14 @@ namespace SilverlightMenu
                                            var topNodes = data.Where(n => n.ParentId == 0);
                                            foreach (var node in topNodes)
                                            {
+                                               //todo: add dragtarget for header...
                                                var item = new AccordionItem { Header = node.NodeName };
                                                var currentNode = node;
                                                var children = data.Where(d => d.ParentId == currentNode.Id).ToList();
                                                if (children.Count() > 0)
                                                {
+                                                   //todo: add dragtarget for content
+                                                   //todo: add dragsource for content
                                                    var wrapper = new StackPanel();
                                                    foreach (var child in children)
                                                    {
