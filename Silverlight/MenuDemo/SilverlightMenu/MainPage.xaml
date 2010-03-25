@@ -14,11 +14,11 @@
         </Grid.RowDefinitions>
         <layoutToolkit:Accordion x:Name="LeftMenu" Width="200" Grid.Column="0" Grid.Row="0"/>
         <controlsToolkit:BusyIndicator x:Name="Loading" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Loading menu..." Grid.Column="0" Grid.Row="0"/>
-        <StackPanel x:Name="PanelDropTargets" Grid.Column="0" Grid.Row="0">
+        <!--<StackPanel x:Name="PanelDropTargets" Grid.Column="0" Grid.Row="0">
             <TextBlock Text="DropTargets" Width="100" Height="20"></TextBlock>
         </StackPanel>
         <StackPanel x:Name="PanelDropSources" Grid.Column="0" Grid.Row="0">
             <TextBlock Text="DragSouces" Width="100" Height="20"></TextBlock>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </UserControl>
