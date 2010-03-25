@@ -1,0 +1,114 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:SL_Drag_Drop_BaseClasses">
+
+    <!-- Template for dragsource  -->
+
+    <Style TargetType="local:DragSource">
+        <Setter Property="Background" Value="#ffffffff"></Setter>
+        <Setter Property="BorderBrush" Value="#ff999999"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:DragSource">
+                    <Canvas x:Name="MainControlHost" HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                             >
+
+                        <!-- The content ghost that remains when dragging (typically a usercontrol) -->
+                        <ContentPresenter x:Name="GhostContentControl" 
+                              Content="{TemplateBinding Ghost}"   
+                              Visibility="{TemplateBinding GhostVisibility}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        <!-- The draggable control with draghandle (DragBar) -->
+                        <Grid x:Name="MainDraggableControl" 
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              >
+
+                            <!-- Border with white background -->
+                            <Border CornerRadius="3,3,3,3"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="0">
+                                <Grid>
+                                    <!-- The content (typically a usercontrol) -->
+                                    <ContentPresenter x:Name="MainContentPresenter" Content="{TemplateBinding Content}" 
+                                                       />
+
+                                    <!-- DragBar: handlers for dragging will be applied to this element  -->
+                                    <Border x:Name="DragBar"   CornerRadius="3,3,0,0" Background="#00ffffff" 
+                                                VerticalAlignment="Top" MinHeight="12" Cursor="Hand"
+                                                Margin="0,0,0,0" BorderThickness="1">
+                                        <Grid>
+                                            <Rectangle Opacity="0.5" >
+                                                <Rectangle.Fill>
+                                                    <LinearGradientBrush EndPoint="6.58300018310547,6.08300018310547" StartPoint="2.31500005722046,1.81500005722046" 
+                                                   SpreadMethod="Repeat" MappingMode="Absolute">
+                                                        <GradientStop Color="#FFAFAFAF" Offset="0"/>
+                                                        <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                                        <GradientStop Color="#00FFFFFF" Offset="0.339"/>
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Grid>
+                                    </Border>
+
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- Template for DropTarget  -->
+    <Style TargetType="local:DropTarget">
+        <Setter Property="DropBorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF70BFF5" Offset="0"/>
+                    <GradientStop Color="#FF0097FF" Offset="1"/>
+                    <GradientStop Color="#FF70BFF5" Offset="0.52"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="DropBorderThickness" Value="4"/>
+        <Setter Property="DropBorderCornerRadius" Value="3,3,3,3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:DropTarget">
+                    <Grid x:Name="MainControlHost"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <!-- The content ghost when nothing has been dropped -->
+                        <Grid x:Name="GhostContentControl" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        <Grid x:Name="MainContentControl" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              />
+
+                        <!-- The bounding box when a dragsource is hovering over the target -->
+                        <Border x:Name="BoundingBorder" CornerRadius="{TemplateBinding DropBorderCornerRadius}"
+                                Background="Transparent" Opacity="0"
+                                BorderThickness="{TemplateBinding DropBorderThickness}"
+                                Padding="1" IsHitTestVisible="False"
+                                BorderBrush="{TemplateBinding DropBorderBrush}" 
+                                >
+                        </Border>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

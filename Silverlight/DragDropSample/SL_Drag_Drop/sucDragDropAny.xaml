@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="SL_Drag_Drop.sucDragDropAny"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:dragdrop="clr-namespace:SL_Drag_Drop_BaseClasses;assembly=SL_Drag_Drop_BaseClasses"
+    >
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <ItemsControl x:Name="icTargets" Width="150" Height="500">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <dragdrop:DropTarget AllowPositionSave="True">
+                        <dragdrop:DropTarget.Content>
+                            <dragdrop:DragSource AllDropTargetsValid="True"  >
+                                <TextBlock Text="{Binding DummyText}" Width="100"></TextBlock>
+                            </dragdrop:DragSource>
+                        </dragdrop:DropTarget.Content>
+                    </dragdrop:DropTarget>
+                    
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+        
+    </Grid>
+</UserControl>
