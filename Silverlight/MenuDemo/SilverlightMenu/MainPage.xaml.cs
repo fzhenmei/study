@@ -23,22 +23,7 @@ namespace SilverlightMenu
             var srv = new MenuDemoClient();
             srv.GetAllMenuNodesCompleted += new EventHandler<GetAllMenuNodesCompletedEventArgs>(srv_GetAllMenuNodesCompleted);
             srv.GetAllMenuNodesAsync();
-            //init drop & drag
-            //InitDragDrop();
         }
-
-        //private void InitDragDrop()
-        //{
-        //    var target1 = new DropTarget() { Width = 100, Height = 20 };
-        //    var target2 = new DropTarget() { Width = 100, Height = 20 };
-        //    PanelDropTargets.Children.Add(target1);
-        //    PanelDropTargets.Children.Add(target2);
-        //    var targets = new List<DropTarget>() { target1, target2 };
-        //    var dragSouce1 = new DragSource() { Content = new HyperlinkButton() { Content = "Test Source 1" }, DropTargets = targets, Ghost = new HyperlinkButton()};
-        //    var dragSouce2 = new DragSource() { Content = new HyperlinkButton() { Content = "Test Source 2" }, DropTargets = targets, Ghost = new HyperlinkButton()};
-        //    PanelDropSources.Children.Add(dragSouce1);
-        //    PanelDropSources.Children.Add(dragSouce2);
-        //}
 
         void srv_GetAllMenuNodesCompleted(object sender, GetAllMenuNodesCompletedEventArgs e)
         {
@@ -51,7 +36,6 @@ namespace SilverlightMenu
 
                                            foreach (var node in topNodes)
                                            {
-                                               //todo: add dragtarget for header...
                                                var target = new DropTarget
                                                {
                                                    Content = new DragSource() { Content = new HyperlinkButton { Content = node.NodeName}, DraggingEnabled = false},
@@ -79,6 +63,7 @@ namespace SilverlightMenu
                                                                         {
                                                                             Content = new HyperlinkButton() { Content = child.NodeName, Width = 100, Height = 50},
                                                                             //DragHandleMode = DragSource.DragHandleModeType.FullDragSource
+                                                                            Tag = child.NodeName
                                                                         };
                                                        
                                                        dragSource.Add(source);
@@ -108,10 +93,7 @@ namespace SilverlightMenu
 
         void target_DragSourceDropped(object sender, DropEventArgs args)
         {
-            if (args.DragSource.Tag.ToString() == "Test")
-            {
-                
-            }
+            MessageBox.Show(args.DragSource.Tag.ToString());
         }
     }
 }
