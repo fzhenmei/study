@@ -23,6 +23,7 @@ namespace SilverlightMenu
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            Loading.IsBusy = true;
             var srv = new MenuDemoClient();
             srv.GetAllMenuNodesCompleted += new EventHandler<GetAllMenuNodesCompletedEventArgs>(srv_GetAllMenuNodesCompleted);
             srv.GetAllMenuNodesAsync();
@@ -56,6 +57,8 @@ namespace SilverlightMenu
                                                LeftMenu.Items.Add(item);
                                            }
                                        });
+            Loading.IsBusy = false;
+            Loading.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }
