@@ -122,6 +122,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SL_Drag_Drop_BaseClasses\SL_Drag_Drop_BaseClasses.csproj">
+      <Project>{912977D5-0889-4433-9C63-A37B01411EBC}</Project>
+      <Name>SL_Drag_Drop_BaseClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\v3.0\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -73,4 +73,4 @@
 		  </object><iframe id="_sl_historyFrame" style='visibility:hidden;height:0;width:0;border:0px'></iframe></div>
   </form>
 </body>
-</html>(&)
+</html>

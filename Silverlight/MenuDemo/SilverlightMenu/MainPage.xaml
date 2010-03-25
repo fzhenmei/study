@@ -4,8 +4,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" xmlns:layoutToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:controlsToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit" x:Class="SilverlightMenu.MainPage"
     d:DesignWidth="640" d:DesignHeight="480">
-  <Grid x:Name="LayoutRoot">
-  	<layoutToolkit:Accordion x:Name="LeftMenu" Width="200"/>
-  	<controlsToolkit:BusyIndicator x:Name="Loading" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Loading menu..."/>
-  </Grid>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <layoutToolkit:Accordion x:Name="LeftMenu" Width="200" Grid.Column="0" Grid.Row="0"/>
+        <controlsToolkit:BusyIndicator x:Name="Loading" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Loading menu..." Grid.Column="0" Grid.Row="0"/>
+        <StackPanel x:Name="PanelDropTargets" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="DropTargets" Width="100" Height="20"></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="PanelDropSources" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="DragSouces" Width="100" Height="20"></TextBlock>
+        </StackPanel>
+    </Grid>
 </UserControl>

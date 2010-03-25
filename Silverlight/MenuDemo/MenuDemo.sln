@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightMenu", "Silverli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightMenu.Web", "SilverlightMenu.Web\SilverlightMenu.Web.csproj", "{30CFCF8F-F33B-445B-B295-A2C3E874291E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SL_Drag_Drop_BaseClasses", "SL_Drag_Drop_BaseClasses\SL_Drag_Drop_BaseClasses.csproj", "{912977D5-0889-4433-9C63-A37B01411EBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{30CFCF8F-F33B-445B-B295-A2C3E874291E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30CFCF8F-F33B-445B-B295-A2C3E874291E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30CFCF8F-F33B-445B-B295-A2C3E874291E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

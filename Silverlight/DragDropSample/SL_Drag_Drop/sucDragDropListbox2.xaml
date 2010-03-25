@@ -4,18 +4,18 @@
     xmlns:dd="clr-namespace:SL_Drag_Drop_BaseClasses;assembly=SL_Drag_Drop_BaseClasses"     
     >
     <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition></ColumnDefinition>
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"></RowDefinition>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-    </Grid.RowDefinitions>
+        </Grid.RowDefinitions>
 
-    <TextBlock Text="Dragging and dropping in an ItemsControl" 
+        <TextBlock Text="Dragging and dropping in an ItemsControl" 
                        FontSize="14" Margin="10"
                        HorizontalAlignment="Left" VerticalAlignment="Top"
                        Grid.ColumnSpan="3"></TextBlock>
@@ -29,9 +29,9 @@
 
 
 
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
                            Grid.Row="2" Grid.Column="0" Margin="10">
-        <TextBlock FontSize="14" Margin="0,0,0,10">The list of items</TextBlock>
+            <TextBlock FontSize="14" Margin="0,0,0,10">The list of items</TextBlock>
 
             <ItemsControl x:Name="lstbxItems">
                 <ItemsControl.ItemTemplate>
