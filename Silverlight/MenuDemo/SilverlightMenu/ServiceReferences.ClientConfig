@@ -9,7 +9,7 @@
             </customBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost/MenuDemo.svc" binding="customBinding"
+            <endpoint address="http://192.168.0.78/MenuDemo.svc" binding="customBinding"
                 bindingConfiguration="CustomBinding_MenuDemo" contract="MenuDemoService.MenuDemo"
                 name="CustomBinding_MenuDemo" />
         </client>
