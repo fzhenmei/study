@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragDropLearn", "DragDropLearn\DragDropLearn.csproj", "{FDF94259-1597-4BE9-B642-65A4B10921DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragDropLearn.Web", "DragDropLearn.Web\DragDropLearn.Web.csproj", "{4AB6AFE7-4041-4913-987A-D79384002119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SL_Drag_Drop_BaseClasses", "..\DragDropSample\SL_Drag_Drop_BaseClasses\SL_Drag_Drop_BaseClasses.csproj", "{912977D5-0889-4433-9C63-A37B01411EBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDF94259-1597-4BE9-B642-65A4B10921DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDF94259-1597-4BE9-B642-65A4B10921DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDF94259-1597-4BE9-B642-65A4B10921DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDF94259-1597-4BE9-B642-65A4B10921DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB6AFE7-4041-4913-987A-D79384002119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB6AFE7-4041-4913-987A-D79384002119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB6AFE7-4041-4913-987A-D79384002119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB6AFE7-4041-4913-987A-D79384002119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912977D5-0889-4433-9C63-A37B01411EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

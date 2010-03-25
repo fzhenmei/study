@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="DragDropLearn.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
+    <Grid x:Name="LayoutRoot" ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="PanelDropTargets" Grid.Column="0" Grid.Row="0"></StackPanel>
+        <StackPanel x:Name="PanelDragSources" Grid.Column="0" Grid.Row="1"></StackPanel>
+    </Grid>
+</UserControl>
