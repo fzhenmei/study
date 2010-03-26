@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     Width="100" Height="100">
     <Grid x:Name="LayoutRoot" Margin="5">
-        <Grid.Background>
+        <!--<Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FFA1A7AA" Offset="0"/>
                 <GradientStop Color="#FFE0E0E0" Offset="1"/>
             </LinearGradientBrush>
-        </Grid.Background>
+        </Grid.Background>-->
     </Grid>
 </UserControl>

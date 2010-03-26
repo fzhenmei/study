@@ -49,11 +49,7 @@ namespace SilverlightMenu
                     //only Top node can accept drag drop
                     var target = new DropTarget
                                      {
-                                         Content = new DragSource()
-                                                       {
-                                                           Content = new MenuGroupHeaderContent() { DataContext = node}, 
-                                                           DraggingEnabled = false
-                                                       }
+                                         Ghost = new MenuGroupHeaderContent() { DataContext = node}
                                      };
                     target.DragSourceDropped += new DropEventHandler(target_DragSourceDropped);
                     dropTagets.Add(target);
@@ -79,6 +75,11 @@ namespace SilverlightMenu
             var target = MenuDataList.Where(m => m.IsTop).Single();
             foreach (var data in MenuDataList)
             {
+                if (data.IsTop)
+                {
+                    continue;
+                }
+
                 var obj = data.MenuItems.Where(m => m.Id == id).SingleOrDefault();
                 if (obj != null)
                 {

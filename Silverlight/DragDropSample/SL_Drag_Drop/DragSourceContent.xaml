@@ -5,14 +5,6 @@
     <Grid x:Name="LayoutRoot"  Margin="5">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <!--<LinearGradientBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform CenterX="0.5" CenterY="0.5"/>
-                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                        <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </LinearGradientBrush.RelativeTransform>-->
                 <GradientStop Color="#FFD83F00" Offset="0"/>
                 <GradientStop Color="#FFF65E00" Offset="1"/>
             </LinearGradientBrush>

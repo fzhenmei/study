@@ -43,6 +43,7 @@ namespace SL_Drag_Drop
             PanelDropTargets.Children.Add(dropTarget1);
             PanelDropTargets.Children.Add(dropTarget2);
             PanelDropTargets.Children.Add(dropTarget3);
+
             PanelDragSources.Children.Add(dropTarget4);
             PanelDragSources.Children.Add(dropTarget5);
             PanelDragSources.Children.Add(dropTarget6);
