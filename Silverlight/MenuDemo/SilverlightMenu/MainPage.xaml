@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" xmlns:layoutToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:controlsToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit" x:Class="SilverlightMenu.MainPage"
-    d:DesignWidth="640" d:DesignHeight="480">
-    <Grid x:Name="LayoutRoot">
+    d:DesignWidth="200" d:DesignHeight="600" Width="300">
+    <Grid x:Name="LayoutRoot" Height="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <layoutToolkit:Accordion x:Name="LeftMenu" Width="200" Height="auto" Grid.Column="0" Grid.Row="0"/>
+        <layoutToolkit:Accordion x:Name="LeftMenu" Width="200" Grid.Column="0" Grid.Row="0"/>
         <controlsToolkit:BusyIndicator x:Name="Loading" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Loading menu..." Grid.Column="0" Grid.Row="0"/>
     </Grid>
 </UserControl>

@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace SilverlightMenu.Web
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class LeftMenu : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Response.Redirect("SilverlightMenuTestPage.aspx");
+
         }
     }
 }

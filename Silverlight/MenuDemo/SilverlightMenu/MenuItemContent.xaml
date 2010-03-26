@@ -8,11 +8,12 @@
                 <DataTemplate>
                     <dragdrop:DropTarget ShowHover="False" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <dragdrop:DropTarget.Content>
-                            <dragdrop:DragSource AllDropTargetsValid="True" BorderBrush="{x:Null}" 
-                                         ShowReturnToOriginalPositionAnimation="True" DragHandleMode="Handle"
-                                         DropMode="ReturnDragSource"
-                                         Tag="{Binding Id}" 
-										 >
+                            <dragdrop:DragSource AllDropTargetsValid="True" 
+                                                 BorderBrush="{x:Null}" 
+                                                 ShowReturnToOriginalPositionAnimation="True" 
+                                                 DragHandleMode="Handle"
+                                                 DropMode="ReturnDragSource"
+                                                 Tag="{Binding Id}">
                                 <StackPanel Width="150" Height="auto">
                                     <HyperlinkButton Margin="10,0,0,0" Content="{Binding Caption}" NavigateUri="{Binding Url}"></HyperlinkButton>
                                 </StackPanel>

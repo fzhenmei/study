@@ -65,6 +65,8 @@
   <ItemGroup>
     <Content Include="ClientBin\SilverlightMenu.xap" />
     <Content Include="Default.aspx" />
+    <Content Include="LeftMenu.aspx" />
+    <Content Include="Main.aspx" />
     <Content Include="MenuDemo.svc" />
     <Content Include="Silverlight.js" />
     <Content Include="SilverlightMenuTestPage.aspx" />
@@ -85,6 +87,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeftMenu.aspx.cs">
+      <DependentUpon>LeftMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LeftMenu.aspx.designer.cs">
+      <DependentUpon>LeftMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuData.cs" />
     <Compile Include="MenuDemo.svc.cs">
@@ -109,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Css\" />
+    <Folder Include="Images\" />
+    <Folder Include="Js\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

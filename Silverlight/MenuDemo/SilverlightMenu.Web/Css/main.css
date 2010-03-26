@@ -1,0 +1,302 @@
+
+html, body
+{
+    height: 100%;
+    width: 100%;
+}
+
+A
+{
+    color: black;
+    text-decoration: underline;
+}
+A:visited
+{
+    color: black;
+    text-decoration: underline;
+}
+A:hover
+{
+    color: red;
+    text-decoration: underline;
+}
+
+BODY
+{
+    background-image: url(/Images/IND_Bg1.jpg);
+    margin: 0px;
+    vertical-align: middle;
+    text-align: center;
+}
+.bigtitle
+{
+    font-family: "ËÎÌו";
+    font-size: 14px;
+    color: #676767;
+    line-height: 20px;
+    vertical-align: middle;
+}
+td
+{
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+th
+{
+    font-size: 13px; /*background-color: #EEEEEE;*/
+}
+.textBox
+{
+    border: 1px solid #999999;
+}
+.zt
+{
+    color: #FFFFFF;
+    background-color: #2F74B5;
+}
+table.zt
+{
+    border: 1px solid #0098E1;
+}
+
+.PageTitle
+{
+    font-weight: bold;
+    letter-spacing: 1pt;
+    font-size: 14px;
+}
+.zt1
+{
+    background-color: #EEEEEE;
+}
+.list
+{
+    background-color: #cccccc;
+}
+tr.list
+{
+    background-color: #FFFFFF;
+}
+a.white
+{
+    color: white;
+    text-decoration: none;
+}
+A:visited.white
+{
+    color: white;
+    text-decoration: none;
+}
+
+.NormalText
+{
+    font-size: 9pt;
+}
+.noborder
+{
+    border: none;
+}
+
+INPUT checkbox
+{
+    border-style: none;
+}
+/* TABS superiores ------------------------------------------*/
+
+#shademenu
+{
+    float: right;
+    width: 440px;
+    font-size: 11px;
+    line-height: normal;
+}
+.shadetabs a
+{
+    color: #CCCCCC;
+}
+.shadetabs ul
+{
+    margin-left: 0;
+    margin-top: 0px;
+    font: normal 11px Verdana;
+    list-style-type: none;
+}
+.shadetabs li
+{
+    display: inline;
+    margin: 0;
+}
+.shadetabs li a
+{
+    float: left;
+    background: url("/Images/tableftH.gif") no-repeat left -42px;
+    margin: 0;
+    padding: 0 0 0 3px;
+    text-decoration: none;
+}
+.shadetabs a span
+{
+    display: block;
+    background: url("/Images/tabrightH.gif") no-repeat right -42px;
+    padding: 6px 12px 6px 6px;
+    color: #FFF;
+}
+.shadetabs a:hover
+{
+    background-position: 0% 0;
+    cursor: pointer;
+    color: #FFF;
+    text-decoration: none;
+}
+.shadetabs a:hover span
+{
+    background-position: 100% 0;
+    cursor: pointer;
+    color: #614c27;
+    text-decoration: none;
+}
+
+/* ######### Style for Drop Down Menu ######### */
+.dropmenudiv
+{
+    position: absolute;
+    border: 1px solid #d9e0ea; /*THEME CHANGE HERE*/
+    border-width: 1px;
+    font: normal 11px Verdana;
+    line-height: 18px;
+    z-index: 100;
+    background-color: #f1f4f8;
+    visibility: hidden;
+}
+.dropmenudiv a
+{
+    width: auto;
+    display: block;
+    text-indent: 8px;
+    border-top: 1px solid #d9e0ea; /*THEME CHANGE HERE*/
+    padding: 2px 0;
+    text-decoration: none;
+    color: #333;
+}
+* html .dropmenudiv a
+{
+    /*IE only hack*/
+    width: 100%;
+}
+.dropmenudiv a:hover
+{
+    /*THEME CHANGE HERE*/
+    background-color: #d9e0ea;
+    color: #333;
+    text-decoration: none;
+}
+tr ul
+{
+    margin-left: 0;
+}
+
+.title
+{
+    background-color: #930000; /*BBD3F9*/
+    color: White;
+}
+
+.title td
+{
+    padding-left: 5px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: large;
+    font-weight: bold;
+}
+
+
+
+.MessageItem
+{
+    background-color: #fff;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    color: #000099;
+    word-break: break-all;
+}
+
+
+.ContentItem
+{
+    word-break: break-all;
+    white-space: normal;
+    cursor: pointer;
+    width: 99%;
+    height: 100%;
+    padding: 3px;
+}
+
+.ReplayItem
+{
+    background-color: #fff;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    color: #CC3300;
+    word-break: break-all;
+}
+
+.ReplyTR
+{
+    background-color: White;
+    display: none;
+}
+
+
+.LinkButton
+{
+    padding: 5px;
+    margin: 0px;
+    font-size: smaller;
+    border: 0px;
+}
+
+.MessageList
+{
+    width: 100%;
+}
+
+.MessageList tr th
+{
+    background-color: #336699;
+    color: White;
+    text-align: center;
+    height: 30px;
+}
+
+.ckbSelectRow
+{
+}
+
+.Catption
+{
+    font-size: medium;
+    text-align: left;
+    font-weight: bold;
+}
+.Catption span
+{
+    display: inline-block;
+    background-color: Background;
+    color: White;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.inputItem td
+{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
