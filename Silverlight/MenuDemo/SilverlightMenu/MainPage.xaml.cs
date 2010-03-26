@@ -16,7 +16,7 @@ namespace SilverlightMenu
         {
             InitializeComponent();
             InitialValues.ContainingLayoutPanel = LayoutRoot;
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+            Loaded += MainPage_Loaded;
         }
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -32,7 +32,7 @@ namespace SilverlightMenu
             MenuDataList = e.Result;
             Dispatcher.BeginInvoke(BindMenuItem);
             Loading.IsBusy = false;
-            Loading.Visibility = System.Windows.Visibility.Collapsed;
+            Loading.Visibility = Visibility.Collapsed;
         }
 
         private void BindMenuItem()
@@ -51,7 +51,7 @@ namespace SilverlightMenu
                                      {
                                          Ghost = new MenuGroupHeaderContent() { DataContext = node}
                                      };
-                    target.DragSourceDropped += new DropEventHandler(target_DragSourceDropped);
+                    target.DragSourceDropped += target_DragSourceDropped;
                     dropTagets.Add(target);
                     item = new AccordionItem { Header = target };
                 }
