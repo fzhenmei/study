@@ -86,6 +86,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MenuData.cs" />
     <Compile Include="MenuDemo.svc.cs">
       <DependentUpon>MenuDemo.svc</DependentUpon>
     </Compile>

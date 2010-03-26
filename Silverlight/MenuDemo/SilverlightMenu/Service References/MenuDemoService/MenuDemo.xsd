@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:4852/MenuDemo.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web.Dao" />
+  <xs:import schemaLocation="http://localhost:4852/MenuDemo.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web" />
   <xs:element name="GetAllMenuNodes">
     <xs:complexType>
       <xs:sequence />
@@ -9,7 +9,7 @@
   <xs:element name="GetAllMenuNodesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web.Dao" minOccurs="0" name="GetAllMenuNodesResult" nillable="true" type="q1:ArrayOfNodes" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web" minOccurs="0" name="GetAllMenuNodesResult" nillable="true" type="q1:ArrayOfMenuData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

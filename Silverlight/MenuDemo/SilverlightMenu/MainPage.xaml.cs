@@ -10,6 +10,8 @@ namespace SilverlightMenu
 {
     public partial class MainPage : UserControl
     {
+        public System.Collections.ObjectModel.ObservableCollection<MenuDemoService.MenuData> MenuDataList;
+
         public MainPage()
         {
             InitializeComponent();
@@ -27,73 +29,65 @@ namespace SilverlightMenu
 
         void srv_GetAllMenuNodesCompleted(object sender, GetAllMenuNodesCompletedEventArgs e)
         {
-            var data = e.Result;
-            Dispatcher.BeginInvoke(() =>
-                                       {
-                                           var topNodes = data.Where(n => n.ParentId == 0);
-                                           var dropTagets = new List<DropTarget>();
-                                           var dragSource = new List<DragSource>();
-
-                                           foreach (var node in topNodes)
-                                           {
-                                               var target = new DropTarget
-                                               {
-                                                   Content = new DragSource() { Content = new HyperlinkButton { Content = node.NodeName}, DraggingEnabled = false},
-                                                   Width = 200,
-                                                   Height = 30,
-                                               };
-                                               target.DragSourceDropped += new DropEventHandler(target_DragSourceDropped);
-                                               dropTagets.Add(target);
-
-                                               var item = new AccordionItem { Header = target };
-
-                                               var currentNode = node;
-                                               var children = data.Where(d => d.ParentId == currentNode.Id).ToList();
-                                               if (children.Count() > 0)
-                                               {
-                                                   var wrapper = new StackPanel();//this is a container,should have targets
-                                                   foreach (var child in children)
-                                                   {
-                                                       var childTarget = new DropTarget()
-                                                                             {
-                                                                                 Ghost =
-                                                                                     new HyperlinkButton() { Content = child.NodeName },
-                                                                             };
-                                                       var source = new DragSource()
-                                                                        {
-                                                                            Content = new HyperlinkButton() { Content = child.NodeName, Width = 100, Height = 50},
-                                                                            //DragHandleMode = DragSource.DragHandleModeType.FullDragSource
-                                                                            Tag = child.NodeName
-                                                                        };
-                                                       
-                                                       dragSource.Add(source);
-                                                       childTarget.Content = source;
-                                                       dropTagets.Add(childTarget);
-
-                                                       wrapper.Children.Add(childTarget);
-                                                   }
-                                                   item.Content = wrapper;
-                                               }
-                                               else
-                                               {
-                                                   item.Content = "没有菜单项";
-                                               }
-
-                                               LeftMenu.Items.Add(item);
-                                           }
-
-                                           for (int i = 0; i < dragSource.Count; i++)
-                                           {
-                                               dragSource[i].DropTargets = dropTagets;
-                                           }
-                                       });
+            MenuDataList = e.Result;
+            Dispatcher.BeginInvoke(BindMenuItem);
             Loading.IsBusy = false;
             Loading.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        private void BindMenuItem()
+        {
+            LeftMenu.Items.Clear();
+
+            var dropTagets = new List<DropTarget>();
+
+            foreach (var node in MenuDataList)
+            {
+                AccordionItem item;
+                if (node.IsTop)
+                {
+                    //only Top node can accept drag drop
+                    var target = new DropTarget
+                                     {
+                                         Content = new DragSource()
+                                                       {
+                                                           Content = new MenuGroupHeaderContent() { DataContext = node}, 
+                                                           DraggingEnabled = false
+                                                       }
+                                     };
+                    target.DragSourceDropped += new DropEventHandler(target_DragSourceDropped);
+                    dropTagets.Add(target);
+                    item = new AccordionItem { Header = target };
+                }
+                else
+                {
+                    item = new AccordionItem()
+                               {
+                                   Header = 
+                                       new MenuGroupHeaderContent() {DataContext = node}
+                               };
+                }
+
+                item.Content = new MenuItemContent() { DataSource = node.MenuItems};
+                LeftMenu.Items.Add(item);
+            }
+        }
+
         void target_DragSourceDropped(object sender, DropEventArgs args)
         {
-            MessageBox.Show(args.DragSource.Tag.ToString());
+            var id = (int) args.DragSource.Tag;
+            var target = MenuDataList.Where(m => m.IsTop).Single();
+            foreach (var data in MenuDataList)
+            {
+                var obj = data.MenuItems.Where(m => m.Id == id).SingleOrDefault();
+                if (obj != null)
+                {
+                    data.MenuItems.Remove(obj);
+                    target.MenuItems.Add(obj);
+                    BindMenuItem();
+                    break;
+                }
+            }
         }
     }
 }

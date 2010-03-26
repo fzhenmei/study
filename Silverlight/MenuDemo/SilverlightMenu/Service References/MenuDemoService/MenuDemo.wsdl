@@ -4,7 +4,7 @@
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:4852/MenuDemo.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:4852/MenuDemo.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:4852/MenuDemo.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web.Dao" />
+      <xsd:import schemaLocation="http://localhost:4852/MenuDemo.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="MenuDemo_GetAllMenuNodes_InputMessage">

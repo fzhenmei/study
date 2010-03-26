@@ -17,14 +17,29 @@ namespace SilverlightMenu.MenuDemoService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Nodes", Namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web.Dao")]
-    public partial class Nodes : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.DataContractAttribute(Name="MenuData", Namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web")]
+    public partial class MenuData : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string GroupNameField;
         
         private int IdField;
         
-        private string NodeNameField;
+        private bool IsTopField;
         
-        private int ParentIdField;
+        private System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuItem> MenuItemsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GroupName {
+            get {
+                return this.GroupNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupNameField, value) != true)) {
+                    this.GroupNameField = value;
+                    this.RaisePropertyChanged("GroupName");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
@@ -40,27 +55,87 @@ namespace SilverlightMenu.MenuDemoService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NodeName {
+        public bool IsTop {
             get {
-                return this.NodeNameField;
+                return this.IsTopField;
             }
             set {
-                if ((object.ReferenceEquals(this.NodeNameField, value) != true)) {
-                    this.NodeNameField = value;
-                    this.RaisePropertyChanged("NodeName");
+                if ((this.IsTopField.Equals(value) != true)) {
+                    this.IsTopField = value;
+                    this.RaisePropertyChanged("IsTop");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ParentId {
+        public System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuItem> MenuItems {
             get {
-                return this.ParentIdField;
+                return this.MenuItemsField;
             }
             set {
-                if ((this.ParentIdField.Equals(value) != true)) {
-                    this.ParentIdField = value;
-                    this.RaisePropertyChanged("ParentId");
+                if ((object.ReferenceEquals(this.MenuItemsField, value) != true)) {
+                    this.MenuItemsField = value;
+                    this.RaisePropertyChanged("MenuItems");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MenuItem", Namespace="http://schemas.datacontract.org/2004/07/SilverlightMenu.Web")]
+    public partial class MenuItem : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string CaptionField;
+        
+        private int IdField;
+        
+        private string UrlField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Caption {
+            get {
+                return this.CaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CaptionField, value) != true)) {
+                    this.CaptionField = value;
+                    this.RaisePropertyChanged("Caption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Url {
+            get {
+                return this.UrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UrlField, value) != true)) {
+                    this.UrlField = value;
+                    this.RaisePropertyChanged("Url");
                 }
             }
         }
@@ -82,7 +157,7 @@ namespace SilverlightMenu.MenuDemoService {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:MenuDemo/GetAllMenuNodes", ReplyAction="urn:MenuDemo/GetAllMenuNodesResponse")]
         System.IAsyncResult BeginGetAllMenuNodes(System.AsyncCallback callback, object asyncState);
         
-        System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes> EndGetAllMenuNodes(System.IAsyncResult result);
+        System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData> EndGetAllMenuNodes(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -100,10 +175,10 @@ namespace SilverlightMenu.MenuDemoService {
             this.results = results;
         }
         
-        public System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes> Result {
+        public System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes>)(this.results[0]));
+                return ((System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData>)(this.results[0]));
             }
         }
     }
@@ -183,7 +258,7 @@ namespace SilverlightMenu.MenuDemoService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes> SilverlightMenu.MenuDemoService.MenuDemo.EndGetAllMenuNodes(System.IAsyncResult result) {
+        System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData> SilverlightMenu.MenuDemoService.MenuDemo.EndGetAllMenuNodes(System.IAsyncResult result) {
             return base.Channel.EndGetAllMenuNodes(result);
         }
         
@@ -192,7 +267,7 @@ namespace SilverlightMenu.MenuDemoService {
         }
         
         private object[] OnEndGetAllMenuNodes(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes> retVal = ((SilverlightMenu.MenuDemoService.MenuDemo)(this)).EndGetAllMenuNodes(result);
+            System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData> retVal = ((SilverlightMenu.MenuDemoService.MenuDemo)(this)).EndGetAllMenuNodes(result);
             return new object[] {
                     retVal};
         }
@@ -303,9 +378,9 @@ namespace SilverlightMenu.MenuDemoService {
                 return _result;
             }
             
-            public System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes> EndGetAllMenuNodes(System.IAsyncResult result) {
+            public System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData> EndGetAllMenuNodes(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes> _result = ((System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.Nodes>)(base.EndInvoke("GetAllMenuNodes", _args, result)));
+                System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData> _result = ((System.Collections.ObjectModel.ObservableCollection<SilverlightMenu.MenuDemoService.MenuData>)(base.EndInvoke("GetAllMenuNodes", _args, result)));
                 return _result;
             }
         }

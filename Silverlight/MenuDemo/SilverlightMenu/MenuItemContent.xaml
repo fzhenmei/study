@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="SilverlightMenu.MenuItemContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:dragdrop="clr-namespace:SL_Drag_Drop_BaseClasses;assembly=SL_Drag_Drop_BaseClasses">
+    <Grid x:Name="LayoutRoot" Background="Gray">
+        <ListBox Width="auto" Height="auto" x:Name="lstMenuItem">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <dragdrop:DropTarget ShowHover="False">
+                        <dragdrop:DropTarget.Content>
+                            <dragdrop:DragSource AllDropTargetsValid="True"
+                                         ShowReturnToOriginalPositionAnimation="False"
+                                         DropMode="ReturnDragSource" DragHandleMode="FullDragSource"
+                                         Tag="{Binding Id}">
+                                <StackPanel Width="150" Height="30">
+                                    <HyperlinkButton Content="{Binding Caption}" NavigateUri="{Binding Url}"></HyperlinkButton>
+                                </StackPanel>
+                            </dragdrop:DragSource>
+                        </dragdrop:DropTarget.Content>
+                        <dragdrop:DropTarget.Ghost>
+                            <StackPanel Width="150" Height="30">
+                                <HyperlinkButton Content="{Binding Caption}" NavigateUri="{Binding Url}"></HyperlinkButton>
+                            </StackPanel>
+                        </dragdrop:DropTarget.Ghost>
+                    </dragdrop:DropTarget>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
