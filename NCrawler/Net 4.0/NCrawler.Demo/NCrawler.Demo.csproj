@@ -12,10 +12,14 @@
     <AssemblyName>NCrawler.Demo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
@@ -86,7 +90,6 @@
     <Compile Include="FindBrokenLinksDemo.cs" />
     <Compile Include="IndexerDemo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleCrawlDemo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,10 +121,6 @@
       <Project>{8DBF9F2F-A8BD-45B1-8750-C7CB63611425}</Project>
       <Name>NCrawler.MP3Processor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NCrawler.SQLite\NCrawler.SQLite.csproj">
-      <Project>{5CD07ACF-10BE-4CAB-B249-00F4C005AA03}</Project>
-      <Name>NCrawler.SQLite</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NCrawler\NCrawler.csproj">
       <Project>{5E4DF149-F650-4152-8410-586FB9CCF644}</Project>
       <Name>NCrawler</Name>
@@ -150,7 +149,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
