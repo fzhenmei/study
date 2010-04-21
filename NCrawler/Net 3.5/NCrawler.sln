@@ -62,42 +62,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autofac", "Autofac", "{C3C6
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs08.codeplex.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = NCrawler.Demo\\NCrawler.Demo.csproj
-		SccProjectName1 = NCrawler.Demo
-		SccLocalPath1 = NCrawler.Demo
-		SccProjectUniqueName2 = NCrawler.HtmlProcessor\\NCrawler.HtmlProcessor.csproj
-		SccProjectName2 = NCrawler.HtmlProcessor
-		SccLocalPath2 = NCrawler.HtmlProcessor
-		SccProjectUniqueName3 = NCrawler.IFilterProcessor\\NCrawler.IFilterProcessor.csproj
-		SccProjectName3 = NCrawler.IFilterProcessor
-		SccLocalPath3 = NCrawler.IFilterProcessor
-		SccProjectUniqueName4 = NCrawler\\NCrawler.csproj
-		SccProjectName4 = NCrawler
-		SccLocalPath4 = NCrawler
-		SccProjectUniqueName5 = NCrawler.LanguageDetection.Google\\NCrawler.LanguageDetection.Google.csproj
-		SccProjectName5 = NCrawler.LanguageDetection.Google
-		SccLocalPath5 = NCrawler.LanguageDetection.Google
-		SccProjectUniqueName6 = NCrawler.iTextSharpPdfProcessor\\NCrawler.iTextSharpPdfProcessor.csproj
-		SccProjectName6 = NCrawler.iTextSharpPdfProcessor
-		SccLocalPath6 = NCrawler.iTextSharpPdfProcessor
-		SccProjectUniqueName7 = NCrawler.DbServices\\NCrawler.DbServices.csproj
-		SccProjectName7 = NCrawler.DbServices
-		SccLocalPath7 = NCrawler.DbServices
-		SccProjectUniqueName8 = NCrawler.MP3Processor\\NCrawler.MP3Processor.csproj
-		SccProjectName8 = NCrawler.MP3Processor
-		SccLocalPath8 = NCrawler.MP3Processor
-		SccProjectUniqueName9 = NCrawler.IsolatedStorageServices\\NCrawler.IsolatedStorageServices.csproj
-		SccProjectName9 = NCrawler.IsolatedStorageServices
-		SccLocalPath9 = NCrawler.IsolatedStorageServices
-		SccProjectUniqueName10 = NCrawler.FileStorageServices\\NCrawler.FileStorageServices.csproj
-		SccProjectName10 = NCrawler.FileStorageServices
-		SccLocalPath10 = NCrawler.FileStorageServices
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -159,5 +123,41 @@ Global
 		{19BDD7FB-9DDD-490A-AF79-E57B2E5512AB} = {BF44D7D9-3CDF-4A7D-89F9-A80A04BB418C}
 		{DDB7D096-1E93-4814-951F-65B0C4B5D8C9} = {BF44D7D9-3CDF-4A7D-89F9-A80A04BB418C}
 		{C3C6449B-03BE-4D0F-9277-9A3488E123E8} = {BF44D7D9-3CDF-4A7D-89F9-A80A04BB418C}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs08.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = NCrawler.Demo\\NCrawler.Demo.csproj
+		SccProjectName1 = NCrawler.Demo
+		SccLocalPath1 = NCrawler.Demo
+		SccProjectUniqueName2 = NCrawler.HtmlProcessor\\NCrawler.HtmlProcessor.csproj
+		SccProjectName2 = NCrawler.HtmlProcessor
+		SccLocalPath2 = NCrawler.HtmlProcessor
+		SccProjectUniqueName3 = NCrawler.IFilterProcessor\\NCrawler.IFilterProcessor.csproj
+		SccProjectName3 = NCrawler.IFilterProcessor
+		SccLocalPath3 = NCrawler.IFilterProcessor
+		SccProjectUniqueName4 = NCrawler\\NCrawler.csproj
+		SccProjectName4 = NCrawler
+		SccLocalPath4 = NCrawler
+		SccProjectUniqueName5 = NCrawler.LanguageDetection.Google\\NCrawler.LanguageDetection.Google.csproj
+		SccProjectName5 = NCrawler.LanguageDetection.Google
+		SccLocalPath5 = NCrawler.LanguageDetection.Google
+		SccProjectUniqueName6 = NCrawler.iTextSharpPdfProcessor\\NCrawler.iTextSharpPdfProcessor.csproj
+		SccProjectName6 = NCrawler.iTextSharpPdfProcessor
+		SccLocalPath6 = NCrawler.iTextSharpPdfProcessor
+		SccProjectUniqueName7 = NCrawler.DbServices\\NCrawler.DbServices.csproj
+		SccProjectName7 = NCrawler.DbServices
+		SccLocalPath7 = NCrawler.DbServices
+		SccProjectUniqueName8 = NCrawler.MP3Processor\\NCrawler.MP3Processor.csproj
+		SccProjectName8 = NCrawler.MP3Processor
+		SccLocalPath8 = NCrawler.MP3Processor
+		SccProjectUniqueName9 = NCrawler.IsolatedStorageServices\\NCrawler.IsolatedStorageServices.csproj
+		SccProjectName9 = NCrawler.IsolatedStorageServices
+		SccLocalPath9 = NCrawler.IsolatedStorageServices
+		SccProjectUniqueName10 = NCrawler.FileStorageServices\\NCrawler.FileStorageServices.csproj
+		SccProjectName10 = NCrawler.FileStorageServices
+		SccLocalPath10 = NCrawler.FileStorageServices
 	EndGlobalSection
 EndGlobal
