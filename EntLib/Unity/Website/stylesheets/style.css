@@ -1,0 +1,10 @@
+body, td, tr, th {font-family:Arial,sans-serif; font-size:small}
+li {font-family:Arial,sans-serif; font-size:x-small; padding-bottom:5px}
+input, select, textarea {font-family:Arial,sans-serif; font-size:small}
+xmp, pre {font-size:small}
+.heading {font-family:Arial,sans-serif; font-size:medium; font-weight:bold}
+.subhead {font-family:Arial,sans-serif; font-size:small; font-weight:bold; padding-bottom:5px}
+.cite {font-family:Arial,sans-serif; font-size:x-small}
+.specialpage {background-color:Yellow; font-family:Comic Sans MS; color:#000080; font-size:small}
+.specialheading {font-family:Comic Sans MS; color:#000080; font-size:medium}
+.speciallargeheading {font-family:Comic Sans MS; color:#000080; font-size:large}
