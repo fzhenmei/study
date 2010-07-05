@@ -8,6 +8,7 @@ using System.Threading;
 using Autofac;
 using Autofac.Core;
 
+using NCrawler.Events;
 using NCrawler.Extensions;
 using NCrawler.Interfaces;
 using NCrawler.Services;
@@ -20,35 +21,38 @@ namespace NCrawler
 		#region Readonly & Static Fields
 
 		protected readonly Uri m_BaseUri;
-		protected ICrawlerHistory m_CrawlerHistory;
-		protected ICrawlerQueue m_CrawlerQueue;
-		protected readonly IDownloaderFactory m_DownloaderFactory;
-		protected ILog m_Logger;
-		protected IRobot m_Robot;
-		protected ITaskRunner m_TaskRunner;
-		protected ThreadSafeCounter m_ThreadInUse = new ThreadSafeCounter();
 		private readonly ILifetimeScope m_LifetimeScope;
+		private readonly ThreadSafeCounter m_ThreadInUse = new ThreadSafeCounter();
+		private long m_VisitedCount;
 
 		#endregion
 
 		#region Fields
 
+		protected ICrawlerHistory m_CrawlerHistory;
+		protected ICrawlerQueue m_CrawlerQueue;
+		protected ILog m_Logger;
+		protected ITaskRunner m_TaskRunner;
+		protected Func<IWebDownloader> m_WebDownloaderFactory;
+
 		private bool m_Cancelled;
 		private ManualResetEvent m_CrawlCompleteEvent;
 		private bool m_CrawlStopped;
+		private ICrawlerRules m_CrawlerRules;
 		private bool m_Crawling;
 		private long m_DownloadErrors;
 		private Stopwatch m_Runtime;
+		private bool m_OnlyOneCrawlPerInstance;
 
 		#endregion
 
 		#region Constructors
 
 		/// <summary>
-		/// Constructor for NCrawler
+		/// 	Constructor for NCrawler
 		/// </summary>
-		/// <param name="crawlStart">The url from where the crawler should start</param>
-		/// <param name="pipeline">Pipeline steps</param>
+		/// <param name = "crawlStart">The url from where the crawler should start</param>
+		/// <param name = "pipeline">Pipeline steps</param>
 		public Crawler(Uri crawlStart, params IPipelineStep[] pipeline)
 		{
 			AspectF.Define.
@@ -56,15 +60,14 @@ namespace NCrawler
 				NotNull(pipeline, "pipeline");
 
 			m_LifetimeScope = NCrawlerModule.Container.BeginLifetimeScope();
-			m_DownloaderFactory = m_LifetimeScope.Resolve<IDownloaderFactory>();
 			m_BaseUri = crawlStart;
 			MaximumCrawlDepth = null;
 			AdhereToRobotRules = true;
 			MaximumThreadCount = 1;
 			Pipeline = pipeline;
-			UserAgent = "NCrawler";
-			DownloadDelay = null;
 			UriSensitivity = UriComponents.HttpRequestUrl;
+			MaximumDownloadSizeInRam = 1024*1024;
+			DownloadBufferSize = 0x1000;
 		}
 
 		#endregion
@@ -72,29 +75,35 @@ namespace NCrawler
 		#region Instance Methods
 
 		/// <summary>
-		/// Start crawl process
+		/// 	Start crawl process
 		/// </summary>
 		public virtual void Crawl()
 		{
-			if (m_Crawling)
+			if (m_OnlyOneCrawlPerInstance)
 			{
-				throw new InvalidOperationException("Crawler already running");
+				throw new InvalidOperationException("Crawler instance cannot be reused");
 			}
+
+			m_OnlyOneCrawlPerInstance = true;
 
 			Parameter[] parameters = new Parameter[]
 				{
 					new TypedParameter(typeof (Uri), m_BaseUri),
 					new NamedParameter("crawlStart", m_BaseUri),
 					new NamedParameter("resume", false),
-					new NamedParameter("crawler", this),
+					new TypedParameter(typeof (Crawler), this),
 				};
 			m_CrawlerQueue = m_LifetimeScope.Resolve<ICrawlerQueue>(parameters);
+			parameters = parameters.AddToEnd(new TypedParameter(typeof (ICrawlerQueue), m_CrawlerQueue)).ToArray();
 			m_CrawlerHistory = m_LifetimeScope.Resolve<ICrawlerHistory>(parameters);
-			m_Robot = AdhereToRobotRules ? m_LifetimeScope.Resolve<IRobot>(parameters) : new DummyRobot();
+			parameters = parameters.AddToEnd(new TypedParameter(typeof (ICrawlerHistory), m_CrawlerHistory)).ToArray();
 			m_TaskRunner = m_LifetimeScope.Resolve<ITaskRunner>(parameters);
+			parameters = parameters.AddToEnd(new TypedParameter(typeof (ITaskRunner), m_TaskRunner)).ToArray();
 			m_Logger = m_LifetimeScope.Resolve<ILog>(parameters);
-
+			parameters = parameters.AddToEnd(new TypedParameter(typeof (ILog), m_Logger)).ToArray();
+			m_CrawlerRules = m_LifetimeScope.Resolve<ICrawlerRules>(parameters);
 			m_Logger.Verbose("Crawl started @ {0}", m_BaseUri);
+			m_WebDownloaderFactory = m_LifetimeScope.Resolve<Func<IWebDownloader>>();
 			using (m_CrawlCompleteEvent = new ManualResetEvent(false))
 			{
 				m_Crawling = true;
@@ -118,28 +127,23 @@ namespace NCrawler
 			OnCrawlFinished();
 		}
 
-		public virtual bool IsExternalUrl(Uri uri)
-		{
-			return m_BaseUri.IsHostMatch(uri);
-		}
-
 		/// <summary>
-		/// Queue a new step on the crawler queue
+		/// 	Queue a new step on the crawler queue
 		/// </summary>
-		/// <param name="uri">url to crawl</param>
-		/// <param name="depth">depth of the url</param>
+		/// <param name = "uri">url to crawl</param>
+		/// <param name = "depth">depth of the url</param>
 		public void AddStep(Uri uri, int depth)
 		{
 			AddStep(uri, depth, null, null);
 		}
 
 		/// <summary>
-		/// Queue a new step on the crawler queue
+		/// 	Queue a new step on the crawler queue
 		/// </summary>
-		/// <param name="uri">url to crawl</param>
-		/// <param name="depth">depth of the url</param>
-		/// <param name="referrer">Step which the url was located</param>
-		/// <param name="properties">Custom properties</param>
+		/// <param name = "uri">url to crawl</param>
+		/// <param name = "depth">depth of the url</param>
+		/// <param name = "referrer">Step which the url was located</param>
+		/// <param name = "properties">Custom properties</param>
 		public void AddStep(Uri uri, int depth, CrawlStep referrer, Dictionary<string, object> properties)
 		{
 			if (!m_Crawling)
@@ -154,7 +158,7 @@ namespace NCrawler
 
 			if ((uri.Scheme != Uri.UriSchemeHttps && uri.Scheme != Uri.UriSchemeHttp) || // Only accept http(s) schema
 				(MaximumCrawlDepth.HasValue && MaximumCrawlDepth.Value > 0 && depth >= MaximumCrawlDepth.Value) ||
-				!IsAllowedUrl(uri, referrer))
+				!m_CrawlerRules.IsAllowedUrl(uri, referrer))
 			{
 				if (depth == 0)
 				{
@@ -164,7 +168,6 @@ namespace NCrawler
 				return;
 			}
 
-
 			if (!m_CrawlerHistory.Register(uri.GetUrlKeyString(UriSensitivity)))
 			{
 				return;
@@ -173,7 +176,7 @@ namespace NCrawler
 			// Make new crawl step
 			CrawlStep crawlStep = new CrawlStep(uri, depth)
 				{
-					IsExternalUrl = IsExternalUrl(uri),
+					IsExternalUrl = m_CrawlerRules.IsExternalUrl(uri),
 					IsAllowed = true,
 				};
 			m_CrawlerQueue.Push(new CrawlerQueueEntry
@@ -184,7 +187,7 @@ namespace NCrawler
 				});
 			m_Logger.Verbose("Added {0} to queue referred from {1}",
 				crawlStep.Uri, referrer.IsNull() ? string.Empty : referrer.Uri.ToString());
-			StartNew();
+			ProcessQueue();
 		}
 
 		public void Cancel()
@@ -195,7 +198,6 @@ namespace NCrawler
 			}
 
 			m_Logger.Verbose("Cancelled crawler from {0}", m_BaseUri);
-
 			if (m_Cancelled)
 			{
 				throw new ConstraintException("Already cancelled once");
@@ -205,72 +207,41 @@ namespace NCrawler
 			StopCrawl();
 		}
 
-		/// <summary>
-		/// Checks if the crawler should follow an url
-		/// </summary>
-		/// <param name="uri">Url to check</param>
-		/// <param name="referrer"></param>
-		/// <returns>True if the crawler should follow the url, else false</returns>
-		protected virtual bool IsAllowedUrl(Uri uri, CrawlStep referrer)
-		{
-			if (MaximumUrlSize.HasValue && MaximumUrlSize.Value > 10 && uri.ToString().Length > MaximumUrlSize.Value)
-			{
-				return false;
-			}
-
-			if (!IncludeFilter.IsNull() && IncludeFilter.Any(f => f.Match(uri, referrer)))
-			{
-				return true;
-			}
-
-			if (!ExcludeFilter.IsNull() && ExcludeFilter.Any(f => f.Match(uri, referrer)))
-			{
-				return false;
-			}
-
-			if (IsExternalUrl(uri))
-			{
-				return false;
-			}
-
-			return !AdhereToRobotRules || m_Robot.IsAllowed(UserAgent, uri);
-		}
-
 		protected override void Cleanup()
 		{
 			m_LifetimeScope.Dispose();
 		}
 
-		/// <summary>
-		/// Download content from a url
-		/// </summary>
-		/// <param name="step">Step in crawler that contains url to download</param>
-		/// <returns>Downloaded content</returns>
-		private PropertyBag Download(CrawlStep step)
+		private void EndDownload(CrawlStep crawlStep, PropertyBag propertyBag, Exception exception,
+			ThreadSafeCounter.ThreadSafeCounterCookie counterCookie)
 		{
-			try
+			using (counterCookie)
 			{
-				IWebDownloader webDownloader = m_DownloaderFactory.GetDownloader();
-				m_Logger.Verbose("Downloading {0}", step.Uri);
-				return webDownloader.Download(step, DownloadMethod.Get);
-			}
-			catch (Exception ex)
-			{
-				OnDownloadException(ex, step);
+				if (exception != null)
+				{
+					OnDownloadException(exception, crawlStep);
+				} else if (!propertyBag.IsNull())
+				{
+					propertyBag.Referrer = crawlStep;
+
+					// Assign initial properties to propertybag
+					if (!counterCookie.CrawlerQueueEntry.Properties.IsNull())
+					{
+						counterCookie.CrawlerQueueEntry.Properties.
+							ForEach(key => propertyBag[key.Key].Value = key.Value);
+					}
+
+					if (OnAfterDownload(crawlStep, propertyBag))
+					{
+						// Executes all the pipelines sequentially for each downloaded content
+						// in the crawl process. Used to extract data from content, like which
+						// url's to follow, email addresses, aso.
+						Pipeline.ForEach(pipelineStep => ExecutePipeLineStep(pipelineStep, propertyBag));
+					}
+				}
 			}
 
-			return null;
-		}
-
-		/// <summary>
-		/// Executes all the pipelines sequentially for each downloaded content
-		/// in the crawl process. Used to extract data from content, like which
-		/// url's to follow, email addresses, aso.
-		/// </summary>
-		/// <param name="propertyBag">Downloaded content</param>
-		private void ExecutePipeLine(PropertyBag propertyBag)
-		{
-			Pipeline.ForEach(pipelineStep => ExecutePipeLineStep(pipelineStep, propertyBag));
+			ProcessQueue();
 		}
 
 		private void ExecutePipeLineStep(IPipelineStep pipelineStep, PropertyBag propertyBag)
@@ -282,7 +253,13 @@ namespace NCrawler
 					IPipelineStepWithTimeout stepWithTimeout = (IPipelineStepWithTimeout) pipelineStep;
 					m_Logger.Debug("Running pipeline step {0} with timeout {1}",
 						pipelineStep.GetType().Name, stepWithTimeout.ProcessorTimeout);
-					m_TaskRunner.RunSync(() => pipelineStep.Process(this, propertyBag), stepWithTimeout.ProcessorTimeout);
+					m_TaskRunner.RunSync(cancelArgs =>
+						{
+							if (!cancelArgs.Cancel)
+							{
+								pipelineStep.Process(this, propertyBag);
+							}
+						}, stepWithTimeout.ProcessorTimeout);
 				}
 				else
 				{
@@ -296,35 +273,7 @@ namespace NCrawler
 			}
 		}
 
-		private void ProcessNextInQueue()
-		{
-			CrawlerQueueEntry crawlerQueueEntry = m_CrawlerQueue.Pop();
-			if (crawlerQueueEntry.IsNull() || !OnBeforeDownload(crawlerQueueEntry.CrawlStep))
-			{
-				return;
-			}
-
-			PropertyBag propertyBag = Download(crawlerQueueEntry.CrawlStep);
-			if (propertyBag.IsNull())
-			{
-				return;
-			}
-
-			// Assign initial properties to propertybag
-			if (!crawlerQueueEntry.Properties.IsNull())
-			{
-				crawlerQueueEntry.Properties.
-					ForEach(key => propertyBag[key.Key].Value = key.Value);
-			}
-
-			propertyBag.Referrer = crawlerQueueEntry.Referrer;
-			if (OnAfterDownload(crawlerQueueEntry.CrawlStep, propertyBag))
-			{
-				ExecutePipeLine(propertyBag);
-			}
-		}
-
-		private void StartNew()
+		private void ProcessQueue()
 		{
 			if (ThreadsInUse == 0 && WaitingQueueLength == 0)
 			{
@@ -350,18 +299,49 @@ namespace NCrawler
 			}
 
 			if (MaximumCrawlCount.HasValue && MaximumCrawlCount.Value > 0 &&
-				MaximumCrawlCount.Value <= m_CrawlerHistory.VisitedCount)
+				MaximumCrawlCount.Value <= Interlocked.Read(ref m_VisitedCount))
 			{
 				m_Logger.Verbose("CrawlCount exceeded {0}, cancelling", MaximumCrawlCount.Value);
 				StopCrawl();
 				return;
 			}
 
-			if (ThreadsInUse < MaximumThreadCount && WaitingQueueLength > 0)
+			while (ThreadsInUse < MaximumThreadCount && WaitingQueueLength > 0)
 			{
-				m_Logger.Verbose("Starting new thread {0}", m_BaseUri);
-				m_TaskRunner.RunAsync(WorkerProc);
+				StartDownload();
 			}
+		}
+
+		private void StartDownload()
+		{
+			CrawlerQueueEntry crawlerQueueEntry = m_CrawlerQueue.Pop();
+			if (crawlerQueueEntry.IsNull() || !OnBeforeDownload(crawlerQueueEntry.CrawlStep))
+			{
+				return;
+			}
+
+			IWebDownloader webDownloader = m_WebDownloaderFactory();
+			webDownloader.MaximumDownloadSizeInRam = MaximumDownloadSizeInRam;
+			webDownloader.ConnectionTimeout = ConnectionTimeout;
+			webDownloader.MaximumContentSize = MaximumContentSize;
+			webDownloader.DownloadBufferSize = DownloadBufferSize;
+			webDownloader.UserAgent = UserAgent;
+			webDownloader.UseCookies = UseCookies;
+			webDownloader.ReadTimeout = ConnectionReadTimeout;
+			webDownloader.RetryCount = DownloadRetryCount;
+			webDownloader.RetryWaitDuration = DownloadRetryWaitDuration;
+
+			m_Logger.Verbose("Downloading {0}", crawlerQueueEntry.CrawlStep.Uri);
+			ThreadSafeCounter.ThreadSafeCounterCookie threadSafeCounterCookie = m_ThreadInUse.EnterCounterScope(crawlerQueueEntry);
+			Action<DownloadProgressEventArgs> progress = null;
+			if (DownloadProgress != null)
+			{
+				progress = OnDownloadProgress;
+			}
+
+			Interlocked.Increment(ref m_VisitedCount);
+			webDownloader.DownloadAsync(crawlerQueueEntry.CrawlStep, DownloadMethod.Get,
+				EndDownload, progress, threadSafeCounterCookie);
 		}
 
 		private void StopCrawl()
@@ -372,29 +352,11 @@ namespace NCrawler
 			}
 
 			m_CrawlStopped = true;
-			m_TaskRunner.CancelAll();
-		}
-
-		/// <summary>
-		/// The actual worker code for the crawler
-		/// </summary>
-		private void WorkerProc()
-		{
-			using (m_ThreadInUse.GetCounterScope())
+			if (ThreadsInUse == 0)
 			{
-				while (WaitingQueueLength > 0)
-				{
-					ProcessNextInQueue();
-
-					// Sleep before next download
-					if (DownloadDelay.HasValue && DownloadDelay.Value != TimeSpan.Zero)
-					{
-						Thread.Sleep(DownloadDelay.Value);
-					}
-				}
+				m_CrawlCompleteEvent.Set();
+				return;
 			}
-
-			StartNew();
 		}
 
 		#endregion

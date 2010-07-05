@@ -3,11 +3,12 @@ using System.Reflection;
 
 using Autofac;
 
+using NCrawler.Db4oServices;
 using NCrawler.DbServices;
+using NCrawler.EsentServices;
 using NCrawler.FileStorageServices;
 using NCrawler.Interfaces;
 using NCrawler.IsolatedStorageServices;
-using NCrawler.SQLite;
 
 using Module = Autofac.Module;
 
@@ -19,17 +20,27 @@ namespace NCrawler.Test.Helpers
 
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.Register(c => new FakeDownloaderFactory()).As<IDownloaderFactory>().SingleInstance();
 			builder.Register(c => new FakeLoggerService()).As<ILog>().InstancePerDependency();
+			builder.Register(c => new FakeDownloader()).As<IWebDownloader>().InstancePerDependency();
 		}
 
 		#endregion
 
 		#region Class Methods
 
+		public static void SetupDb4oServicesStorage()
+		{
+			NCrawlerModule.Setup(new Db4oServicesModule(false), new TestModule());
+		}
+
 		public static void SetupDbServicesStorage()
 		{
 			NCrawlerModule.Setup(new DbServicesModule(false), new TestModule());
+		}
+
+		public static void SetupESentServicesStorage()
+		{
+		    NCrawlerModule.Setup(new EsentServicesModule(false), new TestModule());
 		}
 
 		public static void SetupFileStorage()

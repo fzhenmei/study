@@ -1,21 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 using NCrawler.Extensions;
-using NCrawler.Interfaces;
 using NCrawler.Utils;
 
 namespace NCrawler.FileStorageServices
 {
-	public class FileCrawlHistoryService : DisposableBase, ICrawlerHistory
+	public class FileCrawlHistoryService : HistoryServiceBase
 	{
 		#region Readonly & Static Fields
 
 		private readonly DictionaryCache m_DictionaryCache = new DictionaryCache(500);
-		private readonly ReaderWriterLockSlim m_Lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 		private readonly string m_StoragePath;
 
 		#endregion
@@ -46,26 +43,48 @@ namespace NCrawler.FileStorageServices
 
 		#region Instance Methods
 
-		public bool IsCrawled(string key)
+		protected override void Add(string key)
 		{
-			return AspectF.Define.
-				Cache<bool>(m_DictionaryCache, key).
-				Return(() =>
-					{
-#if NCRAWLER35
-						string[] fileNames = Directory.GetFiles(m_StoragePath, GetFileName(key, false) + "*");
-						return fileNames.Select(f => File.ReadAllText(f)).Any(content => content == key);
-#else
-						IEnumerable<string> fileNames = Directory.EnumerateFiles(m_StoragePath, GetFileName(key, false) + "*");
-						return fileNames.Select(File.ReadAllText).Any(content => content == key);
-#endif
-					});
+			string path = Path.Combine(m_StoragePath, GetFileName(key, true));
+			File.WriteAllText(path, key);
+			m_DictionaryCache.Remove(key);
+			m_Count = null;
 		}
 
 		protected override void Cleanup()
 		{
 			m_DictionaryCache.Dispose();
-			m_Lock.Dispose();
+		}
+
+		protected override bool Exists(string key)
+		{
+			return AspectF.Define.
+				Cache<bool>(m_DictionaryCache, key).
+				Return(() =>
+					{
+#if DOTNET4
+						IEnumerable<string> fileNames = Directory.EnumerateFiles(m_StoragePath, GetFileName(key, false) + "*");
+						return fileNames.Select(File.ReadAllText).Any(content => content == key);
+#else
+					string[] fileNames = Directory.GetFiles(m_StoragePath, GetFileName(key, false) + "*");
+					return fileNames.Select(fileName => File.ReadAllText(fileName)).Any(content => content == key);
+#endif
+					});
+		}
+
+		protected override long GetRegisteredCount()
+		{
+			if (m_Count.HasValue)
+			{
+				return m_Count.Value;
+			}
+
+#if !DOTNET4
+			m_Count = Directory.GetFiles(m_StoragePath).Count();
+#else
+			m_Count = Directory.EnumerateFiles(m_StoragePath).Count();
+#endif
+			return m_Count.Value;
 		}
 
 		protected string GetFileName(string key, bool includeGuid)
@@ -85,66 +104,10 @@ namespace NCrawler.FileStorageServices
 
 		private void Initialize()
 		{
-			AspectF.Define.
-				Do(() =>
-					{
-						if (!Directory.Exists(m_StoragePath))
-						{
-							Directory.CreateDirectory(m_StoragePath);
-						}
-					});
-		}
-
-		#endregion
-
-		#region ICrawlerHistory Members
-
-		public long VisitedCount
-		{
-			get
+			if (!Directory.Exists(m_StoragePath))
 			{
-				return AspectF.Define.
-					ReadLockUpgradable(m_Lock).
-					Return(() =>
-						{
-							if (m_Count.HasValue)
-							{
-								return m_Count.Value;
-							}
-
-#if NCRAWLER35
-							AspectF.Define.
-								WriteLock(m_Lock).
-								Do(() => { m_Count = Directory.GetFiles(m_StoragePath).Count(); });
-#else
-							AspectF.Define.
-								WriteLock(m_Lock).
-								Do(() => { m_Count = Directory.EnumerateFiles(m_StoragePath).Count(); });
-#endif
-
-							return m_Count.Value;
-						});
+				Directory.CreateDirectory(m_StoragePath);
 			}
-		}
-
-		public bool Register(string key)
-		{
-			return AspectF.Define.
-				WriteLock(m_Lock).
-				Return(() =>
-					{
-						if (IsCrawled(key))
-						{
-							return false;
-						}
-
-						string path = Path.Combine(m_StoragePath, GetFileName(key, true));
-						File.WriteAllText(path, key);
-
-						m_DictionaryCache.Remove(key);
-						m_Count = null;
-						return true;
-					});
 		}
 
 		#endregion

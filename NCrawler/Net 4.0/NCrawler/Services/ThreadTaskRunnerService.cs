@@ -1,7 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 
-using NCrawler.Extensions;
 using NCrawler.Interfaces;
 
 namespace NCrawler.Services
@@ -10,50 +10,27 @@ namespace NCrawler.Services
 	{
 		#region ITaskRunner Members
 
-		public bool RunSync(Action action, TimeSpan maxRuntime)
+		public bool RunSync(Action<CancelEventArgs> action, TimeSpan maxRuntime)
 		{
-			Exception exception = null;
-			Thread thread = new Thread(() =>
-				{
-					try
-					{
-						action();
-					}
-					catch (Exception e)
-					{
-						exception = e;
-					}
-				})
-				{
-					IsBackground = false
-				};
-			thread.Start();
-			bool success = thread.Join(maxRuntime);
-			if (!success)
+			if (maxRuntime.TotalMilliseconds <= 0)
 			{
-				thread.Abort();
+				throw new ArgumentOutOfRangeException("maxRuntime");
+			}
+
+			CancelEventArgs args = new CancelEventArgs(false);
+			IAsyncResult functionResult = action.BeginInvoke(args, null, null);
+			WaitHandle waitHandle = functionResult.AsyncWaitHandle;
+			if (!waitHandle.WaitOne(maxRuntime))
+			{
+				args.Cancel = true; // flag to worker that it should cancel!
+				ThreadPool.UnsafeRegisterWaitForSingleObject(waitHandle,
+					(state, timedOut) => action.EndInvoke(functionResult),
+					null, -1, true);
 				return false;
 			}
 
-			if (!exception.IsNull())
-			{
-				throw exception;
-			}
-
+			action.EndInvoke(functionResult);
 			return true;
-		}
-
-		public void RunAsync(Action action)
-		{
-			Thread thread = new Thread(() => action())
-				{
-					IsBackground = true
-				};
-			thread.Start();
-		}
-
-		public void CancelAll()
-		{
 		}
 
 		#endregion

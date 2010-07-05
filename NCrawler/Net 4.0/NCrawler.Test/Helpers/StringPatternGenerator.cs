@@ -27,13 +27,15 @@ namespace NCrawler.Test.Helpers
 
 		private readonly string m_Source;
 
-		private static readonly Regex s_AlphaSequenceRegex = new Regex("(?<Begin>\\w+)-(?<End>\\w+)(:(?<Step>\\d*))?",
-			RegexOptions.IgnoreCase | RegexOptions.CultureInvariant |
-			RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+		private static readonly Lazy<Regex> s_AlphaSequenceRegex = new Lazy<Regex>(
+			() => new Regex("(?<Begin>\\w+)-(?<End>\\w+)(:(?<Step>\\d*))?",
+				RegexOptions.IgnoreCase | RegexOptions.CultureInvariant |
+				RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled), true);
 
-		private static readonly Regex s_SequencesRegex = new Regex("\\[(?<sequences>.*?)\\]",
-			RegexOptions.IgnoreCase | RegexOptions.CultureInvariant |
-			RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+		private static readonly Lazy<Regex> s_SequencesRegex = new Lazy<Regex>(
+			() => new Regex("\\[(?<sequences>.*?)\\]",
+				RegexOptions.IgnoreCase | RegexOptions.CultureInvariant |
+				RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled), true);
 
 		#endregion
 
@@ -50,13 +52,11 @@ namespace NCrawler.Test.Helpers
 
 		public IEnumerator<string> GetEnumerator()
 		{
-			MatchCollection sequences = s_SequencesRegex.Matches(m_Source);
-
-			IEnumerable<SequenceItem> tmp = sequences.
+			IEnumerable<SequenceItem> tmp = s_SequencesRegex.Value.
+				Matches(m_Source).
 				Cast<Match>().
 				OrderBy(s => s.Index).
-				Select(match => new SequenceItem(match)).
-				ToArray();
+				Select(match => new SequenceItem(match));
 
 			return FlattenAndReplace(m_Source, tmp).GetEnumerator();
 		}
@@ -70,32 +70,27 @@ namespace NCrawler.Test.Helpers
 
 		#region Class Methods
 
+		private static IEnumerable<string> FlattenAndReplace(string source,
+			IEnumerable<SequenceItem> sequences)
+		{
+			SequenceItem firstSequence = sequences.FirstOrDefault();
+			if (firstSequence == null)
+			{
+				return new[] { source };
+			}
+
+			return FlattenAndReplace(source, sequences.Skip(1)).
+				SelectMany(child => (
+					from replacement in firstSequence
+					let result = child.Remove(firstSequence.ReplacementMatch.Index, firstSequence.ReplacementMatch.Length)
+					select result.Insert(firstSequence.ReplacementMatch.Index, replacement)));
+		}
+
 		private static IEnumerable<string> AlphaSequenceGenerator(char alphaNumericBegin, char alphaNumericEnd, int step)
 		{
 			for (int i = alphaNumericBegin; i <= alphaNumericEnd; i += step)
 			{
 				yield return ((char)i).ToString();
-			}
-		}
-
-		private static IEnumerable<string> FlattenAndReplace(string source,
-			IEnumerable<SequenceItem> sequences)
-		{
-			SequenceItem firstSequence = sequences.FirstOrDefault();
-			if (firstSequence.IsNull())
-			{
-				yield return source;
-			}
-			else
-			{
-				IEnumerable<string> children = FlattenAndReplace(source, sequences.Skip(1).ToArray());
-				foreach (string child in children)
-				foreach (string replacement in firstSequence)
-				{
-					string result = child.Remove(firstSequence.ReplacementMatch.Index, firstSequence.ReplacementMatch.Length);
-					result = result.Insert(firstSequence.ReplacementMatch.Index, replacement);
-					yield return result;
-				}
 			}
 		}
 
@@ -207,13 +202,11 @@ namespace NCrawler.Test.Helpers
 			public SequenceItem(Match replacementMatch)
 			{
 				ReplacementMatch = replacementMatch;
-
-				string[] sequences = replacementMatch.Groups[1].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
+				string[] sequences = replacementMatch.Groups["sequences"].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 				foreach (string sequenceItem in sequences)
 				{
 					// Determine sequence m_Items type
-					Match alphaSequenceMatch = s_AlphaSequenceRegex.Match(sequenceItem);
+					Match alphaSequenceMatch = s_AlphaSequenceRegex.Value.Match(sequenceItem);
 					if (alphaSequenceMatch.Success)
 					{
 						m_Items.Add(new RangeSequenceItem(alphaSequenceMatch));

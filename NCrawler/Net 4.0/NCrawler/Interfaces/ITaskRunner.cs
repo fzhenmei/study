@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace NCrawler.Interfaces
 {
@@ -10,8 +11,6 @@ namespace NCrawler.Interfaces
 		/// <param name="action"></param>
 		/// <param name="maxRuntime"></param>
 		/// <returns>True on success</returns>
-		bool RunSync(Action action, TimeSpan maxRuntime);
-		void RunAsync(Action action);
-		void CancelAll();
+		bool RunSync(Action<CancelEventArgs> action, TimeSpan maxRuntime);
 	}
 }

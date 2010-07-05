@@ -1,61 +1,32 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 
-using NCrawler.Extensions;
-using NCrawler.Interfaces;
 using NCrawler.Utils;
 
 namespace NCrawler.Services
 {
-	public class InMemoryCrawlerQueueService : DisposableBase, ICrawlerQueue
+	public class InMemoryCrawlerQueueService : CrawlerQueueServiceBase
 	{
 		#region Readonly & Static Fields
 
 		private readonly Stack<CrawlerQueueEntry> m_Stack = new Stack<CrawlerQueueEntry>();
-		private readonly ReaderWriterLockSlim m_StackLock =
-			new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
 
 		#endregion
 
 		#region Instance Methods
 
-		protected override void Cleanup()
+		protected override long GetCount()
 		{
-			m_StackLock.Dispose();
+			return m_Stack.Count;
 		}
 
-		#endregion
-
-		#region ICrawlerQueue Members
-
-		public CrawlerQueueEntry Pop()
+		protected override CrawlerQueueEntry PopImpl()
 		{
-			return AspectF.Define.
-				WriteLock(m_StackLock).
-				Return(() => m_Stack.Count == 0 ? null : m_Stack.Pop());
+			return m_Stack.Count == 0 ? null : m_Stack.Pop();
 		}
 
-		public void Push(CrawlerQueueEntry crawlerQueueEntry)
+		protected override void PushImpl(CrawlerQueueEntry crawlerQueueEntry)
 		{
-			AspectF.Define.
-				WriteLock(m_StackLock).
-				Do(() =>
-					{
-						if (!m_Stack.Contains(crawlerQueueEntry))
-						{
-							m_Stack.Push(crawlerQueueEntry);
-						}
-					});
-		}
-
-		public long Count
-		{
-			get
-			{
-				return AspectF.Define.
-					ReadLock(m_StackLock).
-					Return(() => m_Stack.Count);
-			}
+			m_Stack.Push(crawlerQueueEntry);
 		}
 
 		#endregion

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,7 +9,7 @@ using NCrawler.Interfaces;
 
 namespace NCrawler.HtmlProcessor
 {
-	public class LinkExtractionProcessor : CrawlerRules, IPipelineStep
+	public class LinkExtractionProcessor : ContentCrawlerRules, IPipelineStep
 	{
 		#region Readonly & Static Fields
 

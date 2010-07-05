@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using NCrawler.Interfaces;
@@ -20,34 +20,19 @@ namespace NCrawler
 		/// <summary>
 		/// Maximum amount of time allowed to make a connection
 		/// </summary>
-		public TimeSpan? ConnectionReadTimeout
-		{
-			get { return m_DownloaderFactory.ReadTimeout; }
-			set { m_DownloaderFactory.ReadTimeout = value; }
-		}
+		public TimeSpan? ConnectionReadTimeout { get; set; }
 
 		/// <summary>
 		/// In seconds
 		/// </summary>
-		public TimeSpan? ConnectionTimeout
-		{
-			get{ return m_DownloaderFactory.ConnectionTimeout; }
-			set{ m_DownloaderFactory.ConnectionTimeout = value; }
-		}
-
-		/// <summary>
-		/// Delay between downloads, per thread
-		/// </summary>
-		public TimeSpan? DownloadDelay { get; set; }
+		public TimeSpan? ConnectionTimeout { get; set; }
 
 		/// <summary>
 		/// Maximum size a single download is allowed to be
 		/// </summary>
-		public int? MaximumContentSize
-		{
-			get { return m_DownloaderFactory.MaximumContentSize; }
-			set { m_DownloaderFactory.MaximumContentSize = value; }
-		}
+		public uint? MaximumContentSize { get; set; }
+
+		public uint DownloadBufferSize { get; set; }
 
 		/// <summary>
 		/// Maximum number of steps to download before ending crawl
@@ -97,20 +82,22 @@ namespace NCrawler
 		/// <summary>
 		/// How the crawler should present itself to websites
 		/// </summary>
-		public string UserAgent
-		{
-			get { return m_DownloaderFactory.UserAgent; }
-			set { m_DownloaderFactory.UserAgent = value; }
-		}
+		public string UserAgent { get; set; }
+
+		/// <summary>
+		/// How many times crawler should try to download a single url before giving up
+		/// </summary>
+		public int? DownloadRetryCount { get; set; }
+
+		/// <summary>
+		/// How long the crawler should wait before retrying a download
+		/// </summary>
+		public TimeSpan? DownloadRetryWaitDuration { get; set; }
 
 		/// <summary>
 		/// Use cookies when downloading
 		/// </summary>
-		public bool UseCookies
-		{
-			get { return m_DownloaderFactory.UseCookies; }
-			set { m_DownloaderFactory.UseCookies = value; }
-		}
+		public bool UseCookies { get; set; }
 
 		/// <summary>
 		/// How many url's are currently waiting to be downloaded/analysed
@@ -119,6 +106,8 @@ namespace NCrawler
 		{
 			get { return m_CrawlerQueue.Count; }
 		}
+
+		public uint MaximumDownloadSizeInRam { get; set; }
 
 		#endregion
 	}

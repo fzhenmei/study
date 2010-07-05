@@ -11,17 +11,6 @@ namespace NCrawler
 		#region Instance Methods
 
 		/// <summary>
-		/// Wrapper for executing an event
-		/// </summary>
-		private void ExecuteEvent<T>(EventHandler<T> handler, Func<T> args) where T : EventArgs
-		{
-			if (!handler.IsNull())
-			{
-				handler(this, args());
-			}
-		}
-
-		/// <summary>
 		/// Returns true to continue crawl of this url, else false
 		/// </summary>
 		/// <returns>True if this step should be cancelled, else false</returns>
@@ -62,7 +51,7 @@ namespace NCrawler
 		/// </summary>
 		private void OnCancelled()
 		{
-			ExecuteEvent(Cancelled, () => new EventArgs());
+			Cancelled.ExecuteEvent(this, () => new EventArgs());
 		}
 
 		/// <summary>
@@ -70,7 +59,7 @@ namespace NCrawler
 		/// </summary>
 		private void OnCrawlFinished()
 		{
-			ExecuteEvent(CrawlFinished, () => new CrawlFinishedEventArgs(this));
+			CrawlFinished.ExecuteEvent(this, () => new CrawlFinishedEventArgs(this));
 		}
 
 		/// <summary>
@@ -86,7 +75,7 @@ namespace NCrawler
 			}
 
 			m_Logger.Error("Download exception while downloading {0}, error was {1}", crawlStep.Uri, exception);
-			ExecuteEvent(DownloadException, () => new DownloadExceptionEventArgs(crawlStep, exception));
+			DownloadException.ExecuteEvent(this, () => new DownloadExceptionEventArgs(crawlStep, exception));
 		}
 
 		/// <summary>
@@ -95,7 +84,16 @@ namespace NCrawler
 		private void OnProcessorException(PropertyBag propertyBag, Exception exception)
 		{
 			m_Logger.Error("Exception while processing pipeline for {0}, error was {1}", propertyBag.OriginalUrl, exception);
-			ExecuteEvent(PipelineException, () => new PipelineExceptionEventArgs(propertyBag, exception));
+			PipelineException.ExecuteEvent(this, () => new PipelineExceptionEventArgs(propertyBag, exception));
+		}
+
+		/// <summary>
+		/// Executes DownloadProgress event
+		/// </summary>
+		private void OnDownloadProgress(DownloadProgressEventArgs downloadProgressEventArgs)
+		{
+			m_Logger.Error("Download progress for step {0}", downloadProgressEventArgs.Step.Uri);
+			DownloadProgress.ExecuteEvent(this, () => downloadProgressEventArgs);
 		}
 
 		#endregion
@@ -131,6 +129,11 @@ namespace NCrawler
 		/// Event executed if there is an exception when processing the pipeline
 		/// </summary>
 		public event EventHandler<PipelineExceptionEventArgs> PipelineException;
+
+		/// <summary>
+		/// Event executed between every download step
+		/// </summary>
+		public event EventHandler<DownloadProgressEventArgs> DownloadProgress;
 
 		#endregion
 	}

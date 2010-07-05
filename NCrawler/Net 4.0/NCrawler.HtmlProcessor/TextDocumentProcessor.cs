@@ -23,7 +23,7 @@ namespace NCrawler.HtmlProcessor
 				return;
 			}
 
-			using (MemoryStream reader = propertyBag.GetResponseStream())
+			using (Stream reader = propertyBag.GetResponse())
 			{
 				string content = reader.ReadToEnd();
 				propertyBag.Text = content.Trim();

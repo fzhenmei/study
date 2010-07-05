@@ -1,19 +1,13 @@
-﻿using System;
+using System;
 using System.Linq;
-using System.Threading;
 
-using NCrawler.Extensions;
-using NCrawler.Interfaces;
 using NCrawler.Utils;
 
 namespace NCrawler.DbServices
 {
-	public class DbCrawlerHistoryService : DisposableBase, ICrawlerHistory
+	public class DbCrawlerHistoryService : HistoryServiceBase
 	{
 		#region Readonly & Static Fields
-
-		private readonly ReaderWriterLockSlim m_CrawlHistoryLock =
-			new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
 		private readonly int m_GroupId;
 
@@ -34,22 +28,32 @@ namespace NCrawler.DbServices
 
 		#region Instance Methods
 
-		public bool IsCrawled(string key)
+		protected override void Add(string key)
 		{
-			return AspectF.Define.
-				ReadLock(m_CrawlHistoryLock).
-				Return<bool, NCrawlerEntitiesDbServices>(
-				e => e.CrawlHistory.Where(h => h.GroupId == m_GroupId && h.Key == key).Any());
+			AspectF.Define.
+				Do<NCrawlerEntitiesDbServices>(e =>
+					{
+						e.AddToCrawlHistory(CrawlHistory.CreateCrawlHistory(0, key, m_GroupId));
+						e.SaveChanges();
+					});
 		}
 
-		protected override void Cleanup()
+		protected override bool Exists(string key)
 		{
-			m_CrawlHistoryLock.Dispose();
+			return AspectF.Define.
+				Return<bool, NCrawlerEntitiesDbServices>(
+					e => e.CrawlHistory.Where(h => h.GroupId == m_GroupId && h.Key == key).Any());
+		}
+
+		protected override long GetRegisteredCount()
+		{
+			return AspectF.Define.
+				Return<long, NCrawlerEntitiesDbServices>(e => e.CrawlHistory.Count(h => h.GroupId == m_GroupId));
 		}
 
 		private void Clean()
 		{
-#if NCRAWLER35
+#if !DOTNET4
 			using (NCrawlerEntitiesDbServices e = new NCrawlerEntitiesDbServices())
 			{
 				foreach(CrawlHistory historyObject in e.CrawlHistory.Where(h => h.GroupId == m_GroupId))
@@ -63,42 +67,6 @@ namespace NCrawler.DbServices
 			AspectF.Define.
 				Do<NCrawlerEntitiesDbServices>(e => e.ExecuteStoreCommand("DELETE FROM CrawlHistory WHERE GroupId = {0}", m_GroupId));
 #endif
-		}
-
-		#endregion
-
-		#region ICrawlerHistory Members
-
-		public long VisitedCount
-		{
-			get
-			{
-				return AspectF.Define.
-					ReadLock(m_CrawlHistoryLock).
-					Return<long, NCrawlerEntitiesDbServices>(e => e.CrawlHistory.Count(h => h.GroupId == m_GroupId));
-			}
-		}
-
-		/// <summary>
-		/// Register a unique key
-		/// </summary>
-		/// <param name="key">key to register</param>
-		/// <returns>false if key has already been registered else true</returns>
-		public bool Register(string key)
-		{
-			return AspectF.Define.
-				WriteLock(m_CrawlHistoryLock).
-				Return<bool, NCrawlerEntitiesDbServices>(e =>
-					{
-						if (IsCrawled(key))
-						{
-							return false;
-						}
-
-						e.AddToCrawlHistory(CrawlHistory.CreateCrawlHistory(0, key, m_GroupId));
-						e.SaveChanges();
-						return true;
-					});
 		}
 
 		#endregion

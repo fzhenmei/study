@@ -4,7 +4,7 @@ namespace NCrawler.Interfaces
 	{
 		#region Instance Properties
 
-		long VisitedCount { get; }
+		long RegisteredCount { get; }
 
 		#endregion
 

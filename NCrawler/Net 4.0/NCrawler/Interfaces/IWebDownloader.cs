@@ -1,5 +1,6 @@
 using System;
 
+using NCrawler.Events;
 using NCrawler.Services;
 
 namespace NCrawler.Interfaces
@@ -9,8 +10,12 @@ namespace NCrawler.Interfaces
 		#region Instance Properties
 
 		TimeSpan? ConnectionTimeout { get; set; }
-		int? MaximumContentSize { get; set; }
+		uint? DownloadBufferSize { get; set; }
+		uint? MaximumContentSize { get; set; }
+		uint? MaximumDownloadSizeInRam { get; set; }
 		TimeSpan? ReadTimeout { get; set; }
+		int? RetryCount { get; set; }
+		TimeSpan? RetryWaitDuration { get; set; }
 		bool UseCookies { get; set; }
 		string UserAgent { get; set; }
 
@@ -19,6 +24,9 @@ namespace NCrawler.Interfaces
 		#region Instance Methods
 
 		PropertyBag Download(CrawlStep crawlStep, DownloadMethod method);
+
+		void DownloadAsync<T>(CrawlStep crawlStep, DownloadMethod method,
+			Action<CrawlStep, PropertyBag, Exception, T> completed, Action<DownloadProgressEventArgs> progress, T state);
 
 		#endregion
 	}

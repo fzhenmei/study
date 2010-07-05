@@ -17,22 +17,7 @@ namespace NCrawler.LanguageDetection.Google
 	{
 		#region Constants
 
-		private const int MaxPostSize = 1000;
-
-		#endregion
-
-		#region Readonly & Static Fields
-
-		private readonly IDownloaderFactory m_DownloaderFactory;
-
-		#endregion
-
-		#region Constructors
-
-		public GoogleLanguageDetection()
-		{
-			m_DownloaderFactory = NCrawlerModule.Container.Resolve<IDownloaderFactory>();
-		}
+		private const int MaxPostSize = 900;
 
 		#endregion
 
@@ -57,10 +42,14 @@ namespace NCrawler.LanguageDetection.Google
 			string encodedRequestUrlFragment =
 				"http://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q={0}".FormatWith(contentLookupText);
 
-			IWebDownloader downloader = m_DownloaderFactory.GetDownloader();
+			IWebDownloader downloader = NCrawlerModule.Container.Resolve<IWebDownloader>();
 			PropertyBag result = downloader.Download(new CrawlStep(new Uri(encodedRequestUrlFragment), 0), DownloadMethod.Get);
+			if (result.IsNull())
+			{
+				return;
+			}
 
-			using (MemoryStream responseReader = result.GetResponseStream())
+			using (Stream responseReader = result.GetResponse())
 			using (StreamReader reader = new StreamReader(responseReader))
 			{
 				string json = reader.ReadLine();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 
 using NConsoler;
@@ -47,7 +48,6 @@ namespace NCrawler.Console
 			ServicePointManager.EnableDnsRoundRobin = true;
 
 			s_ShowDownloadTimes = showDownloadTimes;
-
 			using (Crawler crawler = new Crawler(new Uri(url), new HtmlDocumentProcessor()))
 			{
 				crawler.UserAgent = userAgent;

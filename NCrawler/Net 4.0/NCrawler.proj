@@ -51,7 +51,6 @@
 			<MergeAsm Include="$(MSBuildProjectDirectory)\NCrawler.LanguageDetection.Google\bin\$(BuildConfig)\NCrawler.LanguageDetection.Google.dll" />
 			<MergeAsm Include="$(MSBuildProjectDirectory)\NCrawler.MP3Processor\bin\$(BuildConfig)\NCrawler.MP3Processor.dll" />
 			<MergeAsm Include="$(MSBuildProjectDirectory)\NCrawler.MP3Processor\bin\$(BuildConfig)\UltraID3Lib.dll" />
-			<MergeAsm Include="$(MSBuildProjectDirectory)\NCrawler.SQLite\bin\$(BuildConfig)\NCrawler.SQLite.dll" />
 			<MergeAsm Include="$(MSBuildProjectDirectory)\NCrawler.FileStorageServices\bin\$(BuildConfig)\NCrawler.FileStorageServices.dll" />
 		</ItemGroup>
 

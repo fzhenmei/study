@@ -65,11 +65,6 @@ namespace NCrawler
 		[DataMember]
 		public string ContentEncoding { get; internal set; }
 
-		public long ContentLength
-		{
-			get { return Response.Length; }
-		}
-
 		[DataMember]
 		public string ContentType { get; internal set; }
 
@@ -104,7 +99,7 @@ namespace NCrawler
 		public CrawlStep Referrer { get; internal set; }
 
 		[DataMember]
-		public byte[] Response { get; internal set; }
+		public Func<Stream> GetResponse { get; internal set; }
 
 		[DataMember]
 		public Uri ResponseUri { get; internal set; }
@@ -168,7 +163,6 @@ namespace NCrawler
 				result = (result*397) ^ (OriginalUrl != null ? OriginalUrl.GetHashCode() : 0);
 				result = (result*397) ^ (ProtocolVersion != null ? ProtocolVersion.GetHashCode() : 0);
 				result = (result*397) ^ (Referrer != null ? Referrer.GetHashCode() : 0);
-				result = (result*397) ^ (Response != null ? Response.GetHashCode() : 0);
 				result = (result*397) ^ (ResponseUri != null ? ResponseUri.GetHashCode() : 0);
 				result = (result*397) ^ (Server != null ? Server.GetHashCode() : 0);
 				result = (result*397) ^ StatusCode.GetHashCode();
@@ -179,11 +173,6 @@ namespace NCrawler
 				result = (result*397) ^ DownloadTime.GetHashCode();
 				return result;
 			}
-		}
-
-		public MemoryStream GetResponseStream()
-		{
-			return new MemoryStream(Response);
 		}
 
 		#endregion
@@ -247,7 +236,6 @@ namespace NCrawler
 				Equals(other.OriginalUrl, OriginalUrl) &&
 				Equals(other.ProtocolVersion, ProtocolVersion) &&
 				Equals(other.Referrer, Referrer) &&
-				Equals(other.Response, Response) &&
 				Equals(other.ResponseUri, ResponseUri) &&
 				Equals(other.Server, Server) &&
 				Equals(other.StatusCode, StatusCode) &&
