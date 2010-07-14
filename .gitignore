@@ -11,3 +11,4 @@ Uploads/
 *.csproj.user
 Thumbs.db
 ClientBin
+Binaries
