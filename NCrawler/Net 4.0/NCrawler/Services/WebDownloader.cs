@@ -2,7 +2,9 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 
+using NCrawler.Events;
 using NCrawler.Extensions;
 using NCrawler.Interfaces;
 using NCrawler.Utils;
@@ -17,14 +19,19 @@ namespace NCrawler.Services
 	}
 
 	/// <summary>
-	/// A utility class to get HTML document from HTTP.
+	/// 	A utility class to get HTML document from HTTP.
 	/// </summary>
 	public class WebDownloader : IWebDownloader
 	{
+		#region Constants
+
+		private const uint DefaultDownloadBufferSize = 0x1000;
+
+		#endregion
+
 		#region Readonly & Static Fields
 
-		private readonly bool m_CacheEnabled;
-		private readonly string m_CacheFolder;
+		private readonly ILog m_Log;
 
 		#endregion
 
@@ -36,10 +43,10 @@ namespace NCrawler.Services
 
 		#region Constructors
 
-		public WebDownloader(string cacheFolder)
+		public WebDownloader(ILog log)
 		{
-			m_CacheFolder = cacheFolder;
-			m_CacheEnabled = !m_CacheFolder.IsNullOrEmpty();
+			m_Log = log;
+			UserAgent = "NCrawler";
 		}
 
 		#endregion
@@ -55,156 +62,279 @@ namespace NCrawler.Services
 
 		#region Instance Methods
 
-		private bool CacheEntryExists(CrawlStep step, DownloadMethod method)
+		/// <summary>
+		/// 	Override this to make set custom request properties
+		/// </summary>
+		/// <param name = "request"></param>
+		protected virtual void SetDefaultRequestProperties(HttpWebRequest request)
 		{
-			return FileSystemHelpers.FileExists(GetCacheFileName(step, method));
+			request.AllowAutoRedirect = true;
+			request.UserAgent = UserAgent;
+			request.Accept = "*/*";
+			request.KeepAlive = true;
+			request.Pipelined = true;
+			if (ConnectionTimeout.HasValue)
+			{
+				request.Timeout = Convert.ToInt32(ConnectionTimeout.Value.TotalMilliseconds);
+			}
+
+			if (ReadTimeout.HasValue)
+			{
+				request.ReadWriteTimeout = Convert.ToInt32(ReadTimeout.Value.TotalMilliseconds);
+			}
+
+			if (UseCookies)
+			{
+				request.CookieContainer = CookieContainer;
+			}
 		}
-
-		private PropertyBag GetCacheEntry(CrawlStep step, DownloadMethod method)
-		{
-			return File.ReadAllBytes(GetCacheFileName(step, method)).FromBinary<PropertyBag>();
-		}
-
-		private string GetCacheFileName(CrawlStep step, DownloadMethod method)
-		{
-			string fileName = FileSystemHelpers.ToValidFileName(string.Format("{0}_{1}", step.Uri, method));
-			fileName = Path.Combine(m_CacheFolder, fileName);
-			return fileName.Max(248);
-		}
-
-		private void WriteCacheEntry(CrawlStep step, DownloadMethod method, PropertyBag result)
-		{
-			File.WriteAllBytes(GetCacheFileName(step, method), result.ToBinary());
-		}
-
-		#endregion
-
-		#region IWebDownloader Members
 
 		/// <summary>
-		/// Gets or Sets a value indicating if cookies will be stored.
+		/// 	Gets or Sets a value indicating if cookies will be stored.
 		/// </summary>
-		public PropertyBag Download(CrawlStep crawlStep, DownloadMethod method)
+		private PropertyBag DownloadInternalSync(CrawlStep crawlStep, DownloadMethod method)
+		{
+			PropertyBag result = null;
+			Exception ex = null;
+			using (ManualResetEvent ev = new ManualResetEvent(false))
+			{
+				StartDownloadAsyncInternal<object>(crawlStep, method,
+					(cs, propertyBag, exception, state) =>
+						{
+							if (exception.IsNull())
+							{
+								result = propertyBag;
+								using (Stream response = result.GetResponse())
+								{
+									byte[] data;
+									if (response is MemoryStream)
+									{
+										data = ((MemoryStream) response).ToArray();
+									}
+									else
+									{
+										using (MemoryStream copy = response.CopyToMemory())
+										{
+											data = copy.ToArray();
+										}
+									}
+
+									result.GetResponse = () => new MemoryStream(data);
+								}
+							}
+							else
+							{
+								ex = exception;
+							}
+
+							ev.Set();
+						}, null, null, RetryCount.HasValue ? RetryCount.Value : 0);
+				TimeSpan timeout =
+					(ReadTimeout.HasValue ? ReadTimeout.Value : TimeSpan.Zero) +
+					(ConnectionTimeout.HasValue ? ConnectionTimeout.Value : TimeSpan.Zero);
+				if (timeout.TotalMilliseconds > 0)
+				{
+					ev.WaitOne(timeout);
+				}
+				else
+				{
+					ev.WaitOne();
+				}
+			}
+
+			if (!ex.IsNull())
+			{
+				throw new Exception("Error write downloading {0}".FormatWith(crawlStep.Uri), ex);
+			}
+
+			return result;
+		}
+
+		private void EndGetResponseAsync<T>(IAsyncResult asyncResult, bool isTimedout)
+		{
+			RequestState<T> state = (RequestState<T>) asyncResult.AsyncState;
+			try
+			{
+				HttpWebResponse response;
+				try
+				{
+					response = (HttpWebResponse) state.Request.EndGetResponse(asyncResult);
+				}
+				catch (WebException we)
+				{
+					response = we.Response as HttpWebResponse;
+					if (response.IsNull())
+					{
+						throw;
+					}
+				}
+
+				if (isTimedout)
+				{
+					using (response)
+					{
+						state.Complete(state.CrawlStep, null, new TimeoutException(), state.State);
+						return;
+					}
+				}
+
+				uint downloadBufferSize = DownloadBufferSize.HasValue
+					? DownloadBufferSize.Value
+					: DefaultDownloadBufferSize;
+				Stream responseStream = response.GetResponseStream();
+				MemoryStreamWithFileBackingStore output = new MemoryStreamWithFileBackingStore((int) response.ContentLength,
+					MaximumDownloadSizeInRam.HasValue ? MaximumDownloadSizeInRam.Value : int.MaxValue,
+					(int) downloadBufferSize);
+				responseStream.CopyToStreamAsync(output,
+					(s1, se, ex) =>
+						{
+							using (response)
+							using (responseStream)
+							using (output)
+							{
+								if (ex != null)
+								{
+									state.Complete(state.CrawlStep, null, ex, state.State);
+									return;
+								}
+
+								output.FinishedWriting();
+								PropertyBag propertyBag = new PropertyBag
+									{
+										Step = state.CrawlStep,
+										CharacterSet = response.CharacterSet,
+										ContentEncoding = response.ContentEncoding,
+										ContentType = response.ContentType,
+										Headers = response.Headers,
+										IsMutuallyAuthenticated = response.IsMutuallyAuthenticated,
+										IsFromCache = response.IsFromCache,
+										LastModified = response.LastModified,
+										Method = response.Method,
+										ProtocolVersion = response.ProtocolVersion,
+										ResponseUri = response.ResponseUri,
+										Server = response.Server,
+										StatusCode = response.StatusCode,
+										StatusDescription = response.StatusDescription,
+										GetResponse = output.GetReaderStream,
+										DownloadTime = state.DownloadTimer.Elapsed,
+									};
+
+								state.Complete(state.CrawlStep, propertyBag, null, state.State);
+							}
+						},
+					bytesDownloaded =>
+						{
+							if (!state.DownloadProgress.IsNull())
+							{
+								state.DownloadProgress(new DownloadProgressEventArgs
+									{
+										Step = state.CrawlStep,
+										BytesReceived = bytesDownloaded,
+										TotalBytesToReceive = (uint) response.ContentLength,
+										DownloadTime = state.DownloadTimer.Elapsed,
+									});
+							}
+						},
+					downloadBufferSize, MaximumContentSize, ReadTimeout);
+			}
+			catch (Exception ex)
+			{
+				if (state.Retry > 0)
+				{
+					StartDownloadAsyncInternal(state.CrawlStep, state.Method, state.Complete, state.DownloadProgress, state.State,
+						state.Retry - 1);
+				}
+				else
+				{
+					state.Complete(state.CrawlStep, null, ex, state.State);
+				}
+			}
+		}
+
+		private void StartDownloadAsyncInternal<T>(CrawlStep crawlStep, DownloadMethod method,
+			Action<CrawlStep, PropertyBag, Exception, T> completed,
+			Action<DownloadProgressEventArgs> progress, T state, int retry)
 		{
 			AspectF.Define.
-				NotNull(crawlStep, "crawlStep");
+				NotNull(crawlStep, "crawlStep").
+				NotNull(completed, "completed");
 
 			if (UserAgent.IsNullOrEmpty())
 			{
 				UserAgent = "Mozilla/5.0";
 			}
 
-			if (m_CacheEnabled)
-			{
-				if (CacheEntryExists(crawlStep, method))
-				{
-					return GetCacheEntry(crawlStep, method);
-				}
-			}
-
 			HttpWebRequest req = (HttpWebRequest) WebRequest.Create(crawlStep.Uri);
 			req.Method = method.ToString();
-			req.AllowAutoRedirect = true;
-			req.UserAgent = UserAgent;
-			req.Accept = "*/*";
-			req.KeepAlive = true;
-			if (ConnectionTimeout.HasValue)
-			{
-				req.Timeout = Convert.ToInt32(ConnectionTimeout.Value.TotalMilliseconds);
-			}
 
-			if (ReadTimeout.HasValue)
-			{
-				req.ReadWriteTimeout = Convert.ToInt32(ReadTimeout.Value.TotalMilliseconds);
-			}
+			SetDefaultRequestProperties(req);
 
-			if (UseCookies)
-			{
-				req.CookieContainer = CookieContainer;
-			}
-
-			Stopwatch downloadTimer = Stopwatch.StartNew();
-			HttpWebResponse resp;
-			try
-			{
-				resp = (HttpWebResponse) req.GetResponse();
-			}
-			catch (WebException we)
-			{
-				resp = we.Response as HttpWebResponse;
-				if (resp.IsNull())
+			RequestState<T> requestState = new RequestState<T>
 				{
-					throw;
-				}
-			}
-
-			using (resp)
-			using (Stream responseStream = resp.GetResponseStream())
-			{
-				downloadTimer.Stop();
-				PropertyBag result = new PropertyBag
-					{
-						Step = crawlStep,
-						CharacterSet = resp.CharacterSet,
-						ContentEncoding = resp.ContentEncoding,
-						ContentType = resp.ContentType,
-						Headers = resp.Headers,
-						IsMutuallyAuthenticated = resp.IsMutuallyAuthenticated,
-						IsFromCache = resp.IsFromCache,
-						LastModified = resp.LastModified,
-						Method = resp.Method,
-						ProtocolVersion = resp.ProtocolVersion,
-						ResponseUri = resp.ResponseUri,
-						Server = resp.Server,
-						StatusCode = resp.StatusCode,
-						StatusDescription = resp.StatusDescription,
-						Response = CopyStreamToMemory(responseStream, MaximumContentSize),
-						DownloadTime = downloadTimer.Elapsed,
-					};
-
-				if (m_CacheEnabled)
-				{
-					WriteCacheEntry(crawlStep, method, result);
-				}
-
-				return result;
-			}
+					DownloadTimer = Stopwatch.StartNew(),
+					Complete = completed,
+					CrawlStep = crawlStep,
+					Method = method,
+					Retry = retry,
+					State = state,
+					Request = req,
+					DownloadProgress = progress,
+				};
+			req.BeginGetResponse(null, requestState).
+				FromAsync(EndGetResponseAsync<T>, ConnectionTimeout);
 		}
 
+		#endregion
+
+		#region IWebDownloader Members
+
+		public uint? MaximumDownloadSizeInRam { get; set; }
+
+		public PropertyBag Download(CrawlStep crawlStep, DownloadMethod method)
+		{
+			TimeSpan waitDuration = RetryWaitDuration.HasValue ? RetryWaitDuration.Value : TimeSpan.FromSeconds(1);
+			int retryCount = RetryCount.HasValue ? RetryCount.Value : 0;
+			return AspectF.Define.
+				Retry(waitDuration, retryCount,
+					(e, retry) =>
+						m_Log.Error("Error write downloading {0} retrying {1} of {2}. Error was: {3}", crawlStep.Uri, retry, RetryCount, e)).
+				Return(() => DownloadInternalSync(crawlStep, method));
+		}
+
+		public void DownloadAsync<T>(CrawlStep crawlStep, DownloadMethod method,
+			Action<CrawlStep, PropertyBag, Exception, T> completed,
+			Action<DownloadProgressEventArgs> progress, T state)
+		{
+			StartDownloadAsyncInternal(crawlStep, method, completed, progress, state, RetryCount.HasValue ? RetryCount.Value : 0);
+		}
+
+		public int? RetryCount { get; set; }
+		public TimeSpan? RetryWaitDuration { get; set; }
 		public TimeSpan? ConnectionTimeout { get; set; }
-
-		public int? MaximumContentSize { get; set; }
-
+		public uint? MaximumContentSize { get; set; }
+		public uint? DownloadBufferSize { get; set; }
 		public TimeSpan? ReadTimeout { get; set; }
-
 		public bool UseCookies { get; set; }
-
 		public string UserAgent { get; set; }
 
 		#endregion
 
-		#region Class Methods
+		#region Nested type: RequestState
 
-		private static byte[] CopyStreamToMemory(Stream input, int? maximumSize)
+		private class RequestState<T>
 		{
-			using (MemoryStream output = new MemoryStream())
-			{
-				const int bufferSize = 1024;
-				byte[] buffer = new byte[bufferSize];
-				int bytesRead, totalBytesRead = 0;
-				while ((bytesRead = input.Read(buffer, 0, bufferSize)) > 0)
-				{
-					totalBytesRead += bytesRead;
-					if (maximumSize.HasValue && totalBytesRead > maximumSize.Value)
-					{
-						return null;
-					}
+			#region Instance Properties
 
-					output.Write(buffer, 0, bytesRead);
-				}
+			public Action<CrawlStep, PropertyBag, Exception, T> Complete { get; set; }
+			public CrawlStep CrawlStep { get; set; }
+			public Action<DownloadProgressEventArgs> DownloadProgress { get; set; }
+			public Stopwatch DownloadTimer { get; set; }
+			public DownloadMethod Method { get; set; }
+			public HttpWebRequest Request { get; set; }
+			public int Retry { get; set; }
+			public T State { get; set; }
 
-				return output.ToArray();
-			}
+			#endregion
 		}
 
 		#endregion

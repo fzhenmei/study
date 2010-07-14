@@ -6,6 +6,7 @@ using NCrawler.Extensions;
 namespace NCrawler
 {
 	[DataContract]
+	[Serializable]
 	public class CrawlStep : IEquatable<CrawlStep>, IComparable<CrawlStep>, IComparable
 	{
 		#region Constructors

@@ -15,7 +15,7 @@ using NCrawler.Utils;
 
 namespace NCrawler.HtmlProcessor
 {
-	public class HtmlDocumentProcessor : CrawlerRules, IPipelineStep
+	public class HtmlDocumentProcessor : ContentCrawlerRules, IPipelineStep
 	{
 		#region Constructors
 
@@ -66,7 +66,7 @@ namespace NCrawler.HtmlProcessor
 					OptionFixNestedTags = true,
 					OptionReadEncoding = true
 				};
-			using (MemoryStream reader = propertyBag.GetResponseStream())
+			using (Stream reader = propertyBag.GetResponse())
 			{
 				Encoding documentEncoding = htmlDoc.DetectEncoding(reader);
 				reader.Seek(0, SeekOrigin.Begin);
@@ -90,6 +90,8 @@ namespace NCrawler.HtmlProcessor
 					htmlDoc.Load(tr);
 				}
 			}
+
+			propertyBag["HtmlDoc"].Value = htmlDoc;
 
 			HtmlNodeCollection nodes = htmlDoc.DocumentNode.SelectNodes("//title");
 			// Extract Title

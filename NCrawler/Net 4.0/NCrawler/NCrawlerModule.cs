@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 
 using Autofac;
+using Autofac.Core.Lifetime;
 
 using NCrawler.Extensions;
 using NCrawler.Interfaces;
@@ -23,17 +25,17 @@ namespace NCrawler
 
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.Register(c => new DownloaderFactory()).As<IDownloaderFactory>().SingleInstance().ExternallyOwned();
+			builder.Register(c => new WebDownloader(c.Resolve<ILog>())).As<IWebDownloader>().SingleInstance().ExternallyOwned();
 			builder.Register(c => new InMemoryCrawlerHistoryService()).As<ICrawlerHistory>().InstancePerDependency();
 			builder.Register(c => new InMemoryCrawlerQueueService()).As<ICrawlerQueue>().InstancePerDependency();
 			builder.Register(c => new SystemTraceLoggerService()).As<ILog>().InstancePerDependency();
-#if NCRAWLER35
-			builder.Register(c => new ThreadPoolTaskRunner()).As<ITaskRunner>().InstancePerDependency();
-			//builder.Register(c => new ThreadTaskRunnerService()).As<ITaskRunner>().InstancePerDependency();
+#if !DOTNET4
+			builder.Register(c => new ThreadTaskRunnerService()).As<ITaskRunner>().InstancePerDependency();
 #else
 			builder.Register(c => new NativeTaskRunnerService()).As<ITaskRunner>().InstancePerDependency();
 #endif
-			builder.Register((c, p) => new RobotService(p.TypedAs<Uri>(), c.Resolve<IDownloaderFactory>().GetDownloader())).As<IRobot>().InstancePerDependency();
+			builder.Register((c, p) => new RobotService(p.TypedAs<Uri>(), c.Resolve<IWebDownloader>())).As<IRobot>().InstancePerDependency();
+			builder.Register((c, p) => new CrawlerRulesService(p.TypedAs<Crawler>(), c.Resolve<IRobot>(p), p.TypedAs<Uri>())).As<ICrawlerRules>().InstancePerDependency();
 		}
 
 		#endregion
@@ -45,6 +47,17 @@ namespace NCrawler
 		#endregion
 
 		#region Class Methods
+
+		public static void Register(Action<ContainerBuilder> registerCallback)
+		{
+			ContainerBuilder builder = new ContainerBuilder();
+			Container.ComponentRegistry.
+				Registrations.
+				Where(c => !c.Activator.LimitType.IsAssignableFrom(typeof(LifetimeScope))).
+				ForEach(c => builder.RegisterComponent(c));
+			registerCallback(builder);
+			Container = builder.Build();
+		}
 
 		public static void Setup()
 		{

@@ -28,18 +28,18 @@ namespace NCrawler.Demo
 			NCrawlerModule.Setup();
 			Console.Out.WriteLine("Simple crawl demo");
 
-            // Setup crawler to crawl http://baby.163.com
+			// Setup crawler to crawl http://ncrawler.codeplex.com
 			// with 1 thread adhering to robot rules, and maximum depth
 			// of 2 with 4 pipeline steps:
 			//	* Step 1 - The Html Processor, parses and extracts links, text and more from html
 			//  * Step 2 - Processes PDF files, extracting text
 			//  * Step 3 - Try to determine language based on page, based on text extraction, using google language detection
 			//  * Step 4 - Dump the information to the console, this is a custom step, see the DumperStep class
-			using (Crawler c = new Crawler(new Uri("http://baby.163.com"),
+			using (Crawler c = new Crawler(new Uri("http://ncrawler.codeplex.com"),
 				new HtmlDocumentProcessor(), // Process html
-				//new iTextSharpPdfProcessor.iTextSharpPdfProcessor(), // Add PDF text extraction
-				//new GoogleLanguageDetection(), // Add language detection
-				//new Mp3FileProcessor(), // Add language detection
+				new iTextSharpPdfProcessor.iTextSharpPdfProcessor(), // Add PDF text extraction
+				new GoogleLanguageDetection(), // Add language detection
+				new Mp3FileProcessor(), // Add language detection
 				new DumperStep())
 				{
 					// Custom step to visualize crawl
@@ -85,11 +85,12 @@ namespace NCrawler.Demo
 			lock (this)
 			{
 				Console.Out.WriteLine(ConsoleColor.Gray, "Url: {0}", propertyBag.Step.Uri);
-                Console.Out.WriteLine(ConsoleColor.DarkRed, "\tTitle:{0}", propertyBag.Title);
 				Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent type: {0}", propertyBag.ContentType);
 				Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent length: {0}", propertyBag.Text.IsNull() ? 0 : propertyBag.Text.Length);
 				Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tDepth: {0}", propertyBag.Step.Depth);
 				Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tCulture: {0}", cultureDisplayValue);
+				Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThreadId: {0}", System.Threading.Thread.CurrentThread.ManagedThreadId);
+				Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThread Count: {0}", crawler.ThreadsInUse);
 				Console.Out.WriteLine();
 			}
 		}

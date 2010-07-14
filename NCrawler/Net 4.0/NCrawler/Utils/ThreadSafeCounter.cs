@@ -1,9 +1,8 @@
-﻿using System;
 using System.Threading;
 
 namespace NCrawler.Utils
 {
-	public class ThreadSafeCounter
+	internal class ThreadSafeCounter
 	{
 		#region Fields
 
@@ -22,10 +21,10 @@ namespace NCrawler.Utils
 
 		#region Instance Methods
 
-		public IDisposable GetCounterScope()
+		public ThreadSafeCounterCookie EnterCounterScope(CrawlerQueueEntry crawlerQueueEntry)
 		{
 			Increment();
-			return new ThreadSafeCounterCookie(this);
+			return new ThreadSafeCounterCookie(this, crawlerQueueEntry);
 		}
 
 		private void Decrement()
@@ -52,14 +51,17 @@ namespace NCrawler.Utils
 
 			#region Constructors
 
-			public ThreadSafeCounterCookie(ThreadSafeCounter threadSafeCounter)
+			public ThreadSafeCounterCookie(ThreadSafeCounter threadSafeCounter, CrawlerQueueEntry crawlerQueueEntry)
 			{
 				m_ThreadSafeCounter = threadSafeCounter;
+				CrawlerQueueEntry = crawlerQueueEntry;
 			}
 
 			#endregion
 
 			#region Instance Methods
+
+			public CrawlerQueueEntry CrawlerQueueEntry { get; private set; }
 
 			protected override void Cleanup()
 			{

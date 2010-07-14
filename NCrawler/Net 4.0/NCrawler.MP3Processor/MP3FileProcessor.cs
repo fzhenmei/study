@@ -3,6 +3,7 @@ using System.Net;
 
 using HundredMilesSoftware.UltraID3Lib;
 
+using NCrawler.Extensions;
 using NCrawler.Interfaces;
 using NCrawler.Utils;
 
@@ -21,7 +22,12 @@ namespace NCrawler.MP3Processor
 
 			using (TempFile tempFile = new TempFile())
 			{
-				File.WriteAllBytes(tempFile.FileName, propertyBag.Response);
+				using (FileStream fs = new FileStream(tempFile.FileName, FileMode.Create, FileAccess.Write, FileShare.Read, 0x1000))
+				using (Stream input = propertyBag.GetResponse())
+				{
+					input.CopyToStream(fs);
+				}
+
 				UltraID3 id3 = new UltraID3();
 				id3.Read(tempFile.FileName);
 

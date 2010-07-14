@@ -8,6 +8,7 @@ using NCrawler.Extensions;
 namespace NCrawler
 {
 	[DataContract]
+	[Serializable]
 	public class CrawlerQueueEntry : IEquatable<CrawlerQueueEntry>, IComparable<CrawlerQueueEntry>, IComparable
 	{
 		#region Instance Properties

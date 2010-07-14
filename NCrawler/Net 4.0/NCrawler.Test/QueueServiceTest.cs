@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using NCrawler.DbServices;
+using NCrawler.EsentServices;
 using NCrawler.HtmlProcessor;
 using NCrawler.Interfaces;
 using NCrawler.IsolatedStorageServices;
@@ -22,6 +23,11 @@ namespace NCrawler.Test
 		{
 			Assert.NotNull(crawlQueue);
 			Assert.AreEqual(0, crawlQueue.Count);
+
+			if(crawlQueue is IDisposable)
+			{
+				((IDisposable)crawlQueue).Dispose();
+			}
 		}
 
 		public void Test2(ICrawlerQueue crawlQueue)
@@ -29,6 +35,11 @@ namespace NCrawler.Test
 			Assert.NotNull(crawlQueue);
 			crawlQueue.Push(new CrawlerQueueEntry());
 			Assert.AreEqual(1, crawlQueue.Count);
+
+			if (crawlQueue is IDisposable)
+			{
+				((IDisposable)crawlQueue).Dispose();
+			}
 		}
 
 		public void Test3(ICrawlerQueue crawlQueue)
@@ -37,6 +48,11 @@ namespace NCrawler.Test
 			crawlQueue.Push(new CrawlerQueueEntry());
 			crawlQueue.Pop();
 			Assert.AreEqual(0, crawlQueue.Count);
+
+			if (crawlQueue is IDisposable)
+			{
+				((IDisposable)crawlQueue).Dispose();
+			}
 		}
 
 		public void Test4(ICrawlerQueue crawlQueue)
@@ -47,6 +63,11 @@ namespace NCrawler.Test
 			Assert.AreEqual(0, crawlQueue.Count);
 			var actualValue = crawlQueue.Pop();
 			Assert.IsNull(actualValue);
+
+			if (crawlQueue is IDisposable)
+			{
+				((IDisposable)crawlQueue).Dispose();
+			}
 		}
 
 		public void Test5(ICrawlerQueue crawlQueue)
@@ -80,6 +101,11 @@ namespace NCrawler.Test
 			Assert.AreEqual(123, entry.Properties["two"]);
 			Assert.AreEqual(now, entry.Properties["three"]);
 			Assert.AreEqual(0, crawlQueue.Count);
+
+			if (crawlQueue is IDisposable)
+			{
+				((IDisposable)crawlQueue).Dispose();
+			}
 		}
 
 		public void RunCrawlerQueueTests(Func<ICrawlerQueue> constructor)
@@ -88,6 +114,7 @@ namespace NCrawler.Test
 			Test2(constructor());
 			Test3(constructor());
 			Test4(constructor());
+			Test5(constructor());
 		}
 
 		[Test]
@@ -95,8 +122,9 @@ namespace NCrawler.Test
 		{
 			RunCrawlerQueueTests(() => new InMemoryCrawlerQueueService());
 			RunCrawlerQueueTests(() => new IsolatedStorageCrawlerQueueService(new Uri("http://www.biz.com"), false));
-			RunCrawlerQueueTests(() => new DbCrawlQueueService(new Uri("http://www.ncrawler.com"), false));
-			//RunCrawlerQueueTests(() => new SqLiteCrawlQueueService(new Uri("http://www.ncrawler.com"), false));
+			//RunCrawlerQueueTests(() => new DbCrawlQueueService(new Uri("http://www.ncrawler.com"), false));
+			RunCrawlerQueueTests(() => new EsentCrawlQueueService(new Uri("http://www.ncrawler.com"), false));
+			RunCrawlerQueueTests(() => new Db4oServices.Db4oQueueService(new Uri("http://www.ncrawler.com"), false));
 		}
 
 		private static CollectorStep CollectionCrawl()
@@ -135,9 +163,17 @@ namespace NCrawler.Test
 			CollectorStep isolatedStorageServicesCollectorStep = CollectionCrawl();
 			Assert.AreEqual(reference.Steps.Count, isolatedStorageServicesCollectorStep.Steps.Count);
 
-			TestModule.SetupDbServicesStorage();
-			CollectorStep dbServicesCollectorStep = CollectionCrawl();
-			Assert.AreEqual(reference.Steps.Count, dbServicesCollectorStep.Steps.Count);
+			//TestModule.SetupDbServicesStorage();
+			//CollectorStep dbServicesCollectorStep = CollectionCrawl();
+			//Assert.AreEqual(reference.Steps.Count, dbServicesCollectorStep.Steps.Count);
+
+			TestModule.SetupESentServicesStorage();
+			CollectorStep esentServicesCollectorStep = CollectionCrawl();
+			Assert.AreEqual(reference.Steps.Count, esentServicesCollectorStep.Steps.Count);
+
+			TestModule.SetupDb4oServicesStorage();
+			CollectorStep db4oServicesCollectorStep = CollectionCrawl();
+			Assert.AreEqual(reference.Steps.Count, db4oServicesCollectorStep.Steps.Count);
 		}
 	}
 

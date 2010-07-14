@@ -232,52 +232,53 @@ namespace NCrawler.Extensions
 		public static AspectF Retry(this AspectF aspects)
 		{
 			return aspects.Combine(work =>
-				Retry(1000, 1, error => DoNothing(error), x => DoNothing(), work));
+				Retry(TimeSpan.FromSeconds(1), 1, (error, retry) => DoNothing(error), x => DoNothing(), work));
 		}
 
 		[DebuggerStepThrough]
 		public static AspectF Retry(this AspectF aspects, Action<IEnumerable<Exception>> failHandler)
 		{
 			return aspects.Combine(work =>
-				Retry(1000, 1, error => DoNothing(error), x => DoNothing(), work));
+				Retry(TimeSpan.FromSeconds(1), 1, (error, retry) => DoNothing(error), x => DoNothing(), work));
 		}
 
 		[DebuggerStepThrough]
-		public static AspectF Retry(this AspectF aspects, int retryDuration)
+		public static AspectF Retry(this AspectF aspects, TimeSpan retryDuration)
 		{
 			return aspects.Combine(work =>
-				Retry(retryDuration, 1, error => DoNothing(error), x => DoNothing(), work));
+				Retry(retryDuration, 1, (error, retry) => DoNothing(error), x => DoNothing(), work));
 		}
 
 		[DebuggerStepThrough]
-		public static AspectF Retry(this AspectF aspects, int retryDuration,
-			Action<Exception> errorHandler)
+		public static AspectF Retry(this AspectF aspects, TimeSpan retryDuration,
+			Action<Exception, int> errorHandler)
 		{
 			return aspects.Combine(work =>
 				Retry(retryDuration, 1, errorHandler, x => DoNothing(), work));
 		}
 
 		[DebuggerStepThrough]
-		public static AspectF Retry(this AspectF aspects, int retryDuration,
-			int retryCount, Action<Exception> errorHandler)
+		public static AspectF Retry(this AspectF aspects, TimeSpan retryDuration,
+			int retryCount, Action<Exception, int> errorHandler)
 		{
 			return aspects.Combine(work =>
 				Retry(retryDuration, retryCount, errorHandler, x => DoNothing(), work));
 		}
 
 		[DebuggerStepThrough]
-		public static AspectF Retry(this AspectF aspects, int retryDuration,
-			int retryCount, Action<Exception> errorHandler, Action<IEnumerable<Exception>> retryFailed)
+		public static AspectF Retry(this AspectF aspects, TimeSpan retryDuration,
+			int retryCount, Action<Exception, int> errorHandler, Action<IEnumerable<Exception>> retryFailed)
 		{
 			return aspects.Combine(work =>
 				Retry(retryDuration, retryCount, errorHandler, retryFailed, work));
 		}
 
 		[DebuggerStepThrough]
-		public static void Retry(int retryDuration, int retryCount,
-			Action<Exception> errorHandler, Action<IEnumerable<Exception>> retryFailed, Action work)
+		public static void Retry(TimeSpan retryDuration, int retryCount,
+			Action<Exception, int> errorHandler, Action<IEnumerable<Exception>> retryFailed, Action work)
 		{
 			List<Exception> errors = null;
+			int maxRetries = retryCount;
 			do
 			{
 				try
@@ -293,11 +294,18 @@ namespace NCrawler.Extensions
 					}
 
 					errors.Add(x);
-					errorHandler(x);
+					if (!errorHandler.IsNull())
+					{
+						errorHandler(x, maxRetries - retryCount);
+					}
+
 					Thread.Sleep(retryDuration);
 				}
 			} while (retryCount-- > 0);
-			retryFailed(errors);
+			if (!retryFailed.IsNull())
+			{
+				retryFailed(errors);
+			}
 		}
 
 		[DebuggerStepThrough]

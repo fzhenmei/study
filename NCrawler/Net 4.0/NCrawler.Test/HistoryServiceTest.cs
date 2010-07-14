@@ -2,12 +2,13 @@ using System;
 using System.IO;
 using System.Reflection;
 
+using NCrawler.Db4oServices;
 using NCrawler.DbServices;
+using NCrawler.EsentServices;
 using NCrawler.FileStorageServices;
 using NCrawler.Interfaces;
 using NCrawler.IsolatedStorageServices;
 using NCrawler.Services;
-using NCrawler.SQLite;
 using NCrawler.Test.Helpers;
 
 using NUnit.Framework;
@@ -20,14 +21,24 @@ namespace NCrawler.Test
 		public void Test1(ICrawlerHistory crawlerHistory)
 		{
 			Assert.NotNull(crawlerHistory);
-			Assert.AreEqual(0, crawlerHistory.VisitedCount);
+			Assert.AreEqual(0, crawlerHistory.RegisteredCount);
+
+			if (crawlerHistory is IDisposable)
+			{
+				((IDisposable)crawlerHistory).Dispose();
+			}
 		}
 
 		public void Test2(ICrawlerHistory crawlerHistory)
 		{
 			Assert.NotNull(crawlerHistory);
 			crawlerHistory.Register("123");
-			Assert.AreEqual(1, crawlerHistory.VisitedCount);
+			Assert.AreEqual(1, crawlerHistory.RegisteredCount);
+
+			if (crawlerHistory is IDisposable)
+			{
+				((IDisposable)crawlerHistory).Dispose();
+			}
 		}
 
 		public void Test3(ICrawlerHistory crawlerHistory)
@@ -35,6 +46,11 @@ namespace NCrawler.Test
 			Assert.NotNull(crawlerHistory);
 			Assert.IsTrue(crawlerHistory.Register("123"));
 			Assert.IsFalse(crawlerHistory.Register("123"));
+
+			if (crawlerHistory is IDisposable)
+			{
+				((IDisposable)crawlerHistory).Dispose();
+			}
 		}
 
 		public void Test4(ICrawlerHistory crawlerHistory)
@@ -42,6 +58,11 @@ namespace NCrawler.Test
 			Assert.NotNull(crawlerHistory);
 			Assert.IsTrue(crawlerHistory.Register("123"));
 			Assert.IsTrue(crawlerHistory.Register("1234"));
+
+			if (crawlerHistory is IDisposable)
+			{
+				((IDisposable)crawlerHistory).Dispose();
+			}
 		}
 
 		public void Test5(ICrawlerHistory crawlerHistory)
@@ -62,6 +83,11 @@ namespace NCrawler.Test
 			{
 				Assert.IsTrue(crawlerHistory.Register(i.ToString()));
 			}
+
+			if (crawlerHistory is IDisposable)
+			{
+				((IDisposable)crawlerHistory).Dispose();
+			}
 		}
 
 		public void Test6(ICrawlerHistory crawlerHistory)
@@ -74,7 +100,12 @@ namespace NCrawler.Test
 				Assert.IsTrue(crawlerHistory.Register(url));
 				Assert.IsFalse(crawlerHistory.Register(url));
 				count++;
-				Assert.AreEqual(count, crawlerHistory.VisitedCount);
+				Assert.AreEqual(count, crawlerHistory.RegisteredCount);
+			}
+
+			if (crawlerHistory is IDisposable)
+			{
+				((IDisposable)crawlerHistory).Dispose();
 			}
 		}
 
@@ -92,10 +123,11 @@ namespace NCrawler.Test
 		public void TestHistoryService()
 		{
 			RunCrawlHistoryTests(() => new InMemoryCrawlerHistoryService());
+			RunCrawlHistoryTests(() => new Db4oHistoryService(new Uri("http://www.ncrawler.com"), false));
+			RunCrawlHistoryTests(() => new EsentCrawlerHistoryService(new Uri("http://www.ncrawler.com"), false));
 			RunCrawlHistoryTests(() => new FileCrawlHistoryService(new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName + "\\NCrawlerUnitTest", false));
-			RunCrawlHistoryTests(() => new IsolatedStorageCrawlerHistoryService(new Uri("http://www.biz.com"), false));
-			RunCrawlHistoryTests(() => new DbCrawlerHistoryService(new Uri("http://www.ncrawler.com"), false));
-			//RunCrawlHistoryTests(() => new SqLiteCrawlerHistoryService(new Uri("http://www.ncrawler.com"), false));
+			RunCrawlHistoryTests(() => new IsolatedStorageCrawlerHistoryService(new Uri("http://www.ncrawler.com"), false));
+			//RunCrawlHistoryTests(() => new DbCrawlerHistoryService(new Uri("http://www.ncrawler.com"), false));
 		}
 	}
 }

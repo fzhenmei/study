@@ -2,15 +2,13 @@ using System;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Threading;
 
 using NCrawler.Extensions;
-using NCrawler.Interfaces;
 using NCrawler.Utils;
 
 namespace NCrawler.IsolatedStorageServices
 {
-	public class IsolatedStorageCrawlerHistoryService : DisposableBase, ICrawlerHistory
+	public class IsolatedStorageCrawlerHistoryService : HistoryServiceBase
 	{
 		#region Constants
 
@@ -22,7 +20,6 @@ namespace NCrawler.IsolatedStorageServices
 
 		private readonly Uri m_BaseUri;
 		private readonly DictionaryCache m_DictionaryCache = new DictionaryCache(500);
-		private readonly ReaderWriterLockSlim m_Lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 		private readonly IsolatedStorageFile m_Store = IsolatedStorageFile.GetMachineStoreForDomain();
 
 		#endregion
@@ -65,7 +62,26 @@ namespace NCrawler.IsolatedStorageServices
 
 		#region Instance Methods
 
-		public bool IsCrawled(string key)
+		protected override void Add(string key)
+		{
+			string path = GetFileName(key, true);
+			using (IsolatedStorageFileStream isoFile = new IsolatedStorageFileStream(path, FileMode.Create, m_Store))
+			using (StreamWriter sw = new StreamWriter(isoFile))
+			{
+				sw.Write(key);
+			}
+
+			m_DictionaryCache.Remove(key);
+			m_Count = null;
+		}
+
+		protected override void Cleanup()
+		{
+			m_DictionaryCache.Dispose();
+			m_Store.Dispose();
+		}
+
+		protected override bool Exists(string key)
 		{
 			return AspectF.Define.
 				Cache<bool>(m_DictionaryCache, key).
@@ -90,11 +106,9 @@ namespace NCrawler.IsolatedStorageServices
 					});
 		}
 
-		protected override void Cleanup()
+		protected override long GetRegisteredCount()
 		{
-			m_DictionaryCache.Dispose();
-			m_Lock.Dispose();
-			m_Store.Dispose();
+			return m_Count.HasValue ? m_Count.Value : m_Store.GetFileNames(Path.Combine(WorkFolderPath, "*")).Count();
 		}
 
 		protected string GetFileName(string key, bool includeGuid)
@@ -134,61 +148,6 @@ namespace NCrawler.IsolatedStorageServices
 			{
 				m_Store.CreateDirectory(WorkFolderPath);
 			}
-		}
-
-		#endregion
-
-		#region ICrawlerHistory Members
-
-		public long VisitedCount
-		{
-			get
-			{
-				return AspectF.Define.
-					ReadLockUpgradable(m_Lock).
-					Return(() =>
-						{
-							if (m_Count.HasValue)
-							{
-								return m_Count.Value;
-							}
-
-							AspectF.Define.
-								WriteLock(m_Lock).
-								Do(() => { m_Count = m_Store.GetFileNames(Path.Combine(WorkFolderPath, "*")).Count(); });
-
-							return m_Count.Value;
-						});
-			}
-		}
-
-		/// <summary>
-		/// Register a unique key
-		/// </summary>
-		/// <param name="key">key to register</param>
-		/// <returns>false if key has already been registered else true</returns>
-		public bool Register(string key)
-		{
-			return AspectF.Define.
-				WriteLock(m_Lock).
-				Return(() =>
-					{
-						if (IsCrawled(key))
-						{
-							return false;
-						}
-
-						string path = GetFileName(key, true);
-						using (IsolatedStorageFileStream isoFile = new IsolatedStorageFileStream(path, FileMode.Create, m_Store))
-						using (StreamWriter sw = new StreamWriter(isoFile))
-						{
-							sw.Write(key);
-						}
-
-						m_DictionaryCache.Remove(key);
-						m_Count = null;
-						return true;
-					});
 		}
 
 		#endregion

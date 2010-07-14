@@ -64,7 +64,12 @@ namespace NCrawler.IFilterProcessor
 			using (TempFile temp = new TempFile())
 			{
 				temp.FileName += "." + extension;
-				File.WriteAllBytes(temp.FileName, propertyBag.Response);
+				using (FileStream fs = new FileStream(temp.FileName, FileMode.Create, FileAccess.Write, FileShare.Read, 0x1000))
+				using (Stream input = propertyBag.GetResponse())
+				{
+					input.CopyToStream(fs);
+				}
+
 				using (FilterReader filterReader = new FilterReader(temp.FileName))
 				{
 					string content = filterReader.ReadToEnd();

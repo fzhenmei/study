@@ -12,14 +12,10 @@
     <AssemblyName>NCrawler.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -59,12 +55,12 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Helpers\FakeDownloader.cs" />
-    <Compile Include="Helpers\FakeDownloaderFactory.cs" />
     <Compile Include="Helpers\FakeLoggerService.cs" />
     <Compile Include="Helpers\StringPatternGenerator.cs" />
     <Compile Include="Helpers\TestModule.cs" />
     <Compile Include="HistoryServiceTest.cs" />
     <Compile Include="MaximumCrawlTimeTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,9 +69,17 @@
     <Compile Include="QueueServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NCrawler.Db4oServices\NCrawler.Db4oServices.csproj">
+      <Project>{8BC9BDCE-64E8-40D8-8691-8BC1DB8AF21E}</Project>
+      <Name>NCrawler.Db4oServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NCrawler.DbServices\NCrawler.DbServices.csproj">
       <Project>{0F514E25-5C5E-4F3D-9F4B-73EE5C7B6986}</Project>
       <Name>NCrawler.DbServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NCrawler.EsentServices\NCrawler.EsentServices.csproj">
+      <Project>{D82B1354-F267-4C35-9FC0-6910A5C44304}</Project>
+      <Name>NCrawler.EsentServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\NCrawler.FileStorageServices\NCrawler.FileStorageServices.csproj">
       <Project>{944F9961-7B7D-4384-9946-705237E7E195}</Project>

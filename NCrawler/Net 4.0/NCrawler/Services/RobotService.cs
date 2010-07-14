@@ -12,7 +12,7 @@ using NCrawler.Interfaces;
 namespace NCrawler.Services
 {
 	/// <summary>
-	/// Taken from Searcharoo 7, and modifed
+	/// 	Taken from Searcharoo 7, and modifed
 	/// </summary>
 	public class RobotService : IRobot
 	{
@@ -27,6 +27,8 @@ namespace NCrawler.Services
 
 		private string[] m_DenyUrls = new string[0];
 
+		private bool m_Initialized;
+
 		#endregion
 
 		#region Constructors
@@ -35,7 +37,6 @@ namespace NCrawler.Services
 		{
 			m_StartPageUri = startPageUri;
 			m_WebDownloader = webDownloader;
-			Initialize();
 		}
 
 		#endregion
@@ -43,14 +44,20 @@ namespace NCrawler.Services
 		#region Instance Methods
 
 		/// <summary>
-		/// Does the parsed robots.txt file allow this Uri to be spidered for this user-agent?
+		/// 	Does the parsed robots.txt file allow this Uri to be spidered for this user-agent?
 		/// </summary>
 		/// <remarks>
-		/// This method does all its "matching" in uppercase - it expects the _DenyUrl 
-		/// elements to be ToUpper() and it calls ToUpper on the passed-in Uri...
+		/// 	This method does all its "matching" in uppercase - it expects the _DenyUrl 
+		/// 	elements to be ToUpper() and it calls ToUpper on the passed-in Uri...
 		/// </remarks>
 		public bool Allowed(Uri uri)
 		{
+			if (!m_Initialized)
+			{
+				Initialize();
+				m_Initialized = true;
+			}
+
 			if (m_DenyUrls.Length == 0)
 			{
 				return true;
@@ -64,12 +71,7 @@ namespace NCrawler.Services
 				return false;
 			}
 
-			if (url == "/robots.txt")
-			{
-				return false;
-			}
-
-			return true;
+			return !url.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase);
 		}
 
 		private void Initialize()
@@ -79,13 +81,13 @@ namespace NCrawler.Services
 				Uri robotsUri = new Uri("http://{0}/robots.txt".FormatWith(m_StartPageUri.Host));
 				PropertyBag robots = m_WebDownloader.Download(new CrawlStep(robotsUri, 0), DownloadMethod.Get);
 
-				if (robots.StatusCode != HttpStatusCode.OK)
+				if (robots == null || robots.StatusCode != HttpStatusCode.OK)
 				{
 					return;
 				}
 
 				string fileContents;
-				using (StreamReader stream = new StreamReader(robots.GetResponseStream(), Encoding.ASCII))
+				using (StreamReader stream = new StreamReader(robots.GetResponse(), Encoding.ASCII))
 				{
 					fileContents = stream.ReadToEnd();
 				}
@@ -153,21 +155,21 @@ namespace NCrawler.Services
 		#region Nested type: RobotInstruction
 
 		/// <summary>
-		/// Use this class to read/parse the robots.txt file
+		/// 	Use this class to read/parse the robots.txt file
 		/// </summary>
 		/// <remarks>
-		/// Types of data coming into this class
-		/// User-agent: * ==> _Instruction='User-agent', _Url='*'
-		/// Disallow: /cgi-bin/ ==> _Instruction='Disallow', _Url='/cgi-bin/'
-		/// Disallow: /tmp/ ==> _Instruction='Disallow', _Url='/tmp/'
-		/// Disallow: /~joe/ ==> _Instruction='Disallow', _Url='/~joe/'
+		/// 	Types of data coming into this class
+		/// 	User-agent: * ==> _Instruction='User-agent', _Url='*'
+		/// 	Disallow: /cgi-bin/ ==> _Instruction='Disallow', _Url='/cgi-bin/'
+		/// 	Disallow: /tmp/ ==> _Instruction='Disallow', _Url='/tmp/'
+		/// 	Disallow: /~joe/ ==> _Instruction='Disallow', _Url='/~joe/'
 		/// </remarks>
 		private class RobotInstruction
 		{
 			#region Constructors
 
 			/// <summary>
-			/// Constructor requires a line, hopefully in the format [instuction]:[url]
+			/// 	Constructor requires a line, hopefully in the format [instuction]:[url]
 			/// </summary>
 			public RobotInstruction(string line)
 			{
@@ -202,12 +204,12 @@ namespace NCrawler.Services
 			#region Instance Properties
 
 			/// <summary>
-			/// Upper-case part of robots.txt line, before the colon (:)
+			/// 	Upper-case part of robots.txt line, before the colon (:)
 			/// </summary>
 			public string Instruction { get; private set; }
 
 			/// <summary>
-			/// Upper-case part of robots.txt line, after the colon (:)
+			/// 	Upper-case part of robots.txt line, after the colon (:)
 			/// </summary>
 			public string UrlOrAgent { get; private set; }
 

@@ -43,7 +43,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NCRAWLER35</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -51,7 +51,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NCRAWLER35</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -110,11 +110,20 @@
     <Compile Include="..\..\Net 4.0\NCrawler\Events\DownloadExceptionEventArgs.cs">
       <Link>Events\DownloadExceptionEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\..\Net 4.0\NCrawler\Events\DownloadProgressEventArgs.cs">
+      <Link>Events\DownloadProgressEventArgs.cs</Link>
+    </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Events\PipelineExceptionEventArgs.cs">
       <Link>Events\PipelineExceptionEventArgs.cs</Link>
     </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Extensions\AspectExtensions.cs">
       <Link>Extensions\AspectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Net 4.0\NCrawler\Extensions\EventHandlerExtensions.cs">
+      <Link>Extensions\EventHandlerExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Net 4.0\NCrawler\Extensions\IAsyncResultExtensions.cs">
+      <Link>Extensions\IAsyncResultExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Extensions\IEnumerableExtensions.cs">
       <Link>Extensions\IEnumerableExtensions.cs</Link>
@@ -143,8 +152,8 @@
     <Compile Include="..\..\Net 4.0\NCrawler\Interfaces\ICrawlerQueue.cs">
       <Link>Interfaces\ICrawlerQueue.cs</Link>
     </Compile>
-    <Compile Include="..\..\Net 4.0\NCrawler\Interfaces\IDownloaderFactory.cs">
-      <Link>Interfaces\IDownloaderFactory.cs</Link>
+    <Compile Include="..\..\Net 4.0\NCrawler\Interfaces\ICrawlerRules.cs">
+      <Link>Interfaces\ICrawlerRules.cs</Link>
     </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Interfaces\IFilter.cs">
       <Link>Interfaces\IFilter.cs</Link>
@@ -179,8 +188,8 @@
     <Compile Include="..\..\Net 4.0\NCrawler\PropertyBag.cs">
       <Link>PropertyBag.cs</Link>
     </Compile>
-    <Compile Include="..\..\Net 4.0\NCrawler\Services\DownloaderFactory.cs">
-      <Link>Services\DownloaderFactory.cs</Link>
+    <Compile Include="..\..\Net 4.0\NCrawler\Services\CrawlerRulesService.cs">
+      <Link>Services\CrawlerRulesService.cs</Link>
     </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Services\DummyRobot.cs">
       <Link>Services\DummyRobot.cs</Link>
@@ -203,9 +212,6 @@
     <Compile Include="..\..\Net 4.0\NCrawler\Services\SystemTraceLoggerService.cs">
       <Link>Services\SystemTraceLoggerService.cs</Link>
     </Compile>
-    <Compile Include="..\..\Net 4.0\NCrawler\Services\ThreadPoolTaskRunner.cs">
-      <Link>Services\ThreadPoolTaskRunner.cs</Link>
-    </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Services\ThreadTaskRunnerService.cs">
       <Link>Services\ThreadTaskRunnerService.cs</Link>
     </Compile>
@@ -215,6 +221,9 @@
     <Compile Include="..\..\Net 4.0\NCrawler\Utils\AspectF.cs">
       <Link>Utils\AspectF.cs</Link>
     </Compile>
+    <Compile Include="..\..\Net 4.0\NCrawler\Utils\CrawlerQueueServiceBase.cs">
+      <Link>Utils\CrawlerQueueServiceBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Utils\DictionaryCache.cs">
       <Link>Utils\DictionaryCache.cs</Link>
     </Compile>
@@ -223,6 +232,12 @@
     </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Utils\FileSystemHelpers.cs">
       <Link>Utils\FileSystemHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Net 4.0\NCrawler\Utils\HistoryServiceBase.cs">
+      <Link>Utils\HistoryServiceBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Net 4.0\NCrawler\Utils\MemoryStreamWithFileBackingStore.cs">
+      <Link>Utils\MemoryStreamWithFileBackingStore.cs</Link>
     </Compile>
     <Compile Include="..\..\Net 4.0\NCrawler\Utils\TempFile.cs">
       <Link>Utils\TempFile.cs</Link>
@@ -269,9 +284,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Crawler.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

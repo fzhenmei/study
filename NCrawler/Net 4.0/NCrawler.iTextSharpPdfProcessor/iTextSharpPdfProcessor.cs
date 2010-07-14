@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -31,58 +32,61 @@ namespace NCrawler.iTextSharpPdfProcessor
 				return;
 			}
 
-			PdfReader pdfReader = new PdfReader(propertyBag.Response);
-			try
+			using (Stream input = propertyBag.GetResponse())
 			{
-				object title = pdfReader.Info["Title"];
-				if (!title.IsNull())
+				PdfReader pdfReader = new PdfReader(input);
+				try
 				{
-					string pdfTitle = Convert.ToString(title, CultureInfo.InvariantCulture).Trim();
-					if (!pdfTitle.IsNullOrEmpty())
+					object title = pdfReader.Info["Title"];
+					if (!title.IsNull())
 					{
-						propertyBag.Title = pdfTitle;
+						string pdfTitle = Convert.ToString(title, CultureInfo.InvariantCulture).Trim();
+						if (!pdfTitle.IsNullOrEmpty())
+						{
+							propertyBag.Title = pdfTitle;
+						}
 					}
-				}
 
-				StringBuilder sb = new StringBuilder();
-				// Following code from:
-				// http://www.vbforums.com/showthread.php?t=475759
-				for (int p = 1; p <= pdfReader.NumberOfPages; p++)
+					StringBuilder sb = new StringBuilder();
+					// Following code from:
+					// http://www.vbforums.com/showthread.php?t=475759
+					for (int p = 1; p <= pdfReader.NumberOfPages; p++)
+					{
+						byte[] pageBytes = pdfReader.GetPageContent(p);
+
+						if (pageBytes.IsNull())
+						{
+							continue;
+						}
+
+						PRTokeniser token = new PRTokeniser(pageBytes);
+						while (token.NextToken())
+						{
+							int tknType = token.TokenType;
+							string tknValue = token.StringValue;
+
+							if (tknType == PRTokeniser.TK_STRING)
+							{
+								sb.Append(token.StringValue);
+								sb.Append(" ");
+							}
+							else if (tknType == 1 && tknValue == "-600")
+							{
+								sb.Append(" ");
+							}
+							else if (tknType == 10 && tknValue == "TJ")
+							{
+								sb.Append(" ");
+							}
+						}
+					}
+
+					propertyBag.Text = sb.ToString();
+				}
+				finally
 				{
-					byte[] pageBytes = pdfReader.GetPageContent(p);
-
-					if (pageBytes.IsNull())
-					{
-						continue;
-					}
-
-					PRTokeniser token = new PRTokeniser(pageBytes);
-					while (token.NextToken())
-					{
-						int tknType = token.TokenType;
-						string tknValue = token.StringValue;
-
-						if (tknType == PRTokeniser.TK_STRING)
-						{
-							sb.Append(token.StringValue);
-							sb.Append(" ");
-						}
-						else if (tknType == 1 && tknValue == "-600")
-						{
-							sb.Append(" ");
-						}
-						else if (tknType == 10 && tknValue == "TJ")
-						{
-							sb.Append(" ");
-						}
-					}
+					pdfReader.Close();
 				}
-
-				propertyBag.Text = sb.ToString();
-			}
-			finally
-			{
-				pdfReader.Close();
 			}
 		}
 
