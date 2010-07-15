@@ -145,12 +145,6 @@ namespace MultiSelect.Control
 
         protected override void CreateChildControls()
         {
-            Controls.Clear();
-            if (HasChildViewState)
-            {
-                ClearChildViewState();
-            }
-
             textBox = new TextBox {CssClass = "textbox"};
             Controls.Add(textBox);
 
