@@ -27,16 +27,16 @@ namespace NCrawler.Demo
 			ServicePointManager.EnableDnsRoundRobin = true;
 
 			// Run demo 1
-			SimpleCrawlDemo.Run();
+            SimpleCrawlDemo.Run();
 
 			// Run demo 2
-			CrawlUsingIsolatedStorage.Run();
+            CrawlUsingIsolatedStorage.Run();
 
 			// Run demo 3
-			CrawlUsingDb4oStorage.Run();
+            CrawlUsingDb4oStorage.Run();
 
 			// Run demo 4
-			CrawlUsingEsentStorage.Run();
+            CrawlUsingEsentStorage.Run();
 
 			// Run demo 5
 			CrawlUsingDbStorage.Run();

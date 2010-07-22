@@ -1,0 +1,50 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx" caret="1200" fromTop="25" />
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx.cs" caret="506" fromTop="17" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx" caret="1284" fromTop="13" />
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx" caret="693" fromTop="8" />
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx" caret="939" fromTop="15" />
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx.cs" caret="315" fromTop="12" />
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx.cs" caret="478" fromTop="17" />
+      <File id="86CC3393-9F98-4A21-B304-62CFA8112B8D/f:Default.aspx" caret="1156" fromTop="22" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="Response" priority="0" />
+      <Item value="string" priority="0" />
+      <Item value="DateTime`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Web.HttpResponse">
+      <Item value="Write`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Format`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.DateTime">
+      <Item value="Now" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
