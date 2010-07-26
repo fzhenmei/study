@@ -1,12 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using NCrawler;
-using NCrawler.Extensions;
 using NCrawler.HtmlProcessor;
 using NCrawler.Interfaces;
 using NCrawler.Services;
@@ -15,100 +12,119 @@ namespace HaveBB.ContentService.App
 {
     public partial class Form1 : Form
     {
+        private readonly BackgroundWorker _backgroundWorker1 = new BackgroundWorker();
+        private Crawler _crawler;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.txtStartUrl.Text = "http://www.cnblogs.com";
-            backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
-            backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
-            backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
+            btnStop.Enabled = false;
+            txtStartUrl.Text = "http://www.cnblogs.com";
+            _backgroundWorker1.WorkerReportsProgress = true;
+            _backgroundWorker1.WorkerSupportsCancellation = true;
+            _backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            _backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            _backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
         }
 
-        void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            rtbEcho.Text += (string)e.UserState;
+            rtbEcho.Text += (string) e.UserState;
         }
 
-        void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var echo = new EchoStep();
-            echo.OneWorkFinished += ShowText;
-
-            using (var c = new Crawler(
-                new Uri("http://www.cnblogs.com"),
-                new HtmlDocumentProcessor(),
-                echo
-                ))
-            {
-                c.MaximumThreadCount = 1;
-                c.MaximumCrawlDepth = 3;
-                c.ExcludeFilter = new[]
-                                      {
-                                          new RegexFilter(
-                                              new Regex(@"(\.jpg|\.css|\.js|\.gif|\.jpeg|\.png|\.ico)",
-                                                        RegexOptions.Compiled | RegexOptions.CultureInvariant |
-                                                        RegexOptions.IgnoreCase))
-                                      };
-                c.Crawl();
-            }
+            _crawler.Crawl();
         }
 
-        void c_AfterDownload(object sender, NCrawler.Events.AfterDownloadEventArgs e)
-        {
-            //e.Response.Title;
-            
-        }
-
-        private delegate void ShowTextHandler(string text);
-       
         private void btnStart_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
-           
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
-            //var uri = new Uri(txtStartUrl.Text.Trim());
+            ServicePointManager.MaxServicePoints = 999999;
+            ServicePointManager.DefaultConnectionLimit = 999999;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            ServicePointManager.CheckCertificateRevocationList = true;
+            ServicePointManager.EnableDnsRoundRobin = true;
 
-            //ServicePointManager.MaxServicePoints = 999999;
-            //ServicePointManager.DefaultConnectionLimit = 999999;
-            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-            //ServicePointManager.CheckCertificateRevocationList = true;
-            //ServicePointManager.EnableDnsRoundRobin = true;
+            var echo = new EchoStep();
+            echo.OneWorkFinished += ShowText;
 
-            
+            _crawler = new Crawler(
+                new Uri("http://www.cnblogs.com"),
+                new HtmlDocumentProcessor(),
+                echo
+                )
+                          {
+                              MaximumThreadCount = 1,
+                              MaximumCrawlDepth = 3,
+                              ExcludeFilter = new[]
+                                                  {
+                                                      new RegexFilter(
+                                                          new Regex(@"(\.jpg|\.css|\.js|\.gif|\.jpeg|\.png|\.ico)",
+                                                                    RegexOptions.Compiled |
+                                                                    RegexOptions.CultureInvariant |
+                                                                    RegexOptions.IgnoreCase))
+                                                  },
+                          };
+
+            _crawler.Cancelled += new EventHandler<EventArgs>(_crawler_Cancelled);
+            _backgroundWorker1.RunWorkerAsync();
         }
 
-        void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void _crawler_Cancelled(object sender, EventArgs e)
+        {
+            //_backgroundWorker1.ReportProgress(100, "STOP!!!");
+            //_backgroundWorker1.CancelAsync();
+        }
+        
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             rtbEcho.Text += "DONE!!!";
-            rtbEcho.Text += Environment.NewLine;  
+            rtbEcho.Text += Environment.NewLine;
         }
 
         private void ShowText(string text)
         {
-            backgroundWorker1.ReportProgress(50, text);
+            _backgroundWorker1.ReportProgress(0, text);
         }
 
-        
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //StopWork();
+        }
+
+        private void StopWork()
+        {
+            if (_crawler != null)
+            {
+                _crawler.Cancel();
+                _crawler.Dispose();
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            StopWork();
+
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
+        }
+
+        #region Nested type: EchoStep
 
         internal class EchoStep : IPipelineStep
         {
+            #region Delegates
+
             public delegate void OneWorkFinishedHandler(string title);
 
-            public event OneWorkFinishedHandler OneWorkFinished;
-
-            public void InvokeOneWorkFinished(string title)
-            {
-                OneWorkFinishedHandler handler = OneWorkFinished;
-                if (handler != null) handler(title);
-            }
+            #endregion
 
             protected RichTextBox EchoControl { get; set; }
 
@@ -131,10 +147,8 @@ namespace HaveBB.ContentService.App
                 //    cultureDisplayValue = contentCulture.DisplayName;
                 //}
 
-
-                //lock (this)
-                //{
-
+                lock (this)
+                {
                     //EchoControl.Invoke(new ShowTitleDelegate(ShowTitle), propertyBag.Title);
                     InvokeOneWorkFinished(propertyBag.Title);
                     //Console.Out.WriteLine(ConsoleColor.Gray, "Url: {0}", propertyBag.Step.Uri);
@@ -145,10 +159,26 @@ namespace HaveBB.ContentService.App
                     //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThreadId: {0}", System.Threading.Thread.CurrentThread.ManagedThreadId);
                     //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThread Count: {0}", crawler.ThreadsInUse);
                     //Console.Out.WriteLine();
-                //}
+                }
             }
 
             #endregion
+
+            public event OneWorkFinishedHandler OneWorkFinished;
+
+            public void InvokeOneWorkFinished(string title)
+            {
+                OneWorkFinishedHandler handler = OneWorkFinished;
+                if (handler != null) handler(title);
+            }
         }
+
+        #endregion
+
+        #region Nested type: ShowTextHandler
+
+        private delegate void ShowTextHandler(string text);
+
+        #endregion
     }
 }

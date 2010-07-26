@@ -10,14 +10,34 @@
     <RecentFiles>
       <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Program.cs" caret="381" fromTop="14" />
       <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.Designer.cs" caret="490" fromTop="12" />
-      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3988" fromTop="33" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3416" fromTop="14" />
     </RecentFiles>
     <RecentEdits>
-      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2488" fromTop="16" />
-      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2884" fromTop="26" />
-      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3900" fromTop="26" />
-      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2985" fromTop="17" />
-      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="4154" fromTop="37" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="4329" fromTop="16" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="4805" fromTop="26" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="5777" fromTop="37" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3835" fromTop="14" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="4848" fromTop="19" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3361" fromTop="26" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="701" fromTop="14" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3078" fromTop="18" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3361" fromTop="26" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3062" fromTop="12" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="5777" fromTop="24" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2438" fromTop="18" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3237" fromTop="27" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3078" fromTop="22" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3078" fromTop="16" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2670" fromTop="35" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="1313" fromTop="21" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2448" fromTop="15" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="1035" fromTop="11" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="1190" fromTop="25" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2172" fromTop="15" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="1353" fromTop="7" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="2355" fromTop="16" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="4846" fromTop="77" />
+      <File id="EEADD7C4-C9E0-4F5D-8F53-B71F59AA03EE/f:Form1.cs" caret="3408" fromTop="34" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
@@ -38,26 +58,75 @@
       <Item value="Form1`0" priority="0" />
       <Item value="EchoControl" priority="3" />
       <Item value="null" priority="0" />
-      <Item value="public" priority="0" />
-      <Item value="void" priority="1" />
-      <Item value="string" priority="1" />
-      <Item value="title" priority="0" />
-      <Item value="delegate" priority="0" />
-      <Item value="new" priority="0" />
+      <Item value="public" priority="3" />
+      <Item value="void" priority="5" />
+      <Item value="string" priority="4" />
+      <Item value="title" priority="1" />
+      <Item value="delegate" priority="2" />
+      <Item value="new" priority="1" />
       <Item value="ShowTitleDelegate`0" priority="0" />
       <Item value="ShowTitle`0" priority="0" />
-      <Item value="propertyBag" priority="0" />
-      <Item value="Environment`0" priority="0" />
+      <Item value="propertyBag" priority="1" />
+      <Item value="Environment`0" priority="1" />
+      <Item value="event" priority="0" />
+      <Item value="OneWorkFinishedHandler`0" priority="0" />
+      <Item value="InvokeOneWorkFinished`0" priority="0" />
+      <Item value="echo" priority="1" />
+      <Item value="true" priority="1" />
+      <Item value="btnStop" priority="0" />
+      <Item value="false" priority="0" />
+      <Item value="private" priority="1" />
+      <Item value="text" priority="1" />
+      <Item value="rtbEcho" priority="1" />
+      <Item value="if" priority="0" />
+      <Item value="else" priority="0" />
+      <Item value="BackgroundWorker" priority="0" />
+      <Item value="c" priority="1" />
+      <Item value="backgroundWorker1" priority="3" />
+      <Item value="Uri" priority="0" />
+      <Item value="e" priority="3" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.RichTextBox">
-      <Item value="Invoke`0" priority="0" />
-      <Item value="Text" priority="2" />
+      <Item value="Invoke`0" priority="1" />
+      <Item value="Text" priority="6" />
+      <Item value="BeginInvoke`0" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:NCrawler.PropertyBag">
-      <Item value="Title" priority="1" />
+      <Item value="Title" priority="4" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Environment">
-      <Item value="NewLine" priority="0" />
+      <Item value="NewLine" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:HaveBB.ContentService.App.Form1+EchoStep">
+      <Item value="OneWorkFinished" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:HaveBB.ContentService.App.Form1">
+      <Item value="rtbEcho" priority="0" />
+      <Item value="btnStart" priority="0" />
+      <Item value="InvokeRequired" priority="0" />
+      <Item value="txtStartUrl" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Button">
+      <Item value="Enabled" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.ComponentModel.BackgroundWorker">
+      <Item value="RunWorkerAsync`0" priority="1" />
+      <Item value="RunWorkerCompleted" priority="0" />
+      <Item value="DoWork" priority="1" />
+      <Item value="ReportProgress`0" priority="1" />
+      <Item value="ProgressChanged" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
+      <Item value="Text" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:NCrawler.Crawler">
+      <Item value="AfterDownload" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:NCrawler.Events.AfterDownloadEventArgs">
+      <Item value="Response" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.ComponentModel.ProgressChangedEventArgs">
+      <Item value="UserState" priority="0" />
     </ItemStatistics>
   </CompletionStatisticsManager>
 </Configuration>
