@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using NCrawler;
 using NCrawler.HtmlProcessor;
@@ -12,7 +13,7 @@ namespace HaveBB.ContentService.App
 {
     public partial class Form1 : Form
     {
-        private readonly BackgroundWorker _backgroundWorker1 = new BackgroundWorker();
+        private BackgroundWorker _backgroundWorker1;
         private Crawler _crawler;
 
         public Form1()
@@ -24,11 +25,7 @@ namespace HaveBB.ContentService.App
         {
             btnStop.Enabled = false;
             txtStartUrl.Text = "http://www.cnblogs.com";
-            _backgroundWorker1.WorkerReportsProgress = true;
-            _backgroundWorker1.WorkerSupportsCancellation = true;
-            _backgroundWorker1.DoWork += backgroundWorker1_DoWork;
-            _backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
-            _backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -38,7 +35,24 @@ namespace HaveBB.ContentService.App
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            //_crawler.Crawl();
+            e.Result = ProcessCrawl(sender as BackgroundWorker, e);
+        }
+
+        private bool ProcessCrawl(BackgroundWorker worker, DoWorkEventArgs e)
+        {
             _crawler.Crawl();
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (worker.CancellationPending)
+                {
+                    _crawler.Cancel();
+                    e.Cancel = true;
+                    break;
+                }
+            }
+            return true;
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -46,6 +60,15 @@ namespace HaveBB.ContentService.App
             btnStart.Enabled = false;
             btnStop.Enabled = true;
 
+            CreateWorker();
+
+            CreateCrawler();
+
+            _backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void CreateCrawler()
+        {
             ServicePointManager.MaxServicePoints = 999999;
             ServicePointManager.DefaultConnectionLimit = 999999;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
@@ -60,29 +83,32 @@ namespace HaveBB.ContentService.App
                 new HtmlDocumentProcessor(),
                 echo
                 )
-                          {
-                              MaximumThreadCount = 1,
-                              MaximumCrawlDepth = 3,
-                              ExcludeFilter = new[]
-                                                  {
-                                                      new RegexFilter(
-                                                          new Regex(@"(\.jpg|\.css|\.js|\.gif|\.jpeg|\.png|\.ico)",
-                                                                    RegexOptions.Compiled |
-                                                                    RegexOptions.CultureInvariant |
-                                                                    RegexOptions.IgnoreCase))
-                                                  },
-                          };
-
-            _crawler.Cancelled += new EventHandler<EventArgs>(_crawler_Cancelled);
-            _backgroundWorker1.RunWorkerAsync();
+                           {
+                               MaximumThreadCount = 1,
+                               MaximumCrawlDepth = 3,
+                               ExcludeFilter = new[]
+                                                   {
+                                                       new RegexFilter(
+                                                           new Regex(@"(\.jpg|\.css|\.js|\.gif|\.jpeg|\.png|\.ico)",
+                                                                     RegexOptions.Compiled |
+                                                                     RegexOptions.CultureInvariant |
+                                                                     RegexOptions.IgnoreCase))
+                                                   },
+                           };
         }
 
-        void _crawler_Cancelled(object sender, EventArgs e)
+        private void CreateWorker()
         {
-            //_backgroundWorker1.ReportProgress(100, "STOP!!!");
-            //_backgroundWorker1.CancelAsync();
+            _backgroundWorker1 = new BackgroundWorker
+                                     {
+                                         WorkerReportsProgress = true,
+                                         WorkerSupportsCancellation = true
+                                     };
+            _backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            _backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            _backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
         }
-        
+
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             rtbEcho.Text += "DONE!!!";
@@ -91,21 +117,17 @@ namespace HaveBB.ContentService.App
 
         private void ShowText(string text)
         {
-            _backgroundWorker1.ReportProgress(0, text);
+            _backgroundWorker1.ReportProgress(100, text);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //StopWork();
+            
         }
 
         private void StopWork()
         {
-            if (_crawler != null)
-            {
-                _crawler.Cancel();
-                _crawler.Dispose();
-            }
+            _backgroundWorker1.CancelAsync();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
