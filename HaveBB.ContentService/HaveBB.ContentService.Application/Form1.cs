@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -30,24 +31,26 @@ namespace HaveBB.ContentService.App
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            rtbEcho.Text += (string) e.UserState;
+            rtbEcho.Text += (string) e.UserState + Environment.NewLine;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            //_crawler.Crawl();
             e.Result = ProcessCrawl(sender as BackgroundWorker, e);
         }
 
         private bool ProcessCrawl(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            _crawler.Crawl();
+            Thread newThread = new Thread(new ThreadStart(_crawler.Crawl));
+            newThread.Start();
+
             while (true)
             {
                 Thread.Sleep(1000);
-                if (worker.CancellationPending)
+                if (_backgroundWorker1.CancellationPending)
                 {
                     _crawler.Cancel();
+                    newThread.Abort();
                     e.Cancel = true;
                     break;
                 }
@@ -111,8 +114,14 @@ namespace HaveBB.ContentService.App
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            rtbEcho.Text += "DONE!!!";
-            rtbEcho.Text += Environment.NewLine;
+            if (e.Cancelled)
+            {
+                rtbEcho.Text += "CANCEL!!!";
+            }
+            else
+            {
+                rtbEcho.Text += "DONE!!!";    
+            }
         }
 
         private void ShowText(string text)
@@ -122,12 +131,15 @@ namespace HaveBB.ContentService.App
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+            StopWork();
         }
 
         private void StopWork()
         {
-            _backgroundWorker1.CancelAsync();
+            if (_backgroundWorker1.IsBusy)
+            {
+                _backgroundWorker1.CancelAsync();    
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
