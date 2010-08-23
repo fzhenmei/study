@@ -1,0 +1,56 @@
+﻿p
+{
+	line-height: 1.5em;
+}
+.sidebarheader,.headerlink
+{
+    font-weight: bold;    
+    font-size: 10pt;
+    display: block;
+}
+.headerlink
+{
+	margin-top: 15px;
+}
+.sidebaritem 
+{
+	margin: 5px 0px 5px 0px;
+}
+.sidebar,.sidebar p
+{
+    width: 200px;     
+    vertical-align: top; 
+    font-size: 8pt; 
+    line-height: 1.5em; 
+}
+.samplebox
+{
+    border-bottom: dashed 1px teal;
+    padding: 12px;
+    padding-left: 10px;
+}
+.introduction
+{
+	font-size: 80%;
+	background-color: lightsteelblue;
+	padding: 20px 50px 20px 50px;
+}
+.notes
+{
+	margin: 20px 75px 20px 75px; 
+	font-size: smaller;
+	border: solid 1px navy;
+	background: lightsteelblue;
+	padding: 15px;
+}
+.codewindow
+{
+	background: #eeeeee;
+	padding: 10px;
+}
+.leftpanel
+{
+	width: 180px; background-image: url(images/newwave.jpg);
+	float: left;
+	height: 1200px;
+}

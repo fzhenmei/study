@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4DE2C935-CD10-4ECA-837D-28B0F8363234}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WestWindWebToolkitWebTemplate</RootNamespace>
+    <AssemblyName>WestWindWebToolkitWebTemplate</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Westwind.BusinessFramework, Version=1.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Westwind.BusinessFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Westwind.Globalization, Version=1.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Westwind.Globalization.dll</HintPath>
+    </Reference>
+    <Reference Include="Westwind.Utilities, Version=1.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Westwind.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Westwind.Web, Version=1.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Westwind.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AppConfiguration.aspx.cs">
+      <DependentUpon>AppConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AppConfiguration.aspx.designer.cs">
+      <DependentUpon>AppConfiguration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\BannerAdmin.aspx.cs">
+      <DependentUpon>BannerAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BannerAdmin.aspx.designer.cs">
+      <DependentUpon>BannerAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WebRequestLog.aspx.cs">
+      <DependentUpon>WebRequestLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WebRequestLog.aspx.designer.cs">
+      <DependentUpon>WebRequestLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDisplay.aspx.cs">
+      <DependentUpon>MessageDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDisplay.aspx.designer.cs">
+      <DependentUpon>MessageDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Classes\Application\App.cs" />
+    <Compile Include="_Classes\Application\ApplicationConfiguration.cs" />
+    <Compile Include="_Classes\Application\AppUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\AppConfiguration.aspx" />
+    <Content Include="Admin\BannerAdmin.aspx" />
+    <Content Include="Admin\WebRequestLog.aspx" />
+    <Content Include="Admin\WebRequestLog.js" />
+    <Content Include="bin\Westwind.BusinessFramework.dll" />
+    <Content Include="bin\Westwind.BusinessFramework.xml" />
+    <Content Include="bin\Westwind.Globalization.dll" />
+    <Content Include="bin\Westwind.Globalization.xml" />
+    <Content Include="bin\Westwind.Utilities.dll" />
+    <Content Include="bin\Westwind.Utilities.xml" />
+    <Content Include="bin\Westwind.Web.dll" />
+    <Content Include="bin\Westwind.Web.xml" />
+    <Content Include="Css\Images\close.gif" />
+    <Content Include="Css\Images\DialogHeader.png" />
+    <Content Include="Css\Images\DialogHighlight.png" />
+    <Content Include="Css\Images\DialogSelection.png" />
+    <Content Include="Css\Images\DialogStrip.png" />
+    <Content Include="Css\Images\edit.gif" />
+    <Content Include="Css\Images\EditBlue.gif" />
+    <Content Include="Css\Images\EditWhite.gif" />
+    <Content Include="Css\Images\help.gif" />
+    <Content Include="Css\Images\home.gif" />
+    <Content Include="Css\Images\Info.gif" />
+    <Content Include="Css\Images\LightBlueGradient.png" />
+    <Content Include="Css\Images\LightOrangeGradient.png" />
+    <Content Include="Css\Images\loading_black.gif" />
+    <Content Include="Css\Images\loading_small.gif" />
+    <Content Include="Css\Images\MenuHighlight.png" />
+    <Content Include="Css\Images\New.gif" />
+    <Content Include="Css\Images\next.png" />
+    <Content Include="Css\Images\prev.png" />
+    <Content Include="Css\Images\refresh.gif" />
+    <Content Include="Css\Images\Remove.gif" />
+    <Content Include="Css\Images\SmallButton.gif" />
+    <Content Include="Css\Images\SmallButtonHover.gif" />
+    <Content Include="Css\Images\SmallButtonPressed.gif" />
+    <Content Include="Css\Images\Sort.gif" />
+    <Content Include="Css\Images\SubmitButton.gif" />
+    <Content Include="Css\Images\SubmitButtonHover.gif" />
+    <Content Include="Css\Images\SubmitButtonPressed.gif" />
+    <Content Include="Css\Images\TabHover.gif" />
+    <Content Include="Css\Images\TabNormal.gif" />
+    <Content Include="Css\Images\TabSelected.gif" />
+    <Content Include="Css\Images\users.gif" />
+    <Content Include="Css\Images\VertGradient.png" />
+    <Content Include="Css\Images\warning.gif" />
+    <Content Include="Global.asax" />
+    <Content Include="MessageDisplay.aspx" />
+    <Content Include="scripts\jquery-ui-custom.js" />
+    <Content Include="scripts\jquery-ui-custom.min.js" />
+    <Content Include="scripts\jquery-vsdoc.js" />
+    <Content Include="scripts\jquery.js" />
+    <Content Include="scripts\jquery.min-vsdoc.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\base\ui.accordion.css" />
+    <Content Include="scripts\themes\base\ui.all.css" />
+    <Content Include="scripts\themes\base\ui.base.css" />
+    <Content Include="scripts\themes\base\ui.core.css" />
+    <Content Include="scripts\themes\base\ui.datepicker.css" />
+    <Content Include="scripts\themes\base\ui.dialog.css" />
+    <Content Include="scripts\themes\base\ui.progressbar.css" />
+    <Content Include="scripts\themes\base\ui.tabs.css" />
+    <Content Include="scripts\themes\base\ui.theme.css" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="scripts\themes\redmond\ui.all.css" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\smoothness\ui.all.css" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_flat_0_e6e6e6_40x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_0_000000_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_55_000080_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="scripts\themes\westwind\ui.all.css" />
+    <Content Include="scripts\ww.jquery.js" />
+    <Content Include="scripts\ww.jquery.min.js" />
+    <Content Include="Css\Westwind.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>14305</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

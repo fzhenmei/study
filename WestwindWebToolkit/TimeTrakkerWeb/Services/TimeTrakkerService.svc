@@ -1,0 +1,4 @@
+<%@ServiceHost Language="C#" Debug="true" 
+               Service="TimeTrakkerWeb.TimeTrakkerService"       
+               CodeBehind="~/Services/TimeTrakkerService.cs"                        
+%>

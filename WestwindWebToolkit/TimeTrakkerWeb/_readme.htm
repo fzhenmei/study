@@ -1,0 +1,53 @@
+﻿<html>
+<head>
+<link href="App_Themes/Standard/Standard.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>Time Trakker Sample Configuration</h1>
+
+<div style="margin: 20px;">
+
+
+    <p>
+    This sample is a demonstration of using LINQ to SQL through a business layer. In 
+    this application all data access occurs through business components which derive
+    from the wwBusinessObject base class.
+        <br />
+        <br />This sample consists of 3 projects:<br />
+        <ul>
+        <li> TimeTrakkerWeb - The Web/UI front end project<br />
+        <li> TimeTrakkerBusiness - application specific business objects<br />
+        <li> Westwind.BusinessFramework - a simple business object wrapper for LINQ to SQL<br />
+        </ul>
+        <br />
+        <br /><b>Web Configuration</b><br />The sample is set up to run as a virtual under
+        <a href="http://localhost/TimeTrakkerWeb/">http://localhost/TimeTrakkerWeb/</a> 
+    rather than with the local Web server, due to an odd configuration issue that 
+    causes file paths not to be resolved properly by the Visual Studio Web Server.&nbsp;If you have to use Visual Studio Web Server note that styles 
+    and images won&#39;t load until you login (top right).<br />
+    <br />
+    To configure IIS go into the Web Project properties and use the Create Virtual 
+    Directory option assuming you have IIS installed on your machine.<br />
+    <br />
+    <b>Database Setup<br /></b>The sample is set up to run against the 
+    TimeTrakker database stored in the App_Data directory. By default the app points 
+    to SQL Express as a file resource. You can change the ConnectionString in 
+    web.config to a full SQL server instance by adjusting the name of one of the 
+    alternate entries. <br />
+    <br />
+    <b>User Setup and Sample Default Login</b><br />
+    The sample uses a user table (Users) in the SQL database to validate users. The 
+    default user info is:<br />
+    <br />
+    Username:<br />
+    <a href="mailto:rstrahl@west-wind.com">rstrahl@west-wind.com</a><br />
+    <br />
+    Password:<br />
+    ww<br />
+    <br />
+    If you want to play around with the sample 
+    data you should log in with this account. To add a new user manually just add a 
+    new record to the Users table in the database - there&#39;s currently no UI to do this through code.</p>
+</div>
+</body>
+</html>

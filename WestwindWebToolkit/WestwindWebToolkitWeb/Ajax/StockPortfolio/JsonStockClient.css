@@ -1,0 +1,166 @@
+﻿#HeaderBar
+{
+	float: right;
+	margin-right: 10px;
+	margin-top: 8px;
+	text-align: right;
+	font-size: 8pt;
+	border-bottom: solid 1px steelblue;
+	padding: 3px;
+
+}
+#HeaderBar input[type=text],#HeaderBar input[type=password]
+{
+	width: 90px;
+}
+#divStockQuote
+{    
+}
+#divStockQuotePadder
+{
+	padding: 10px;
+}
+#divStockQuoteResult
+{    	    	    	
+	xfloat: left;
+	border: solid 1px grey;
+	background: lightsteelblue;
+	color: navy;
+	padding: 12px;
+	margin-top: 10px;
+	width: 620px;
+	display: none;	
+}
+#imgStockQuoteGraph
+{
+	float: right;
+	margin-left: 20px; 
+	width: 300px;
+	height: 120px;
+	display: block;
+}
+#divStockQuoteResult table td:first-child
+{
+	width: 125px;    	
+	padding: 3px;
+	font-weight: bold;
+}
+#divStockQuoteResult table td
+{
+	padding: 3px;
+}
+#divContentContainer
+{
+	width: 710px;
+	margin: 0px auto 0px auto;
+}
+
+.statusbar
+{
+	position: fixed;
+	bottom: 10px;
+	left: 0px;
+	width: 100%;
+	
+	background: black;
+	color: khaki;
+	opacity: 0.70;
+	filter: alpha(opacity="70");
+	height: 15px;     	
+	padding: 4px;
+	padding-left: 10px;
+}
+.statusbarhighlight
+{
+	background: khaki;
+	color: Maroon;
+	font-weight: bold;
+	opacity: .85;
+	filter: alpha(opacity="85");    
+}
+#divPortfolioList
+{
+	border: solid 1px navy;
+	margin: 10px;
+	width: 660px;
+}
+#lstPortfolioContainer
+{
+	height: 250px;
+	overflow-y: scroll;	
+}
+.itemtemplate
+{
+    border-bottom: dashed 1px teal;
+    padding: 9px;
+    xpadding-left: 0px;
+    background: white;
+}
+.itemtemplate:hover
+{
+    background-color: white;
+    background-image: url(../../css/images/lightorangegradient.png);
+    background-repeat: repeat-x;                   
+    cursor: pointer;     
+    
+}
+.itemtemplate b
+{
+    color: Navy;
+}
+.itemtemplate a
+{
+    text-decoration: none;
+}
+.itemtemplate a:visited
+{
+    color: Navy;
+}
+.stockicon
+{
+	float: left;
+	background-image: url(../../images/symbol.gif);
+	background-repeat: no-repeat;	
+	width: 20px;
+	height: 20px;
+	padding: 0px 0px 10px 10px;	
+}
+.itemstockname
+{
+	font-weight: bold;
+	padding: bottom: 3px;
+	color: steelblue;
+	height: 20px;
+}
+.itemtools
+{
+	float: right;
+}
+.itemdetail
+{
+	font-size: 8pt;
+}    
+.itemdetail td
+{
+	font-size: 8pt;
+}
+.stockvaluecolumn
+{    	
+	font-weight: bold;
+	text-align: right;
+	padding-right: 20px;
+	width: 70px;
+}
+#StockEditWindow
+{
+	width: 300px;    	
+	position: absolute;    	
+	top: 80px;
+	left: 45px;
+	display: none;
+}
+.pulse    
+{    	
+	background-image: url(../../css/images/lightbluegradient.png);
+	background-repeat: repeat-x;	
+}

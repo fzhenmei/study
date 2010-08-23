@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{341BC82E-22DF-4DE5-951D-CBA0ED14D454}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TimeTrakkerWeb</RootNamespace>
+    <AssemblyName>TimeTrakkerWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Westwind.BusinessFramework, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\Westwind.BusinessFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Westwind.Utilities, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\Westwind.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Westwind.Web, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\Westwind.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\Standard\images\Calendar.png" />
+    <Content Include="App_Themes\Standard\images\close.gif" />
+    <Content Include="App_Themes\Standard\images\DialogHeader.png" />
+    <Content Include="App_Themes\Standard\images\DialogHighlight.png" />
+    <Content Include="App_Themes\Standard\images\DialogSelection.png" />
+    <Content Include="App_Themes\Standard\images\DialogStrip.png" />
+    <Content Include="App_Themes\Standard\images\edit.gif" />
+    <Content Include="App_Themes\Standard\images\EditBlue.gif" />
+    <Content Include="App_Themes\Standard\images\EditWhite.gif" />
+    <Content Include="App_Themes\Standard\images\help.gif" />
+    <Content Include="App_Themes\Standard\images\home.gif" />
+    <Content Include="App_Themes\Standard\images\Info.gif" />
+    <Content Include="App_Themes\Standard\images\LightBlueGradient.png" />
+    <Content Include="App_Themes\Standard\images\LightOrangeGradient.png" />
+    <Content Include="App_Themes\Standard\images\loading_black.gif" />
+    <Content Include="App_Themes\Standard\images\loading_small.gif" />
+    <Content Include="App_Themes\Standard\images\MenuHighlight.png" />
+    <Content Include="App_Themes\Standard\images\New.gif" />
+    <Content Include="App_Themes\Standard\images\refresh.gif" />
+    <Content Include="App_Themes\Standard\images\Remove.gif" />
+    <Content Include="App_Themes\Standard\images\SmallButton.gif" />
+    <Content Include="App_Themes\Standard\images\SmallButtonHover.gif" />
+    <Content Include="App_Themes\Standard\images\SmallButtonPressed.gif" />
+    <Content Include="App_Themes\Standard\images\Sort.gif" />
+    <Content Include="App_Themes\Standard\images\SubmitButton.gif" />
+    <Content Include="App_Themes\Standard\images\SubmitButtonHover.gif" />
+    <Content Include="App_Themes\Standard\images\SubmitButtonPressed.gif" />
+    <Content Include="App_Themes\Standard\images\TabHover.gif" />
+    <Content Include="App_Themes\Standard\images\TabNormal.gif" />
+    <Content Include="App_Themes\Standard\images\TabSelected.gif" />
+    <Content Include="App_Themes\Standard\images\users.gif" />
+    <Content Include="App_Themes\Standard\images\VertGradient.png" />
+    <Content Include="App_Themes\Standard\images\warning.gif" />
+    <Content Include="App_Themes\Standard\Standard.css" />
+    <Content Include="App_Themes\Standard\TimeTrakker.css" />
+    <Content Include="Services\TimeTrakkerService.svc" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BrowseEntries.aspx.cs">
+      <DependentUpon>BrowseEntries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseEntries.aspx.designer.cs">
+      <DependentUpon>BrowseEntries.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\IReportView.cs" />
+    <Compile Include="CustomerList.aspx.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerList.aspx.designer.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\EntryList.ascx.cs">
+      <DependentUpon>EntryList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\EntryList.ascx.designer.cs">
+      <DependentUpon>EntryList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectList.aspx.cs">
+      <DependentUpon>ProjectList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectList.aspx.designer.cs">
+      <DependentUpon>ProjectList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\TimeSheetReport.ascx.cs">
+      <DependentUpon>TimeSheetReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\TimeSheetReport.ascx.designer.cs">
+      <DependentUpon>TimeSheetReport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\TimeTrakkerWebService.asmx.cs">
+      <DependentUpon>TimeTrakkerWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ShowCustomer.aspx.cs">
+      <DependentUpon>ShowCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowCustomer.aspx.designer.cs">
+      <DependentUpon>ShowCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowProject.aspx.cs">
+      <DependentUpon>ShowProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowProject.aspx.designer.cs">
+      <DependentUpon>ShowProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Callbacks.ashx.cs">
+      <DependentUpon>Callbacks.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\TimeTrakkerBaseForm.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classes\WebUtils.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OpenEntries.aspx.cs">
+      <DependentUpon>OpenEntries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpenEntries.aspx.designer.cs">
+      <DependentUpon>OpenEntries.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Punchin.aspx.cs">
+      <DependentUpon>Punchin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Punchin.aspx.designer.cs">
+      <DependentUpon>Punchin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDisplay.aspx.cs">
+      <DependentUpon>MessageDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Punchout.aspx.cs">
+      <DependentUpon>Punchout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Punchout.aspx.designer.cs">
+      <DependentUpon>Punchout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserEntryPage.aspx.cs">
+      <DependentUpon>UserEntryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserEntryPage.aspx.designer.cs">
+      <DependentUpon>UserEntryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\TimeTrakkerService.cs" />
+    <Compile Include="TimeReport.aspx.cs">
+      <DependentUpon>TimeReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TimeReport.aspx.designer.cs">
+      <DependentUpon>TimeReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TimeTrakkerMaster.Master.cs">
+      <DependentUpon>TimeTrakkerMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TimeTrakkerMaster.Master.designer.cs">
+      <DependentUpon>TimeTrakkerMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WorkStuff\DisconnectedUpdates.aspx.cs">
+      <DependentUpon>DisconnectedUpdates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkStuff\DisconnectedUpdates.aspx.designer.cs">
+      <DependentUpon>DisconnectedUpdates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkStuff\ThreadContext.aspx.cs">
+      <DependentUpon>ThreadContext.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkStuff\ThreadContext.aspx.designer.cs">
+      <DependentUpon>ThreadContext.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\close.gif" />
+    <Content Include="images\help.gif" />
+    <Content Include="images\PleaseWait.gif" />
+    <Content Include="images\Remove.gif" />
+    <Content Include="images\tt_logo.gif" />
+    <Content Include="images\warning.gif" />
+    <Content Include="images\wwtoollogo.jpg" />
+    <Content Include="images\wwtoollogo_text.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\Folder.gif" />
+    <Content Include="images\new.gif" />
+    <Content Include="images\Punchout.gif" />
+    <Content Include="images\Entry.png" />
+    <Content Include="images\users.gif" />
+    <Content Include="Login.aspx" />
+    <Content Include="OpenEntries.aspx" />
+    <Content Include="Punchin.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="MessageDisplay.aspx" />
+    <Content Include="Punchout.aspx" />
+    <Content Include="TimeTrakkerMaster.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\TimeTrakker.mdf">
+    </Content>
+    <Content Include="App_Data\TimeTrakker_log.LDF">
+      <DependentUpon>TimeTrakker.mdf</DependentUpon>
+    </Content>
+    <Content Include="BrowseEntries.aspx" />
+    <Content Include="CustomerList.aspx" />
+    <Content Include="ProjectList.aspx" />
+    <Content Include="Reports\TimeSheetReport.ascx" />
+    <Content Include="Services\TimeTrakkerWebService.asmx" />
+    <Content Include="ShowProject.aspx" />
+    <Content Include="Services\Callbacks.ashx" />
+    <Content Include="TimeReport.aspx" />
+    <Content Include="_readme.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="images\calendar.gif" />
+    <Content Include="images\Customer.png" />
+    <Content Include="images\FloralBackground_sm.gif" />
+    <Content Include="images\LightBlueGradient.png" />
+    <Content Include="images\LightOrangeGradient.png" />
+    <Content Include="images\Options.png" />
+    <Content Include="images\Project.png" />
+    <Content Include="images\Punchin.gif" />
+    <Content Include="images\Reports.gif" />
+    <Content Include="images\ShowEntries.png" />
+    <Content Include="scripts\jquery-ui.js" />
+    <Content Include="scripts\jquery-ui.min.js" />
+    <Content Include="scripts\jquery-vsdoc.js" />
+    <Content Include="scripts\jquery.js" />
+    <Content Include="scripts\jquery.min-vsdoc.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\themes\base\images\ui-anim_basic_16x16.gif" />
+    <Content Include="scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\base\jquery-ui.css" />
+    <Content Include="scripts\themes\base\jquery.ui.accordion.css" />
+    <Content Include="scripts\themes\base\jquery.ui.all.css" />
+    <Content Include="scripts\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="scripts\themes\base\jquery.ui.base.css" />
+    <Content Include="scripts\themes\base\jquery.ui.button.css" />
+    <Content Include="scripts\themes\base\jquery.ui.core.css" />
+    <Content Include="scripts\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="scripts\themes\base\jquery.ui.dialog.css" />
+    <Content Include="scripts\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="scripts\themes\base\jquery.ui.resizable.css" />
+    <Content Include="scripts\themes\base\jquery.ui.slider.css" />
+    <Content Include="scripts\themes\base\jquery.ui.tabs.css" />
+    <Content Include="scripts\themes\base\jquery.ui.theme.css" />
+    <Content Include="scripts\themes\base\ui.accordion.css" />
+    <Content Include="scripts\themes\base\ui.all.css" />
+    <Content Include="scripts\themes\base\ui.base.css" />
+    <Content Include="scripts\themes\base\ui.core.css" />
+    <Content Include="scripts\themes\base\ui.datepicker.css" />
+    <Content Include="scripts\themes\base\ui.dialog.css" />
+    <Content Include="scripts\themes\base\ui.progressbar.css" />
+    <Content Include="scripts\themes\base\ui.resizable.css" />
+    <Content Include="scripts\themes\base\ui.slider.css" />
+    <Content Include="scripts\themes\base\ui.tabs.css" />
+    <Content Include="scripts\themes\base\ui.theme.css" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="scripts\themes\redmond\jquery-ui.css" />
+    <Content Include="scripts\themes\redmond\ui.all.css" />
+    <Content Include="scripts\themes\redmond\ui.jqgrid.css" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\smoothness\jquery-ui.css" />
+    <Content Include="scripts\themes\smoothness\ui.all.css" />
+    <Content Include="scripts\themes\smoothness\ui.jqgrid.css" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_flat_0_e6e6e6_40x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_0_000000_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-bg_inset-hard_55_000080_1x100.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="scripts\themes\westwind\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="scripts\themes\westwind\ui.all.css" />
+    <Content Include="scripts\weblog.js" />
+    <Content Include="scripts\ww.jquery.js" />
+    <Content Include="scripts\ww.jquery.min.js" />
+    <Content Include="scripts\wwEditable.js" />
+    <Content Include="scripts\wweditable.min.js" />
+    <Content Include="UserControls\EntryList.ascx" />
+    <Content Include="ShowCustomer.aspx" />
+    <Content Include="UserEntryPage.aspx" />
+    <Content Include="WorkStuff\DisconnectedUpdates.aspx" />
+    <Content Include="WorkStuff\ThreadContext.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="scripts\themes\.svn\all-wcprops" />
+    <None Include="scripts\themes\.svn\entries" />
+    <None Include="scripts\themes\base\.svn\all-wcprops" />
+    <None Include="scripts\themes\base\.svn\entries" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.accordion.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.all.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.base.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.core.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.datepicker.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.dialog.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.progressbar.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.tabs.css.svn-base" />
+    <None Include="scripts\themes\base\.svn\text-base\ui.theme.css.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\all-wcprops" />
+    <None Include="scripts\themes\base\images\.svn\entries" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_flat_0_aaaaaa_40x100.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_flat_75_ffffff_40x100.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_glass_55_fbf9ee_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_glass_65_ffffff_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_glass_75_dadada_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_glass_75_e6e6e6_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-bg_highlight-soft_75_cccccc_1x100.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-icons_222222_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-icons_454545_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-icons_888888_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\prop-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_flat_0_aaaaaa_40x100.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_flat_75_ffffff_40x100.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_glass_55_fbf9ee_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_glass_65_ffffff_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_glass_75_dadada_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_glass_75_e6e6e6_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-bg_highlight-soft_75_cccccc_1x100.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-icons_222222_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-icons_454545_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-icons_888888_256x240.png.svn-base" />
+    <None Include="scripts\themes\base\images\.svn\text-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\.svn\all-wcprops" />
+    <None Include="scripts\themes\redmond\.svn\entries" />
+    <None Include="scripts\themes\redmond\.svn\text-base\ui.all.css.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\all-wcprops" />
+    <None Include="scripts\themes\redmond\images\.svn\entries" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_flat_0_aaaaaa_40x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_flat_55_fbec88_40x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_glass_75_d0e5f5_1x400.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_glass_85_dfeffc_1x400.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_gloss-wave_55_5c9ccc_500x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_inset-hard_100_f5f8f9_1x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-bg_inset-hard_100_fcfdfd_1x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_217bc0_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_469bdd_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_6da8d5_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_d8e7f3_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\prop-base\ui-icons_f9bd01_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_flat_0_aaaaaa_40x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_flat_55_fbec88_40x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_glass_75_d0e5f5_1x400.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_glass_85_dfeffc_1x400.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_gloss-wave_55_5c9ccc_500x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_inset-hard_100_f5f8f9_1x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-bg_inset-hard_100_fcfdfd_1x100.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_217bc0_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_469bdd_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_6da8d5_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_d8e7f3_256x240.png.svn-base" />
+    <None Include="scripts\themes\redmond\images\.svn\text-base\ui-icons_f9bd01_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\.svn\all-wcprops" />
+    <None Include="scripts\themes\smoothness\.svn\entries" />
+    <None Include="scripts\themes\smoothness\.svn\text-base\ui.all.css.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\all-wcprops" />
+    <None Include="scripts\themes\smoothness\images\.svn\entries" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_flat_0_aaaaaa_40x100.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_flat_75_ffffff_40x100.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_glass_55_fbf9ee_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_glass_65_ffffff_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_glass_75_dadada_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_glass_75_e6e6e6_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-bg_highlight-soft_75_cccccc_1x100.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-icons_222222_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-icons_454545_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-icons_888888_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\prop-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_flat_0_aaaaaa_40x100.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_flat_75_ffffff_40x100.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_glass_55_fbf9ee_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_glass_65_ffffff_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_glass_75_dadada_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_glass_75_e6e6e6_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-bg_highlight-soft_75_cccccc_1x100.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-icons_222222_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-icons_454545_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-icons_888888_256x240.png.svn-base" />
+    <None Include="scripts\themes\smoothness\images\.svn\text-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\.svn\all-wcprops" />
+    <None Include="scripts\themes\westwind\.svn\entries" />
+    <None Include="scripts\themes\westwind\.svn\text-base\ui.all.css.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\all-wcprops" />
+    <None Include="scripts\themes\westwind\images\.svn\entries" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_flat_0_e6e6e6_40x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_flat_55_fbec88_40x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_glass_75_d0e5f5_1x400.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_glass_85_dfeffc_1x400.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_inset-hard_0_000000_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_inset-hard_100_f5f8f9_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_inset-hard_100_fcfdfd_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-bg_inset-hard_55_000080_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_217bc0_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_469bdd_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_6da8d5_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_d8e7f3_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\prop-base\ui-icons_f9bd01_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_flat_0_e6e6e6_40x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_flat_55_fbec88_40x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_glass_75_d0e5f5_1x400.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_glass_85_dfeffc_1x400.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_glass_95_fef1ec_1x400.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_inset-hard_0_000000_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_inset-hard_100_f5f8f9_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_inset-hard_100_fcfdfd_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-bg_inset-hard_55_000080_1x100.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_217bc0_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_2e83ff_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_469bdd_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_6da8d5_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_cd0a0a_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_d8e7f3_256x240.png.svn-base" />
+    <None Include="scripts\themes\westwind\images\.svn\text-base\ui-icons_f9bd01_256x240.png.svn-base" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeTrakkerBusiness\TimeTrakkerBusiness.csproj">
+      <Project>{AC801A0E-7B2B-42A4-A178-229D9D47E4A2}</Project>
+      <Name>TimeTrakkerBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scripts\themes\.svn\prop-base\" />
+    <Folder Include="scripts\themes\.svn\props\" />
+    <Folder Include="scripts\themes\.svn\text-base\" />
+    <Folder Include="scripts\themes\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\base\.svn\prop-base\" />
+    <Folder Include="scripts\themes\base\.svn\props\" />
+    <Folder Include="scripts\themes\base\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\base\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\base\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\base\images\.svn\props\" />
+    <Folder Include="scripts\themes\base\images\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\base\images\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\base\images\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\redmond\.svn\prop-base\" />
+    <Folder Include="scripts\themes\redmond\.svn\props\" />
+    <Folder Include="scripts\themes\redmond\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\redmond\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\redmond\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\redmond\images\.svn\props\" />
+    <Folder Include="scripts\themes\redmond\images\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\redmond\images\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\redmond\images\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\smoothness\.svn\prop-base\" />
+    <Folder Include="scripts\themes\smoothness\.svn\props\" />
+    <Folder Include="scripts\themes\smoothness\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\smoothness\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\smoothness\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\smoothness\images\.svn\props\" />
+    <Folder Include="scripts\themes\smoothness\images\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\smoothness\images\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\smoothness\images\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\westwind\.svn\prop-base\" />
+    <Folder Include="scripts\themes\westwind\.svn\props\" />
+    <Folder Include="scripts\themes\westwind\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\westwind\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\westwind\.svn\tmp\text-base\" />
+    <Folder Include="scripts\themes\westwind\images\.svn\props\" />
+    <Folder Include="scripts\themes\westwind\images\.svn\tmp\prop-base\" />
+    <Folder Include="scripts\themes\westwind\images\.svn\tmp\props\" />
+    <Folder Include="scripts\themes\westwind\images\.svn\tmp\text-base\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

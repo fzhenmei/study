@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Sample Configuration</title>
+		<link href="WestWind.css" rel="stylesheet" type="text/css">        
+	</head>
+	<body>
+		<h1 class="gridheader">
+            Localization Samples Configuration</h1>
+		<a href="default.aspx">Home</a><br>
+		<br>
+		<br>
+		<blockquote> In order to run these demos you need the following:<br>
+			<br>
+			<ul>
+				<li>ASP.NET 3.5 or later<li>Sql Server 2008/2005 or Express, MSDE, SQL Server 2000
+			</ul>
+            <h3>
+				<span style="color: blue;
+                    font-family: 'Courier New'; mso-no-proof: yes"><br />
+                </span>&nbsp;</h3>
+			<H3>Database</H3>
+			<p>
+				The Sample database is provided as &quot;DevSamples&quot; and needs to be installed from 
+                installation root by executing the DevSamplesData_RunThis_ToInstallDb.exe. This 
+                package installs the database in Sql Server 2008/2005 or Express versions on 
+                your machine.
+				The database contains a <i>Localizations </i>table which contains the 
+                localization resources for this sample application.</p>
+            <p>
+                <strong>IMPORTANT!<br />
+                </strong>The sample ships with the data base provider enabled. If for whatever 
+                reason your database connection does not work properly all resources will fail. 
+                Make sure the database connectivity works first or localization will not work. 
+                If you have problems with localization you can also turn off the resource 
+                provider in the web.config file and go back to the stock Resx Resources (comment 
+                the &lt;globalization&gt; section in the web.config). Once the localization admin form 
+                works you can re-enable the database resource provider.</p>
+            <h3>
+                Configuration</h3>
+            <p>
+                The resource provider in the sample is configured to use the 
+                DevSamples database by default and it uses <?xml:namespace 
+  prefix = o />
+                                    the localization data found there. The DbResource configuration section includes
+                a connection string and tablename for the database which you can override if you're
+                not using Sql Express.</p>
+            <p>
+                <strong>Connection String</strong></p>
+            <p>
+                For the connection string in DbResourceProvider you can use either a full connection
+                string or the name of a 'ConnectionStrings' entry in web.config. The easiest way
+                to configure your database connection string is just to set up the <strong>
+                DevSampleConnectionString</strong>
+                Connection string. This connection string is used both by the samples as well as
+                the provider by default.</p>
+            <p>
+                <strong>Creating a new Localization Resource Table</strong></p>
+            <p>
+                Obviously you can store the globalization data in any database so you can point
+                it at any connection string of your choice. Note that the Admin interface can automatically
+                create a new Localization table for you. To do this set your connectionString to
+                the database of your choice and set the resourceTableName to the name of your choice.
+                Run the admin form (LocalizationAdmin/LocalizeForm.aspx) - and you should get a
+                notice that the table can not be found. Click on Create Table on the toolbar on
+                the left to create the new table. Note whatever account you connect
+            </p>
+            <p>
+                <strong>Resource Provider Configuration</strong></p>
+            <p>
+                In addition the wwDbResourceProvider section contains other settings to configure the provider's execution environment. You can find more information on these settings
+                in the help file.</p>
+            <p>
+                <strong>Enabling the Resource Provider</strong>
+            </p>
+            <p>
+                To use the wwDbresourceProvider or wwDbSimpleResourceProvider you need to also enable
+                the resource provider in ASP.NET in the <strong>&lt;globalization&gt;</strong> section. This Web.config is configured to use the wwDbSimpleResourceProvider and you can check the commented
+                sections to see how the providers are hooked up.</p>
+            <h3>
+                File Requirements to run the ResourceProvider and Admin Interface</h3>
+            <p>
+                The resource provider can import and export Resx resources. In order to export 
+                resources the application must have WRITE access in the application folder. This 
+                means the application user account (NETWORK SERVICE or ASPNET) typically must be 
+                set to have Read/Write or Full access in the application&#39;s folders. This is only 
+                required if you want to export to Resx resources.</p>
+            <h3>
+                Security</h3>
+            <p>
+                The provider related code can run in Medium trust. The administration form too 
+                can run in medium trust but the Translation features require that Google.com and 
+                Babelfish.com are accessible.</p>
+            <pre>            &lt;trust level="Medium" originUrl="(http://www.google.com/translate_t)|(http://babelfish.yahoo.com/translate_txt)"/&gt;</pre>
+		</blockquote>
+		<p>
+			&nbsp;</p>
+	</body>
+</html>

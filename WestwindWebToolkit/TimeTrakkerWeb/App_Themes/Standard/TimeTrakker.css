@@ -1,0 +1,15 @@
+﻿#divMainCanvas
+{
+    background: lightgrey; 
+    height: 1024px; 
+    margin: 0px;
+}
+
+#pagecontainer 
+{ text-align:left; width: 850px; 
+  border: solid 1px silver; 
+  border-right: solid 2px silver;
+  border-bottom: solid 2px silver; 
+  background: white; 
+  position:relative; 
+}    

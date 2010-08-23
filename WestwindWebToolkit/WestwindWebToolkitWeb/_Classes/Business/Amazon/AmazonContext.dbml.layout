@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AmazonContext">
+  <DataContextMoniker Name="/AmazonContext" />
+  <nestedChildShapes>
+    <classShape Id="2ade518e-2fac-4a23-b68d-558fe1e08947" absoluteBounds="0.75, 0.75, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/AmazonContext/AmazonBook" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e09c5434-e574-4b88-9b89-15cff5abb6da" absoluteBounds="0.765, 1.21, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11fa8f14-fd4c-4b11-a021-267504fdca94" absoluteBounds="3.75, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/AmazonContext/AmazonLookupList" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6f9b88a3-3ad9-4c64-b343-97d910d3f07e" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

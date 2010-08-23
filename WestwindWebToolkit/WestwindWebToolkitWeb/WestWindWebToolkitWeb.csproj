@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4DDAC9C9-5182-4AA2-A565-24F92E1F3E29}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Westwind.WebToolkit</RootNamespace>
+    <AssemblyName>Westwind.WebToolkit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DemoMode|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEMOMODE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSharpFormat, Version=2.5.3656.20310, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\ThirdParty (Demos Only)\CSharpFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\ThirdParty (Demos Only)\Microsoft.Web.Services3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\ThirdParty (Demos Only)\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\BannerAdmin.aspx" />
+    <Content Include="BannerManager\BannerTest.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="MessageDisplay.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AppConfiguration.aspx.cs">
+      <DependentUpon>AppConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AppConfiguration.aspx.designer.cs">
+      <DependentUpon>AppConfiguration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WebRequestLog.aspx.cs">
+      <DependentUpon>WebRequestLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WebRequestLog.aspx.designer.cs">
+      <DependentUpon>WebRequestLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\AjaxMethodCallbacks.aspx.cs">
+      <DependentUpon>AjaxMethodCallbacks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\AjaxMethodCallbacks.aspx.designer.cs">
+      <DependentUpon>AjaxMethodCallbacks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\AmazonBooks\AdminCallbackHandler.ashx.cs">
+      <DependentUpon>AdminCallbackHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\AmazonBooks\BooksAdmin.aspx.cs">
+      <DependentUpon>BooksAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\AmazonBooks\BooksAdmin.aspx.designer.cs">
+      <DependentUpon>BooksAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\AutoComplete.aspx.cs">
+      <DependentUpon>AutoComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\AutoComplete.aspx.designer.cs">
+      <DependentUpon>AutoComplete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\AutoCompleteHandler.ashx.cs">
+      <DependentUpon>AutoCompleteHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\Chat\Chat.aspx.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\Chat\Chat.aspx.designer.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\HoverPanels.aspx.cs">
+      <DependentUpon>HoverPanels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\HoverPanels.aspx.designer.cs">
+      <DependentUpon>HoverPanels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\jqGrid.aspx.cs">
+      <DependentUpon>jqGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\jqGrid.aspx.designer.cs">
+      <DependentUpon>jqGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\ModalDialogs.aspx.cs">
+      <DependentUpon>ModalDialogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\ModalDialogs.aspx.designer.cs">
+      <DependentUpon>ModalDialogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\Plugins.aspx.cs">
+      <DependentUpon>Plugins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\Plugins.aspx.designer.cs">
+      <DependentUpon>Plugins.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageDisplayDemo.aspx.cs">
+      <DependentUpon>MessageDisplayDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageDisplayDemo.aspx.designer.cs">
+      <DependentUpon>MessageDisplayDemo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PagerControl.aspx.cs">
+      <DependentUpon>PagerControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PagerControl.aspx.designer.cs">
+      <DependentUpon>PagerControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TabControl.aspx.cs">
+      <DependentUpon>TabControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\TabControl.aspx.designer.cs">
+      <DependentUpon>TabControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBinder\NorthwindProductEntityBinding.aspx.cs">
+      <DependentUpon>NorthwindProductEntityBinding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DataBinder\NorthwindProductEntityBinding.aspx.designer.cs">
+      <DependentUpon>NorthwindProductEntityBinding.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDisplay.aspx.designer.cs">
+      <DependentUpon>MessageDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\Amazon\AmazonConfiguration.cs" />
+    <Compile Include="_Classes\Business\Amazon\API\AmazonHmacAssertion.cs" />
+    <Compile Include="_Classes\Business\Amazon\API\AmazonProductAdvtApi.cs" />
+    <Compile Include="_Classes\Business\Chat\ChatContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChatContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\Chat\ChatService.cs" />
+    <Compile Include="Ajax\jQueryDatePicker.aspx.cs">
+      <DependentUpon>jQueryDatePicker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\jQueryDatePicker.aspx.designer.cs">
+      <DependentUpon>jQueryDatePicker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\StockHoverPanel.aspx.cs">
+      <DependentUpon>StockHoverPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\StockHoverPanel.aspx.designer.cs">
+      <DependentUpon>StockHoverPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\StockDisplay.aspx.cs">
+      <DependentUpon>StockDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\StockDisplay.aspx.designer.cs">
+      <DependentUpon>StockDisplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\StockPortfolio\JsonStockService.ashx.cs">
+      <DependentUpon>JsonStockService.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\WebControlUsingAjaxCallbacks.aspx.cs">
+      <DependentUpon>WebControlUsingAjaxCallbacks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\WebControlUsingAjaxCallbacks.aspx.designer.cs">
+      <DependentUpon>WebControlUsingAjaxCallbacks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\Chat\busChatMessage.cs" />
+    <Compile Include="_Classes\Business\NorthwindCustomers\busCustomer.cs" />
+    <Compile Include="_Classes\Business\NorthwindCustomers\busInvoice.cs" />
+    <Compile Include="_Classes\Business\NorthwindCustomers\NorthwindCustomers.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NorthwindCustomers.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\NorthwindProducts\busProducts.cs" />
+    <Compile Include="_Classes\Business\NorthwindProducts\NorthwindProductsContext1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NorthwindProductsContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\StockPortfolio\StockEntities.cs" />
+    <Compile Include="_Classes\Business\TimeTrakker\TimeTrakkerContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeTrakkerContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="AppConfigurationWebDemo\ApplicationConfigurationDemo.aspx.cs">
+      <DependentUpon>ApplicationConfigurationDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppConfigurationWebDemo\ApplicationConfigurationDemo.aspx.designer.cs">
+      <DependentUpon>ApplicationConfigurationDemo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\BannerAdmin.aspx.cs">
+      <DependentUpon>BannerAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BannerAdmin.aspx.designer.cs">
+      <DependentUpon>BannerAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BannerManager\BannerTest.aspx.cs">
+      <DependentUpon>BannerTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BannerManager\BannerTest.aspx.designer.cs">
+      <DependentUpon>BannerTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ajax\StockPortfolio\JsonStockClient.aspx.cs">
+      <DependentUpon>JsonStockClient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\StockPortfolio\JsonStockClient.aspx.designer.cs">
+      <DependentUpon>JsonStockClient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WestWindWebToolkit.master.cs">
+      <DependentUpon>WestWindWebToolkit.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WestWindWebToolkit.master.designer.cs">
+      <DependentUpon>WestWindWebToolkit.master</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\Amazon\AmazonContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AmazonContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\Amazon\AmazonLookup.cs" />
+    <Compile Include="_Classes\Business\Amazon\AmazonSearchResult.cs" />
+    <Compile Include="_Classes\Business\Amazon\busBook.cs" />
+    <Compile Include="_Classes\Business\Amazon\busLookup.cs" />
+    <Compile Include="_Classes\Business\StockPortfolio\Graph.cs" />
+    <Compile Include="_Classes\Business\StockPortfolio\busPortfolioItem.cs" />
+    <Compile Include="_Classes\Business\StockPortfolio\busStockCache.cs" />
+    <Compile Include="_Classes\Business\StockPortfolio\busUser.cs" />
+    <Compile Include="_Classes\Business\StockPortfolio\busUserToken.cs" />
+    <Compile Include="_Classes\Business\StockPortfolio\StockContext1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="_Classes\Business\StockPortfolio\StockServer.cs" />
+    <Compile Include="_Classes\Application\App.cs" />
+    <Compile Include="_Classes\Application\ApplicationConfiguration.cs" />
+    <Compile Include="_Classes\Controls\CustomControlUsingAjaxCallbacks.cs" />
+    <Compile Include="_Classes\Application\AppUtils.cs" />
+    <Compile Include="Default.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDisplay.aspx.cs">
+      <DependentUpon>MessageDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ajax\AmazonBooks\BooksAdmin.aspx" />
+    <Content Include="Ajax\AmazonBooks\BooksAdmin.js" />
+    <Content Include="Ajax\StockHoverPanel.aspx" />
+    <Content Include="Ajax\StockDisplay.aspx" />
+    <Content Include="Ajax\WebControlUsingAjaxCallbacks.aspx" />
+    <Content Include="Ajax\AjaxMethodCallbacks.js" />
+    <None Include="_Classes\Business\NorthwindCustomers\NorthwindCustomers.dbml.layout">
+      <DependentUpon>NorthwindCustomers.dbml</DependentUpon>
+    </None>
+    <None Include="_Classes\Business\NorthwindProducts\NorthwindProductsContext.dbml.layout">
+      <DependentUpon>NorthwindProductsContext.dbml</DependentUpon>
+    </None>
+    <None Include="_Classes\Business\TimeTrakker\TimeTrakkerContext.dbml.layout">
+      <DependentUpon>TimeTrakkerContext.dbml</DependentUpon>
+    </None>
+    <None Include="_Classes\Business\Chat\ChatContext.dbml.layout">
+      <DependentUpon>ChatContext.dbml</DependentUpon>
+    </None>
+    <Content Include="scripts\ww.jquery.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_Classes\Business\StockPortfolio\StockContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>StockContext1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ajax\AmazonBooks\AdminCallbackHandler.ashx" />
+    <Content Include="Ajax\StockPortfolio\JsonStockClient.aspx" />
+    <Content Include="Ajax\StockPortfolio\JsonStockClient.css" />
+    <Content Include="Admin\WebRequestLog.js" />
+    <Content Include="WestWindWebToolkit.master" />
+    <None Include="_Classes\Business\Amazon\AmazonContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AmazonContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_Classes\Business\StockPortfolio\StockContext.dbml.layout">
+      <DependentUpon>StockContext.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\AppConfiguration.aspx" />
+    <Content Include="Admin\WebRequestLog.aspx" />
+    <Content Include="Ajax\AjaxMethodCallbacks.aspx" />
+    <Content Include="Ajax\AmazonBooks\BooksAdmin.css" />
+    <Content Include="Ajax\AutoComplete.aspx" />
+    <Content Include="Ajax\Chat\Chat.aspx" />
+    <Content Include="Ajax\Chat\Chat.js" />
+    <Content Include="Ajax\Chat\images\ChatLive.gif" />
+    <Content Include="Ajax\Chat\images\ChatNotActive.gif" />
+    <Content Include="Ajax\Chat\images\ChatOff.gif" />
+    <Content Include="Ajax\Chat\images\SailBig.jpg" />
+    <Content Include="Ajax\Default.aspx" />
+    <Content Include="Ajax\HoverPanels.js" />
+    <Content Include="Admin\Default.aspx" />
+    <Content Include="Ajax\HoverPanels.aspx" />
+    <Content Include="Ajax\jqGrid.aspx" />
+    <Content Include="Controls\Default.aspx" />
+    <Content Include="Controls\PagerControl.aspx" />
+    <Content Include="Controls\TabControl.aspx" />
+    <Content Include="Css\Images\next.png" />
+    <Content Include="Css\Images\prev.png" />
+    <Content Include="Css\Images\VertGradient.png" />
+    <Content Include="scripts\jquery.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\themes\base\images\ui-anim_basic_16x16.gif" />
+    <Content Include="scripts\themes\base\jquery-ui.css" />
+    <Content Include="scripts\themes\base\jquery.ui.accordion.css" />
+    <Content Include="scripts\themes\base\jquery.ui.all.css" />
+    <Content Include="scripts\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="scripts\themes\base\jquery.ui.base.css" />
+    <Content Include="scripts\themes\base\jquery.ui.button.css" />
+    <Content Include="scripts\themes\base\jquery.ui.core.css" />
+    <Content Include="scripts\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="scripts\themes\base\jquery.ui.dialog.css" />
+    <Content Include="scripts\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="scripts\themes\base\jquery.ui.resizable.css" />
+    <Content Include="scripts\themes\base\jquery.ui.slider.css" />
+    <Content Include="scripts\themes\base\jquery.ui.tabs.css" />
+    <Content Include="scripts\themes\base\jquery.ui.theme.css" />
+    <Content Include="scripts\themes\redmond\jquery-ui.css" />
+    <Content Include="scripts\themes\redmond\ui.jqgrid.css" />
+    <Content Include="scripts\themes\smoothness\jquery-ui.css" />
+    <Content Include="scripts\themes\smoothness\ui.jqgrid.css" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-bg.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-bg1251.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-cat.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-cs.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-de.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-dk.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-el.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-en.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-fa.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-fi.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-fr.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-is.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-it.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-jp.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-nl.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-no.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-pl.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-pt-br.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-pt.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-ru.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-sp.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-sv.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-tr.js" />
+    <Content Include="scripts\ThirdParty\i18n\grid.locale-ua.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.base.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.celledit.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.common.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.custom.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.formedit.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.import.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.inlinedit.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.loader.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.postext.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.setcolumns.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.subgrid.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.tbltogrid.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\grid.treegrid.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\jqDnR.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\jqModal.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\jquery.fmatter.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\jquery.searchFilter.js" />
+    <Content Include="scripts\ThirdParty\jqGrid\JsonXml.js" />
+    <Content Include="scripts\ThirdParty\jquery.autocomplete.js" />
+    <Content Include="scripts\ThirdParty\jquery.autocomplete.min.js" />
+    <Content Include="Ajax\jQueryDatePicker.aspx" />
+    <Content Include="Ajax\ModalDialogs.aspx" />
+    <Content Include="Ajax\Plugins.aspx" />
+    <Content Include="Ajax\StockPortfolio\JsonStockClient.js" />
+    <Content Include="Ajax\StockPortfolio\JsonStockService.ashx" />
+    <Content Include="AppConfigurationWebDemo\ApplicationConfigurationDemo.aspx" />
+    <Content Include="AppConfigurationWebDemo\_Readme.txt" />
+    <Content Include="Controls\MessageDisplayDemo.aspx" />
+    <Content Include="Css\Images\close.gif" />
+    <Content Include="Css\Images\DialogStrip.png" />
+    <Content Include="Css\Images\DialogHeader.png" />
+    <Content Include="Css\Images\DialogHighlight.png" />
+    <Content Include="Css\Images\DialogSelection.png" />
+    <Content Include="Css\Images\edit.gif" />
+    <Content Include="Css\Images\EditBlue.gif" />
+    <Content Include="Css\Images\EditWhite.gif" />
+    <Content Include="Css\Images\help.gif" />
+    <Content Include="Css\Images\home.gif" />
+    <Content Include="Css\Images\Info.gif" />
+    <Content Include="Css\Images\LightBlueGradient.png" />
+    <Content Include="Css\Images\LightOrangeGradient.png" />
+    <Content Include="Css\Images\loading_black.gif" />
+    <Content Include="Css\Images\loading_small.gif" />
+    <Content Include="Css\Images\MenuHighlight.png" />
+    <Content Include="Css\Images\New.gif" />
+    <Content Include="Css\Images\refresh.gif" />
+    <Content Include="Css\Images\Remove.gif" />
+    <Content Include="Css\Images\SmallButton.gif" />
+    <Content Include="Css\Images\SmallButtonHover.gif" />
+    <Content Include="Css\Images\SmallButtonPressed.gif" />
+    <Content Include="Css\Images\SubmitButton.gif" />
+    <Content Include="Css\Images\SubmitButtonHover.gif" />
+    <Content Include="Css\Images\SubmitButtonPressed.gif" />
+    <Content Include="Css\Images\TabHover.gif" />
+    <Content Include="Css\Images\TabNormal.gif" />
+    <Content Include="Css\Images\TabSelected.gif" />
+    <Content Include="Css\Images\warning.gif" />
+    <Content Include="Css\WebToolkitSamples.css" />
+    <Content Include="Css\Westwind.css" />
+    <Content Include="DataBinder\NorthwindProductEntityBinding.aspx" />
+    <Content Include="images\FloralBackground.gif" />
+    <Content Include="images\FloralBackground_sm.gif" />
+    <Content Include="images\Graph.gif" />
+    <Content Include="images\newwave.jpg" />
+    <Content Include="images\Punchout.gif" />
+    <Content Include="images\SailBig.jpg" />
+    <Content Include="images\SmallButton.gif" />
+    <Content Include="images\SmallButtonHover.gif" />
+    <Content Include="images\SmallButtonPressed.gif" />
+    <Content Include="Css\Images\Sort.gif" />
+    <Content Include="images\Stock.png" />
+    <Content Include="images\Symbol.bmp" />
+    <Content Include="images\Symbol.gif" />
+    <Content Include="Css\Images\users.gif" />
+    <Content Include="images\WestWindWebToolkit.jpg" />
+    <Content Include="images\WestWindWebToolkit_100.jpg" />
+    <Content Include="images\wwtoollogo.jpg" />
+    <Content Include="images\wwtoollogo_text.gif" />
+    <Content Include="scripts\jquery-ui.min.js" />
+    <Content Include="scripts\jquery-ui.js" />
+    <Content Include="scripts\jquery.min-vsdoc.js" />
+    <Content Include="scripts\jquery-vsdoc.js" />
+    <Content Include="Ajax\Chat\ChatService.ashx" />
+    <Content Include="Ajax\AutoCompleteHandler.ashx" />
+    <Content Include="scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="scripts\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\ThirdParty\jquery.jqGrid.min.js" />
+    <Content Include="scripts\ww.jquery.js" />
+    <None Include="_Classes\Business\Amazon\AmazonContext.dbml.layout">
+      <DependentUpon>AmazonContext.dbml</DependentUpon>
+    </None>
+    <None Include="_Classes\Business\Chat\ChatContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ChatContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_Classes\Business\NorthwindCustomers\NorthwindCustomers.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>NorthwindCustomers.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_Classes\Business\NorthwindProducts\NorthwindProductsContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>NorthwindProductsContext1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_Classes\Business\TimeTrakker\TimeTrakkerContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TimeTrakkerContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Westwind.BusinessFramework\Westwind.BusinessFramework.csproj">
+      <Project>{FC58B1C4-81CE-47D9-A3A5-FD71737ED723}</Project>
+      <Name>Westwind.BusinessFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Westwind.Utilities\Westwind.Utilities.csproj">
+      <Project>{F2A17F24-A9EB-4959-9C57-D2E371013B2E}</Project>
+      <Name>Westwind.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Westwind.Web\Westwind.Web.csproj">
+      <Project>{54A21899-D5F4-4F43-B819-FDEE5CD93120}</Project>
+      <Name>Westwind.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)..\tools\ajaxmin.exe" -h "$(ProjectDir)scripts\ww.jquery.js"  -o "$(ProjectDir)scripts\ww.jquery.min.js"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
