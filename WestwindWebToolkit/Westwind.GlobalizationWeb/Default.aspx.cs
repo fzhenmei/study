@@ -1,9 +1,0 @@
-
-namespace Westwind.GlobalizationWeb
-{
-
-    public partial class _Default : System.Web.UI.Page
-    {
-
-    }
-}
