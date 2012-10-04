@@ -12,3 +12,6 @@ Uploads/
 Thumbs.db
 ClientBin
 Binaries
+
+/Rails/SayHello/tmp
+/Rails/SayHello/log
