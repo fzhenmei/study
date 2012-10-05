@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_id: MyString
+  integer: MyString
+  cart_id: MyString
+  integer: MyString
+
+two:
+  product_id: MyString
+  integer: MyString
+  cart_id: MyString
+  integer: MyString
