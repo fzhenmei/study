@@ -1,11 +1,26 @@
+<% if @notice %>
 <p id="notice"><%= notice %></p>
-
+<% end %>
 <h2>Your Pragmatic Cart</h2>
-<ul>
+<table>
+  <tr>
+    <td>Quantity</td>
+    <td>Product Name</td>
+    <td>Price</td>
+  </tr>
   <% @cart.line_items.each do |item| %>
-      <li><%= item.product.title %></li>
+      <tr>
+        <td><%= item.quantity %> &times</td>
+        <td><%= item.product.title %></td>
+        <td><%= number_to_currency(item.product.price) %></td>
+      </tr>
   <% end %>
-</ul>
+  <tr>
+    <td></td>
+    <td>Total Price:</td>
+    <td><%= number_to_currency(@total_price) %></td>
+  </tr>
+</table>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', carts_path %>
+<%= button_to 'Empty cart', @cart, method: :delete, :confirm => 'Are you sure?' %>
+<%= link_to 'Back to store', store_path %>

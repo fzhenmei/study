@@ -1,6 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  def increment_count
+    session[:count] ||= 0
+    session[:count] += 1
+  end
+
+  def setcount_zero
+    session[:count] = 0
+  end
+
   private
 
   def current_cart

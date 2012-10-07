@@ -14,6 +14,7 @@ class CartsController < ApplicationController
   # GET /carts/1.json
   def show
     @cart = Cart.find(params[:id])
+    @total_price = @cart.total_price
 
     respond_to do |format|
       format.html # show.html.erb
